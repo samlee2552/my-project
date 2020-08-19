@@ -1,13 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>¸ÞÀÎ</title>
-</head>
-<body>
-<h1>¸ÞÀÎÀÔ´Ï´Ù À¸ÇãÇÏ¾îÇÏÇã¤¿¤¤¤·Çã¤¿¤Ã</h1>
-</body>
-</html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="../part/head.jspf"%>
+
+<h1>ë©”ì¸ìž…ë‹ˆë‹¤ ìœ¼í—ˆí•˜ì–´í•˜í—ˆã…ã„´ã…‡í—ˆã…ã…“</h1>
+
+<%@ include file="../part/foot.jspf"%>
+

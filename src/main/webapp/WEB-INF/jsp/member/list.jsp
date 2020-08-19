@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>테스트ㄴ</title>
+<meta charset="UTF-8">
+<title>테스트</title>
 </head>
 <body>
-<h1>testtest</h1>
-<h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita ipsa harum consequuntur facilis illum aliquam cum nobis temporibus obcaecati dolores. Perferendis harum sint ipsa rem iure nesciunt eius ullam dolore?</h1>
+<h1>${member.id}</h1>
+<h1>${member.loginId}</h1>
+<h1>${member.name}</h1>
 </body>
 </html>
