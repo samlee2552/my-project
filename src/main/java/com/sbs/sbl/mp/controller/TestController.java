@@ -32,4 +32,15 @@ public class TestController {
 		System.out.println(member);
 		return "member/list";
 	}
+	
+	@RequestMapping("/test/count")
+	public String showMemberCount(String loginId, Model model) {
+		int count = memberService.getCount(loginId);
+		System.out.println("count : " + count);
+		System.out.println("count : " + count);
+		System.out.println("count : " + count);
+		System.out.println("count : " + count);
+		System.out.println("count : " + count);
+		return "member/list";
+	}
 }

@@ -22,4 +22,38 @@
 		email = #{email},
 		cellphoneNo = #{cellphoneNo}
 	</insert>
+	<select id="getMemberByLoginId" resultType="Member">
+		SELECT *
+		FROM member
+		WHERE
+		loginId = #{loginId}
+	</select>
+	
+	<!-- 회원 가입시 중복체크 시작 -->
+	<select id="getLoginIdCount" resultType="int">
+		SELECT COUNT(*)
+		AS cnt
+		FROM member
+		WHERE loginId = #{loginId}
+	</select>
+	<select id="getNicknameCount" resultType="int">
+		SELECT COUNT(*)
+		AS cnt
+		FROM member
+		WHERE nickname = #{nickname}
+	</select>
+	<select id="getEmailCount" resultType="int">
+		SELECT COUNT(*)
+		AS cnt
+		FROM member
+		WHERE email = #{email}
+	</select>
+	<select id="getCellphoneNoCount" resultType="int">
+		SELECT COUNT(*)
+		AS cnt
+		FROM member
+		WHERE cellphoneNo = #{cellphoneNo}
+	</select>
+	<!-- 끝 -->
+	
 </mapper>

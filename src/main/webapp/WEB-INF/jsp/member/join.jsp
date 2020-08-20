@@ -112,7 +112,7 @@
 <h1>회원 가입</h1>
 <form class="table-box con form1" method="POST" action="doJoin"
 	onsubmit="MemberJoinForm__submit(this); return false;">
-	<!-- <input type="hidden" name="redirectUri" value="/usr/member/login"> -->
+	<input type="hidden" name="redirectUri" value="/member/login">
 	<input type="hidden" name="loginPwReal">
 	<table>
 		<tbody>

@@ -14,4 +14,12 @@ public interface MemberDao {
 
 	void join(Map<String, Object> param);
 
+	Member getMemberByLoginId(@Param("loginId") String loginId);
+
+	//회원가입 중복체크 
+	int getLoginIdCount(@Param("loginId") String loginId);
+	int getNicknameCount(@Param("nickname") String nickname);
+	int getEmailCount(@Param("email") String email);
+	int getCellphoneNoCount(@Param("cellphoneNo") String cellphoneNo);
+
 }
