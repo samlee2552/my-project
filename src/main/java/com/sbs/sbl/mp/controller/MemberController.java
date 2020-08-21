@@ -17,10 +17,11 @@ import com.sbs.sbl.mp.util.Util;
 
 @Controller
 public class MemberController {
-	
+
 	@Autowired
 	private MemberService memberService;
 
+	// 회원가입 시작
 	@RequestMapping("/member/join")
 	public String showJoin() {
 		return "member/join";
@@ -30,9 +31,8 @@ public class MemberController {
 	public String doJoin(@RequestParam Map<String, Object> param, Model model) {
 		Util.changeMapKey(param, "loginPwReal", "loginPw");
 
-		ResultData checkForDupEntryResultData = memberService
-				.checkForDupEntry(param);
-		
+		ResultData checkForDupEntryResultData = memberService.checkForDupEntry(param);
+
 		if (checkForDupEntryResultData.isFail()) {
 			model.addAttribute("historyBack", true);
 			model.addAttribute("alertMsg", checkForDupEntryResultData.getMsg());
@@ -40,13 +40,17 @@ public class MemberController {
 		}
 
 		int newMemberId = memberService.join(param);
-		
+
 		String redirectUri = (String) param.get("redirectUri");
+		String nickname = (String) param.get("nickname");
 		model.addAttribute("redirectUri", redirectUri);
+		model.addAttribute("alertMsg", String.format("%s님, 회원이 되신것을 환영합니다!", nickname));
 
 		return "common/redirect";
 	}
 
+	// 회원가입 끝
+	// 로그인 시작
 	@RequestMapping("/member/login")
 	public String showLogin() {
 		return "member/login";
@@ -55,6 +59,7 @@ public class MemberController {
 	@RequestMapping("/member/doLogin")
 	public String doLogin(String loginId, String loginPwReal, String redirectUri, Model model, HttpSession session) {
 		String loginPw = loginPwReal;
+		
 		Member member = memberService.getMemberByLoginId(loginId);
 		// 로그인 조건 검사
 		if (member == null) {
@@ -78,6 +83,32 @@ public class MemberController {
 		model.addAttribute("redirectUri", redirectUri);
 		model.addAttribute("alertMsg", String.format("%s님, 환영합니다!", member.getNickname()));
 
+		return "common/redirect";
+	}
+
+	// 로그인 끝
+	@RequestMapping("/member/findLoginId")
+	public String showfindLoginId() {
+		return "member/findLoginId";
+	}
+
+	@RequestMapping("/member/doFindloginId")
+	public String doFindLoginId(String name, String email, String redirectUri, Model model) {
+		Member member = memberService.getMemberByName_email(name, email);
+		
+		if (member == null) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("alertMsg", "입력하신 정보와 일치하는 회원이 없습니다.");
+			return "common/redirect";
+		}
+		
+		if (redirectUri == null || redirectUri.length() == 0) {
+			redirectUri = "/home/main";
+		}
+
+		model.addAttribute("redirectUri", redirectUri);
+		model.addAttribute("alertMsg", String.format("회원님의 아이디는 \"%s\", 환영합니다!", member.getName()));
+		
 		return "common/redirect";
 	}
 }

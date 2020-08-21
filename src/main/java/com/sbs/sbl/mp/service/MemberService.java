@@ -3,6 +3,7 @@ package com.sbs.sbl.mp.service;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.sbs.sbl.mp.util.Util;
@@ -15,13 +16,11 @@ public class MemberService {
 	@Autowired
 	private MemberDao memberDao;
 	@Autowired
-	private MailService mailservice;
-
-	public Member getMember(int id) {
-		
-		return memberDao.getMemberById(id);
-	}
-
+	private MailService mailService;
+	@Value("${custom.siteName}")
+	private String siteName;
+	@Value("${custom.siteMainUri}")
+	private String siteMainUri;
 
 	public int join(Map<String, Object> param) {
 		memberDao.join(param);
@@ -32,15 +31,23 @@ public class MemberService {
 
 	private void sendWelcomeMail(String email) {
 		String title = String.format("[%s] 회원이 되신 것을 환영합니다.", siteName);
+		StringBuilder body = new StringBuilder();
+	
+		body.append("<h1>가입이 완료되었습니다.</h1>");
+		body.append(String.format("<p><a href=\"%s\" target=\"_blank\">%s</a>로 이동</p>", siteMainUri, siteName));
 		
-	}
+		mailService.send(email, title, body.toString());
 
+		}
 
+	//로그인, 아이디 찾을 시
 	public Member getMemberByLoginId(String loginId) {
-		// TODO Auto-generated method stub
 		return memberDao.getMemberByLoginId(loginId);
 	}
-
+	
+	public Member getMemberByName_email(String name, String email) {
+		return memberDao.getMemberByName_email(name, email);
+	}
 
 	public ResultData checkLoginIdJoinable(String loginId) {
 		int count = memberDao.getLoginIdCount(loginId);
@@ -61,7 +68,6 @@ public class MemberService {
 		int loginIdCount = memberDao.getLoginIdCount(Util.getAsStr(param.get("loginId")));
 		int nicknameCount = memberDao.getNicknameCount(Util.getAsStr(param.get("nickname")));
 		int emailCount = memberDao.getEmailCount(Util.getAsStr(param.get("email")));
-		int cellphoneNocount = memberDao.getCellphoneNoCount(Util.getAsStr(param.get("cellphoneNo")));
 
 		if(loginIdCount == 1) {
 			return new ResultData("F-1", "이미 사용중인 아이디입니다.");
@@ -71,9 +77,6 @@ public class MemberService {
 		}
 		else if(emailCount == 1) {
 			return new ResultData("F-1", "이미 등록된 이메일입니다.");
-		}
-		else if(cellphoneNocount == 1) {
-			return new ResultData("F-1", "이미 등록된 번호입니다.");
 		}
 		return new ResultData("S-1", "사용 가능한 아이디입니다.");
 	}

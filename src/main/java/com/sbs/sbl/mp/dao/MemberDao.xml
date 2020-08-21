@@ -15,7 +15,8 @@
 		INTO member
 		SET regDate = NOW(),
 		loginId = #{loginId},
-		loginPw = #{loginPw},
+		loginPw =
+		#{loginPw},
 		`name` = #{name},
 		nickname =
 		#{nickname},
@@ -28,7 +29,7 @@
 		WHERE
 		loginId = #{loginId}
 	</select>
-	
+
 	<!-- 회원 가입시 중복체크 시작 -->
 	<select id="getLoginIdCount" resultType="int">
 		SELECT COUNT(*)
@@ -45,15 +46,17 @@
 	<select id="getEmailCount" resultType="int">
 		SELECT COUNT(*)
 		AS cnt
-		FROM member
+		FROM
+		member
 		WHERE email = #{email}
 	</select>
-	<select id="getCellphoneNoCount" resultType="int">
-		SELECT COUNT(*)
-		AS cnt
-		FROM member
-		WHERE cellphoneNo = #{cellphoneNo}
-	</select>
 	<!-- 끝 -->
-	
+	<select id="getMemberByName_email" resultType="Member">
+		SELECT #
+		FROM
+		member
+		WHERE name = #{name}
+		AND email = #{email}
+	</select>
+
 </mapper>

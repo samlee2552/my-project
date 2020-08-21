@@ -19,8 +19,8 @@ spring:
 mybatis:
   type-aliases-package: com.sbs.sbl.mp.dto
 custom:
-  siteName: 펫월드(가제)
+  siteName: PET FLICK
   siteMainUri: https://naver.com/
-  logoText: 오디션 트리
+  logoText: 펫플릭
   emailFrom: no-reply@samlee.com
-  emailFromName: 펫월드
+  emailFromName: 펫플릭

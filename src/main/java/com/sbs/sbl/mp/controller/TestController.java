@@ -18,18 +18,7 @@ public class TestController {
 
 	@RequestMapping("/test")
 	public String showMember(@RequestParam Map<String, Object> param, Model model) {
-		int id = Integer.parseInt((String) param.get("id"));
-	
-		Member member = memberService.getMember(id);
-		model.addAttribute("member", member);
-		System.out.println(member);
-		System.out.println(member);
-		System.out.println(member);
-		System.out.println(member);
-		System.out.println(member);
-		System.out.println(member);
-		System.out.println(member);
-		System.out.println(member);
+
 		return "member/list";
 	}
 	
@@ -43,4 +32,6 @@ public class TestController {
 		System.out.println("count : " + count);
 		return "member/list";
 	}
+	
+	
 }

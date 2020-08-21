@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="로그인" />
+<c:set var="pageTitle" value="아이디 찾기" />
 <%@ include file="../part/head.jspf"%>
 
 <script
@@ -16,37 +16,31 @@
 			return;
 		}
 
-		form.loginId.value = form.loginId.value.trim();
+		form.name.value = form.name.value.trim();
+
+		if (form.name.value.length == 0) {
+			form.name.focus();
+			alert('이름을 입력해주세요.');
+			return;
+		}
+
+		form.email.value = form.email.value.trim();
+
+		if (form.email.value.length == 0) {
+			form.email.focus();
+			alert('이메일을 입력해주세요.');
+			return;
+		}
 		
-
-		form.loginId.value = form.loginId.value.replaceAll(' ', '');
-
-		if (form.loginId.value.length == 0) {
-			form.loginId.focus();
-			alert('아이디를 입력해주세요');
-			return;
-		}
-
-		form.loginPw.value = form.loginPw.value.trim();
-
-		if (form.loginPw.value.length == 0) {
-			form.loginPw.focus();
-			alert('비밀번호를 입력해주세요.');
-			return;
-		}
-
-		form.loginPwReal.value = sha256(form.loginPw.value);
-		form.loginPw.value = '';
-
 		form.submit();
 		MemberLoginForm__submitDone = true;
 	}
 </script>
 
-<h1>로그인</h1>
-<form class="table-box con form1" method="POST" action="doLogin"
+<h1>아이디 찾기</h1>
+<form class="table-box con form1" method="POST" action="doFindLoginId"
 	onsubmit="MemberLoginForm__submit(this); return false;">
-	<input type="hidden" name="redirectUri" value="/home/main">
+	<input type="hidden" name="redirectUri" value="/member/login">
 	<input type="hidden" name="loginPwReal">
 	<table>
 		<tbody>
@@ -54,24 +48,24 @@
 				<th>이름</th>
 				<td>
 					<div class="form-control-box">
-						<input type="text" placeholder="아이디를 입력해주세요" name="loginId"
+						<input type="text" placeholder="이름을 입력해주세요" name="name"
 							maxlength="20">
 					</div>
 				</td>
 			</tr>
 			<tr>
-				<th>비밀번호</th>
+				<th>이메일</th>
 				<td>
 					<div class="form-control-box">
-						<input type="password" placeholder="비밀번호를 입력해주세요" name="loginPw"
+						<input type="email" placeholder="이메일을 입력해주세요" name="email"
 							maxlength="20">
 					</div>
 				</td>
 			</tr>
 			<tr>
-				<th>로그인</th>
+				<th>아이디 찾기</th>
 				<td>
-					<button class="btn btn-primary" type="submit">로그인</button>
+					<button class="btn btn-primary" type="submit">아이디 찾기</button>
 					<button class="btn btn-info" type="button"
 						onclick="history.back();">취소</button>
 				</td>
