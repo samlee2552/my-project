@@ -59,7 +59,7 @@ public class MemberController {
 	@RequestMapping("/member/doLogin")
 	public String doLogin(String loginId, String loginPwReal, String redirectUri, Model model, HttpSession session) {
 		String loginPw = loginPwReal;
-		
+
 		Member member = memberService.getMemberByLoginId(loginId);
 		// 로그인 조건 검사
 		if (member == null) {
@@ -74,8 +74,9 @@ public class MemberController {
 			return "common/redirect";
 		}
 		// 끝
-
+		session.setAttribute("loginedMember", member);
 		session.setAttribute("loginedMemberId", member.getId());
+
 		if (redirectUri == null || redirectUri.length() == 0) {
 			redirectUri = "/home/main";
 		}
@@ -87,28 +88,75 @@ public class MemberController {
 	}
 
 	// 로그인 끝
+	// 아이디 찾기 시작
 	@RequestMapping("/member/findLoginId")
 	public String showfindLoginId() {
 		return "member/findLoginId";
 	}
 
-	@RequestMapping("/member/doFindloginId")
+	@RequestMapping("/member/doFindLoginId")
 	public String doFindLoginId(String name, String email, String redirectUri, Model model) {
 		Member member = memberService.getMemberByName_email(name, email);
-		
+
 		if (member == null) {
 			model.addAttribute("historyBack", true);
 			model.addAttribute("alertMsg", "입력하신 정보와 일치하는 회원이 없습니다.");
 			return "common/redirect";
 		}
-		
+
 		if (redirectUri == null || redirectUri.length() == 0) {
 			redirectUri = "/home/main";
 		}
 
 		model.addAttribute("redirectUri", redirectUri);
-		model.addAttribute("alertMsg", String.format("회원님의 아이디는 \"%s\", 환영합니다!", member.getName()));
-		
+		model.addAttribute("alertMsg", String.format("회원님의 아이디는 \"%s\" 입니다!", member.getLoginId()));
+
 		return "common/redirect";
 	}
+
+	// 아이디 찾기 끝
+	// 비밀번호 찾기 시작
+	@RequestMapping("/member/findLoginPw")
+	public String showfindLoginPw() {
+		return "member/findLoginPw";
+	}
+
+	@RequestMapping("/member/doFindLoginPw")
+	public String doFindLoginPw(String loginId, String email, String redirectUri, Model model) {
+		Member member = memberService.getMemberByLoginId_email(loginId, email);
+
+		if (member == null) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("alertMsg", "아이디 또는 이메일을 확인 바랍니다.");
+			return "common/redirect";
+		}
+
+		if (redirectUri == null || redirectUri.length() == 0) {
+			redirectUri = "/home/main";
+		}
+
+		model.addAttribute("redirectUri", redirectUri);
+		model.addAttribute("alertMsg", String.format("\"%s\" 로 임시 비밀번호를 발송했습니다.", email));
+		memberService.recoverLoginPw(loginId, email);
+
+		return "common/redirect";
+	}
+
+	// 비밀번호 찾기 끝
+	// 회원정보 수정 시작
+	@RequestMapping("/member/modify")
+	public String showModify(HttpSession session, Model model) {
+		
+		Member member = (Member) session.getAttribute("loginedMember");
+		model.addAttribute("member", member);
+		
+		return "member/modify";
+	}
+
+	@RequestMapping("/member/doModify")
+	public String doModify(HttpSession session) {
+
+		return "common/redirect";
+	}
+
 }

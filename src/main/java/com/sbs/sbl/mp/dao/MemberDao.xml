@@ -51,12 +51,33 @@
 		WHERE email = #{email}
 	</select>
 	<!-- 끝 -->
+	<!-- 아이디 찾기 -->
 	<select id="getMemberByName_email" resultType="Member">
-		SELECT #
+		SELECT *
 		FROM
 		member
 		WHERE name = #{name}
 		AND email = #{email}
 	</select>
+	<!-- 비번 찾기 -->
+	<select id="getMemberByLoginId_email" resultType="Member">
+		SELECT *
+		FROM
+		member
+		WHERE loginId = #{loginId}
+		AND email = #{email}
+	</select>
+	<!-- 비밀번호 변경 -->
+	<update id="updateLoginPw">
+		UPDATE member
+		SET loginPw = SHA2(#{loginPw}, 256)
+		WHERE loginId = #{loginId}
+	</update>
+<!-- 	<choose>
+			<when test="searchType != null and searchType != ''"> AND NAME LIKE '%' || #{keyword} || '%' </when>
+			<when test="gender != null and gender != ''"> AND GENDER = #{gender} </when>
+			<otherwise> AND ID = 1 </otherwise>
+		</choose>
+ -->
 
 </mapper>

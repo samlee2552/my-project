@@ -2,6 +2,8 @@ package com.sbs.sbl.mp.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +19,11 @@ public class TestController {
 	private MemberService memberService;
 
 	@RequestMapping("/test")
-	public String showMember(@RequestParam Map<String, Object> param, Model model) {
-
+	public String showMember(Model model, HttpSession session) {
+		int id = session.get 
+				memberService.getMemberById();s
+		Member member = \
+		model.addAttribute("member", member);
 		return "member/list";
 	}
 	
@@ -33,5 +38,10 @@ public class TestController {
 		return "member/list";
 	}
 	
+	@RequestMapping("/test/test")
+	public String testtest(@RequestParam Map<String, Object> param, Model model) {
+
+		return "member/findLoginPw";
+	}
 	
 }
