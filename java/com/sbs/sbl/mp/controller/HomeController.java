@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
 	@RequestMapping("/home/main")
-	public String showTest() {
+	public String showMain() {
 		return "home/main";
 	}
 	

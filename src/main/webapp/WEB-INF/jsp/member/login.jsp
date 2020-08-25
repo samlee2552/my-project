@@ -51,7 +51,7 @@
 	<table>
 		<tbody>
 			<tr>
-				<th>이름</th>
+				<th>아이디</th>
 				<td>
 					<div class="form-control-box">
 						<input type="text" placeholder="아이디를 입력해주세요" name="loginId"

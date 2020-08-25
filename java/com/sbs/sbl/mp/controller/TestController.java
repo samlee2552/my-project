@@ -20,10 +20,7 @@ public class TestController {
 
 	@RequestMapping("/test")
 	public String showMember(Model model, HttpSession session) {
-		int id = session.get 
-				memberService.getMemberById();s
-		Member member = \
-		model.addAttribute("member", member);
+
 		return "member/list";
 	}
 	
@@ -39,9 +36,23 @@ public class TestController {
 	}
 	
 	@RequestMapping("/test/test")
-	public String testtest(@RequestParam Map<String, Object> param, Model model) {
-
-		return "member/findLoginPw";
+	public String testtest(@RequestParam Map<String, Object> param, Model model, HttpSession session) {
+		int id = (int) session.getAttribute("loginedMemberId");
+		System.out.println("id: " + id);
+		System.out.println("id: " + id);
+		System.out.println("id: " + id);
+		System.out.println("id: " + id);
+		Member member = memberService.getMemberById(id);
+		System.out.println(member.getName());
+		System.out.println(member.getNickname());
+		System.out.println(member.getNickname());
+		System.out.println(member.getNickname());
+		System.out.println(member);
+		System.out.println(member);
+		System.out.println(member);
+		System.out.println(member);
+	
+		return "home/main";
 	}
 	
 }

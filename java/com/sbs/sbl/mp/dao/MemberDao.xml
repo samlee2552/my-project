@@ -73,11 +73,16 @@
 		SET loginPw = SHA2(#{loginPw}, 256)
 		WHERE loginId = #{loginId}
 	</update>
-<!-- 	<choose>
-			<when test="searchType != null and searchType != ''"> AND NAME LIKE '%' || #{keyword} || '%' </when>
-			<when test="gender != null and gender != ''"> AND GENDER = #{gender} </when>
-			<otherwise> AND ID = 1 </otherwise>
-		</choose>
- -->
+	
+	<update id="modify">
+		UPDATE member
+		SET loginPw = #{loginPw},
+		name = #{name},
+		nickname = #{nickname},
+		email = #{email},
+		cellphoneNo = #{cellphoneNo},
+		updateDate = NOW()
+		WHERE loginId = #{loginId}
+	</update>
 
 </mapper>

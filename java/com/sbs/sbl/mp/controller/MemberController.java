@@ -31,18 +31,33 @@ public class MemberController {
 	public String doJoin(@RequestParam Map<String, Object> param, Model model) {
 		Util.changeMapKey(param, "loginPwReal", "loginPw");
 
-		ResultData checkForDupEntryResultData = memberService.checkForDupEntry(param);
+		String loginId = Util.getAsStr(param.get("loginId"));
+		String nickname = Util.getAsStr(param.get("nickname"));
+		String email = Util.getAsStr(param.get("email"));
 
-		if (checkForDupEntryResultData.isFail()) {
+		ResultData checkForDupEntryResultData1 = memberService.checkLoginIdJoinable(loginId);
+		ResultData checkForDupEntryResultData2 = memberService.checkNickNameJoinable(nickname);
+		ResultData checkForDupEntryResultData3 = memberService.checkEmailJoinable(email);
+
+		if (checkForDupEntryResultData1.isFail()) {
 			model.addAttribute("historyBack", true);
-			model.addAttribute("alertMsg", checkForDupEntryResultData.getMsg());
+			model.addAttribute("alertMsg", checkForDupEntryResultData1.getMsg());
+			return "common/redirect";
+		}
+		if (checkForDupEntryResultData2.isFail()) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("alertMsg", checkForDupEntryResultData2.getMsg());
+			return "common/redirect";
+		}
+		if (checkForDupEntryResultData3.isFail()) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("alertMsg", checkForDupEntryResultData3.getMsg());
 			return "common/redirect";
 		}
 
 		int newMemberId = memberService.join(param);
 
 		String redirectUri = (String) param.get("redirectUri");
-		String nickname = (String) param.get("nickname");
 		model.addAttribute("redirectUri", redirectUri);
 		model.addAttribute("alertMsg", String.format("%s님, 회원이 되신것을 환영합니다!", nickname));
 
@@ -61,6 +76,7 @@ public class MemberController {
 		String loginPw = loginPwReal;
 
 		Member member = memberService.getMemberByLoginId(loginId);
+
 		// 로그인 조건 검사
 		if (member == null) {
 			model.addAttribute("historyBack", true);
@@ -74,8 +90,10 @@ public class MemberController {
 			return "common/redirect";
 		}
 		// 끝
-		session.setAttribute("loginedMember", member);
+		boolean isLogined = true;
+
 		session.setAttribute("loginedMemberId", member.getId());
+		session.setAttribute("isLogined", isLogined);
 
 		if (redirectUri == null || redirectUri.length() == 0) {
 			redirectUri = "/home/main";
@@ -88,6 +106,23 @@ public class MemberController {
 	}
 
 	// 로그인 끝
+	// 로그아웃
+	@RequestMapping("/member/logout")
+	public String doLogout(String redirectUri, Model model, HttpSession session) {
+		
+		boolean isLogined = false;
+		session.removeAttribute("loginedMemberId");
+		session.setAttribute("isLogined", "false");
+		if (redirectUri == null || redirectUri.length() == 0) {
+			redirectUri = "/home/main";
+		}
+
+		model.addAttribute("redirectUri", redirectUri);
+		model.addAttribute("alertMsg", "로그아웃 되었습니다.");
+
+		return "common/redirect";
+	}
+
 	// 아이디 찾기 시작
 	@RequestMapping("/member/findLoginId")
 	public String showfindLoginId() {
@@ -146,15 +181,49 @@ public class MemberController {
 	// 회원정보 수정 시작
 	@RequestMapping("/member/modify")
 	public String showModify(HttpSession session, Model model) {
-		
-		Member member = (Member) session.getAttribute("loginedMember");
+		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
+		Member member = memberService.getMemberById(loginedMemberId);
+
 		model.addAttribute("member", member);
-		
+	
 		return "member/modify";
 	}
 
 	@RequestMapping("/member/doModify")
-	public String doModify(HttpSession session) {
+	public String doModify(@RequestParam Map<String, Object> param, Model model, HttpSession session) {
+		Util.changeMapKey(param, "loginPwReal", "loginPw");
+		
+		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
+		Member member = memberService.getMemberById(loginedMemberId);
+		
+		String paramNickname = (String) param.get("nickname");
+		String paramEmail = (String) param.get("email");
+
+		//로그인된 회원의 정보를 제외한 중복 검사 시작
+		if (member.getNickname().equals(paramNickname) == false) {
+			ResultData checkForDupEntryResultData2 = memberService.checkNickNameJoinable(paramNickname);
+			if (checkForDupEntryResultData2.isFail()) {
+				model.addAttribute("historyBack", true);
+				model.addAttribute("alertMsg", checkForDupEntryResultData2.getMsg());
+				return "common/redirect";
+			}
+		}
+
+		if (member.getEmail().equals(paramEmail) == false) {
+			ResultData checkForDupEntryResultData3 = memberService.checkEmailJoinable(paramEmail);
+			if (checkForDupEntryResultData3.isFail()) {
+				model.addAttribute("historyBack", true);
+				model.addAttribute("alertMsg", checkForDupEntryResultData3.getMsg());
+				return "common/redirect";
+			}
+		}
+		//중복검사 끝
+
+		memberService.modify(param);
+
+		String redirectUri = (String) param.get("redirectUri");
+		model.addAttribute("redirectUri", redirectUri);
+		model.addAttribute("alertMsg", "회원님의 정보가 수정되었습니다. 다시 로그인 해주시기 바랍니다.");
 
 		return "common/redirect";
 	}
