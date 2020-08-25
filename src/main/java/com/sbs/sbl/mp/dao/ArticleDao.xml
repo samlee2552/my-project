@@ -14,17 +14,22 @@
 		WHERE A.displayStatus = 1
 		ORDER BY A.id DESC;
 	</select>
-	
+
 	<select id="getBoardByCode" resultType="Board">
 		SELECT *
 		FROM board
-		WHERE code = #{code};
+		WHERE
+		code = #{code};
 	</select>
-	
-	<select id="getArticleByIdForDetail">
-		SELECT *
-		FROM article
-		WHERE id = ${id);		
+
+	<select id="getArticleByIdForDetail" resultMap="article">
+		SELECT A.*,
+		M.nickname AS extra__writer
+		FROM article AS A
+		INNER JOIN member AS M
+		ON A.memberId = M.id
+		WHERE A.displayStatus = 1
+		AND A.id = #{id}
 	</select>
 
 	<resultMap type="Article" id="article">
@@ -41,7 +46,5 @@
 			<id property="writer" column="extra__writer" />
 		</association>
 	</resultMap>
-
-
 
 </mapper>

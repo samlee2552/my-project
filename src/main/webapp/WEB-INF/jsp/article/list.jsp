@@ -17,6 +17,7 @@
 				<th>번호</th>
 				<th>날짜</th>
 				<th>제목</th>
+				<th>작성자</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -27,6 +28,7 @@
 					<td>
 						<a href="${article.getDetailLink(board.code)}">${article.title}</a>
 					</td>
+					<td>${article.extra.writer}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -34,7 +36,7 @@
 </div>
 
 <!-- 모바일 용 -->
-<div class="table-box con visible-on-sm-down">
+<!-- <div class="table-box con visible-on-sm-down">
 	<table>
 		<thead>
 			<tr>
@@ -62,5 +64,6 @@
 <div class="btn-box con margin-top-20">
 	<a class="btn btn-primary" href="./${board.code}-write">글쓰기</a>
 </div>
+ -->
 
 <%@ include file="../part/foot.jspf"%>

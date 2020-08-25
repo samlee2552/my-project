@@ -15,8 +15,8 @@ public class ArticleService {
 	private ArticleDao articleDao;
 	
 	public List<Article> getArticlesForList() {
-		
-		return articleDao.getArticlesForList();
+		List<Article> articles = articleDao.getArticlesForList();
+		return articles;
 	}
 
 	public Board getBoardByCode(String code) {
@@ -24,7 +24,8 @@ public class ArticleService {
 	}
 
 	public Article getArticleByIdForDetail(int id) {
-		return getArticleByIdForDetail(id);
+		Article article = articleDao.getArticleByIdForDetail(id);
+		return article;
 	}
 
 }

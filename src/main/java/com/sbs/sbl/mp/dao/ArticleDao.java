@@ -16,6 +16,6 @@ public interface ArticleDao {
 
 	Board getBoardByCode(String code);
 
-	Article getArticleByIdForDetail(int id);
+	Article getArticleByIdForDetail(@Param("id") int id);
 	
 }
