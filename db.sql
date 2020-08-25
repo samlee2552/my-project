@@ -6,6 +6,8 @@ USE `at`;
 # article 테이블 세팅
 CREATE TABLE article (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    boardId INT(10) UNSIGNED NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
     regDate DATETIME NOT NULL,
     updateDate DATETIME,
     delDate DATETIME,
@@ -49,7 +51,7 @@ CREATE TABLE `member` (
     `name` CHAR(20) NOT NULL,
     `nickname` CHAR(20) NOT NULL,
     `email` CHAR(100) NOT NULL,
-    `phoneNo` CHAR(20) NOT NULL
+    `cellphoneNo` CHAR(20) NOT NULL
 );
 
 # member 테이블에 테스트 데이터 삽입
@@ -152,6 +154,12 @@ CREATE TABLE `board` (
 
 INSERT INTO `board`
 SET regDate = NOW(),
-updateDAte = NOW(),
+updateDate = NOW(),
 `code` = 'free',
 `name` = '자유';
+
+INSERT INTO `board`
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'notice',
+`name` = '공지';
