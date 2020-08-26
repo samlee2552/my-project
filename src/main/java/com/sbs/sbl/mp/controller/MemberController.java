@@ -109,7 +109,7 @@ public class MemberController {
 	// 로그아웃
 	@RequestMapping("/member/logout")
 	public String doLogout(String redirectUri, Model model, HttpSession session) {
-		
+
 		boolean isLogined = false;
 		session.removeAttribute("loginedMemberId");
 		session.setAttribute("isLogined", "false");
@@ -181,25 +181,25 @@ public class MemberController {
 	// 회원정보 수정 시작
 	@RequestMapping("/member/modify")
 	public String showModify(HttpSession session, Model model) {
-		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
+		int loginedMemberId = (int) session.getAttribute("loginedMemberId");
 		Member member = memberService.getMemberById(loginedMemberId);
 
 		model.addAttribute("member", member);
-	
+
 		return "member/modify";
 	}
 
 	@RequestMapping("/member/doModify")
 	public String doModify(@RequestParam Map<String, Object> param, Model model, HttpSession session) {
 		Util.changeMapKey(param, "loginPwReal", "loginPw");
-		
-		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
+
+		int loginedMemberId = (int) session.getAttribute("loginedMemberId");
 		Member member = memberService.getMemberById(loginedMemberId);
-		
+
 		String paramNickname = (String) param.get("nickname");
 		String paramEmail = (String) param.get("email");
 
-		//로그인된 회원의 정보를 제외한 중복 검사 시작
+		// 로그인된 회원의 정보를 제외한 중복 검사 시작
 		if (member.getNickname().equals(paramNickname) == false) {
 			ResultData checkForDupEntryResultData2 = memberService.checkNickNameJoinable(paramNickname);
 			if (checkForDupEntryResultData2.isFail()) {
@@ -217,7 +217,7 @@ public class MemberController {
 				return "common/redirect";
 			}
 		}
-		//중복검사 끝
+		// 중복검사 끝
 
 		memberService.modify(param);
 
@@ -226,6 +226,35 @@ public class MemberController {
 		model.addAttribute("alertMsg", "회원님의 정보가 수정되었습니다. 다시 로그인 해주시기 바랍니다.");
 
 		return "common/redirect";
+	}
+
+	// 회원 탈퇴
+	@RequestMapping("/member/delete")
+	public String delete(@RequestParam Map<String, Object> param, Model model, HttpSession session) {
+		int loginedMemberId = (int) session.getAttribute("loginedMemberId");
+
+		return "member/delete";
+	}
+
+	@RequestMapping("/member/doDelete")
+	public String doDelete(Model model, HttpSession session, String loginPwReal, String loginPwConfirm) {
+		String loginPw = loginPwReal;
+		int loginedMemberId = (int) session.getAttribute("loginedMemberId");
+		Member member = memberService.getMemberById(loginedMemberId);
+		
+		if (member.getLoginPw().equals(loginPw) == false) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
+			return "common/redirect";
+		}
+		else {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("confirmMsg", "탈퇴하시겠습니까?.");
+		}
+		
+		String redirectUri = "home/main";
+		memberService.delete(loginedMemberId);
+		return "redirect: " + redirectUri;
 	}
 
 }

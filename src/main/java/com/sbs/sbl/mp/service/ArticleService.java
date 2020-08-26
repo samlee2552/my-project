@@ -1,6 +1,7 @@
 package com.sbs.sbl.mp.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,14 @@ public class ArticleService {
 	public Article getArticleByIdForDetail(int id) {
 		Article article = articleDao.getArticleByIdForDetail(id);
 		return article;
+	}
+
+	public void modify(Map<String, Object> param) {
+		articleDao.modify(param);
+	}
+
+	public void delete(int id) {
+		articleDao.delete(id);
 	}
 
 }

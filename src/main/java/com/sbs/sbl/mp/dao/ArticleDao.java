@@ -17,5 +17,9 @@ public interface ArticleDao {
 	Board getBoardByCode(String code);
 
 	Article getArticleByIdForDetail(@Param("id") int id);
+
+	void modify(Map<String, Object> param);
+
+	void delete(int id);
 	
 }

@@ -26,4 +26,6 @@ public interface MemberDao {
 
 	//회원 정보 수정
 	void modify(Map<String, Object> param);
+
+	void delete(@Param("id") int id);
 }

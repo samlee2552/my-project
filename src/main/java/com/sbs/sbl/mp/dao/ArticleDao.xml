@@ -31,6 +31,24 @@
 		WHERE A.displayStatus = 1
 		AND A.id = #{id}
 	</select>
+	
+	<update id="modify">
+		UPDATE article
+		<set>
+			updateDate = NOW(),
+			<if test="title != null">title = #{title},</if>
+			<if test="title != null">body = #{body}</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE article
+		SET delDate = NOW(),
+		displayStatus = 0,
+		delStatus = 1
+		WHERE id = #{id}
+	</update> 
 
 	<resultMap type="Article" id="article">
 		<id property="id" column="id" />

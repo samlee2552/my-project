@@ -73,7 +73,7 @@
 		SET loginPw = SHA2(#{loginPw}, 256)
 		WHERE loginId = #{loginId}
 	</update>
-	
+	<!-- 회원정보 수정 -->
 	<update id="modify">
 		UPDATE member
 		SET loginPw = #{loginPw},
@@ -83,6 +83,14 @@
 		cellphoneNo = #{cellphoneNo},
 		updateDate = NOW()
 		WHERE loginId = #{loginId}
+	</update>
+
+	<!-- 회원 탈퇴. 소프트 탈퇴 -->
+	<update id="delete">
+		UPDATE member
+		SET delDate = NOW(),
+		delStatus = 1
+		WHERE id = #{id}
 	</update>
 
 </mapper>

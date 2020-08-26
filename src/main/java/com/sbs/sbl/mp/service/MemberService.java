@@ -120,4 +120,9 @@ public class MemberService {
 		memberDao.modify(param);
 	}
 
+	public void delete(int id) {
+		memberDao.delete(id);
+		
+	}
+
 }
