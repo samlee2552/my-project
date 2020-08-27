@@ -16,18 +16,19 @@ import com.sbs.sbl.mp.service.MemberService;
 import com.sbs.sbl.mp.util.Util;
 
 @Controller
+@RequestMapping("member/*")
 public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
 
 	// 회원가입 시작
-	@RequestMapping("/member/join")
+	@RequestMapping("join")
 	public String showJoin() {
 		return "member/join";
 	}
 
-	@RequestMapping("/member/doJoin")
+	@RequestMapping("doJoin")
 	public String doJoin(@RequestParam Map<String, Object> param, Model model) {
 		Util.changeMapKey(param, "loginPwReal", "loginPw");
 
@@ -66,12 +67,12 @@ public class MemberController {
 
 	// 회원가입 끝
 	// 로그인 시작
-	@RequestMapping("/member/login")
+	@RequestMapping("login")
 	public String showLogin() {
 		return "member/login";
 	}
 
-	@RequestMapping("/member/doLogin")
+	@RequestMapping("doLogin")
 	public String doLogin(String loginId, String loginPwReal, String redirectUri, Model model, HttpSession session) {
 		String loginPw = loginPwReal;
 
@@ -113,7 +114,7 @@ public class MemberController {
 
 	// 로그인 끝
 	// 로그아웃
-	@RequestMapping("/member/logout")
+	@RequestMapping("logout")
 	public String doLogout(String redirectUri, Model model, HttpSession session) {
 
 		session.removeAttribute("loginedMemberId");
@@ -129,12 +130,12 @@ public class MemberController {
 	}
 
 	// 아이디 찾기 시작
-	@RequestMapping("/member/findLoginId")
+	@RequestMapping("/findLoginId")
 	public String showfindLoginId() {
 		return "member/findLoginId";
 	}
 
-	@RequestMapping("/member/doFindLoginId")
+	@RequestMapping("/doFindLoginId")
 	public String doFindLoginId(String name, String email, String redirectUri, Model model) {
 		Member member = memberService.getMemberByName_email(name, email);
 
@@ -156,12 +157,12 @@ public class MemberController {
 
 	// 아이디 찾기 끝
 	// 비밀번호 찾기 시작
-	@RequestMapping("/member/findLoginPw")
+	@RequestMapping("findLoginPw")
 	public String showfindLoginPw() {
 		return "member/findLoginPw";
 	}
 
-	@RequestMapping("/member/doFindLoginPw")
+	@RequestMapping("/doFindLoginPw")
 	public String doFindLoginPw(String loginId, String email, String redirectUri, Model model) {
 		Member member = memberService.getMemberByLoginId_email(loginId, email);
 
@@ -184,7 +185,7 @@ public class MemberController {
 
 	// 비밀번호 찾기 끝
 	// 회원정보 수정 시작
-	@RequestMapping("/member/modify")
+	@RequestMapping("modify")
 	public String showModify(HttpSession session, Model model) {
 		int loginedMemberId = (int) session.getAttribute("loginedMemberId");
 		Member member = memberService.getMemberById(loginedMemberId);
@@ -194,7 +195,7 @@ public class MemberController {
 		return "member/modify";
 	}
 
-	@RequestMapping("/member/doModify")
+	@RequestMapping("doModify")
 	public String doModify(@RequestParam Map<String, Object> param, Model model, HttpSession session) {
 		Util.changeMapKey(param, "loginPwReal", "loginPw");
 
@@ -234,14 +235,14 @@ public class MemberController {
 	}
 
 	// 회원 탈퇴
-	@RequestMapping("/member/delete")
+	@RequestMapping("delete")
 	public String delete(@RequestParam Map<String, Object> param, Model model, HttpSession session) {
 		int loginedMemberId = (int) session.getAttribute("loginedMemberId");
 
 		return "member/delete";
 	}
 
-	@RequestMapping("/member/doDelete")
+	@RequestMapping("doDelete")
 	public String doDelete(Model model, HttpSession session, String loginPwReal, String loginPwConfirm, String redirectUri) {
 		String loginPw = loginPwReal;
 		int loginedMemberId = (int) session.getAttribute("loginedMemberId");

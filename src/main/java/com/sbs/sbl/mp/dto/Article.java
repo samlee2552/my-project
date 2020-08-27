@@ -2,6 +2,10 @@ package com.sbs.sbl.mp.dto;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.sbs.sbl.mp.service.ArticleService;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Article {
+
 	private int id;
 	private int boardId;
 	private int memberId;

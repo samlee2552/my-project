@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="${board.name} 게시물 작성" />
+<c:set var="pageTitle" value="게시물 작성" />
 <%@ include file="../part/head.jspf"%>
 <h1>게시물 작성</h1>
 <script>
@@ -37,7 +37,7 @@
 </script>
 
 <form class="table-box con form1" method="POST"
-	action="${board.code}-doWrite"
+	action="doWrite"
 	onsubmit="ArticleWriteForm__submit(this); return false;">
 	<input type="hidden" name="redirectUri"
 		value="/article/${board.code}-detail?id=${article.id}" /> 

@@ -15,7 +15,7 @@
 		INNER JOIN board b
 		ON a.boardId = b.id
 		WHERE A.displayStatus = 1
-		AND boardId = #{boardId}
+		<if test="boardId != 0">AND boardId = #{boardId}</if>
 		ORDER BY A.id DESC;
 	</select>
 
@@ -48,7 +48,7 @@
 		FROM
 		article a
 		INNER JOIN MEMBER m
-		ON a.id = m.id
+		ON a.memberId = m.id
 		INNER JOIN board b
 		ON a.boardId = b.id
 		WHERE A.displayStatus = 1

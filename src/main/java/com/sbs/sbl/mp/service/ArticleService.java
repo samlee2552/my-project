@@ -21,7 +21,7 @@ public class ArticleService {
 	}
 	
 	public Board getBoardById(int id) {
-		return articleDao.getBoardById(id);;
+		return articleDao.getBoardById(id);
 	}
 	
 	public List<Board> getBoards() {
@@ -54,8 +54,8 @@ public class ArticleService {
 
 
 
-	public int write(Map<String, Object> param, int memberId) {
-		return articleDao.write(param, memberId);
+	public int write(Map<String, Object> param) {
+		return articleDao.write(param);
 	}
 
 

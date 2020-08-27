@@ -24,7 +24,7 @@ public interface ArticleDao {
 
 	List<Board> getBoards();
 
-	int write(Map<String, Object> param, @Param("memberId") int memberId);
+	int write(Map<String, Object> param);
 
 	Board getBoardById(@Param("id") int id);
 	
