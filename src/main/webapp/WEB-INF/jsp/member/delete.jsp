@@ -9,9 +9,9 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 
 <script>
-	var MemberLoginForm__submitDone = false;
-	function MemberLoginForm__submit(form) {
-		if (MemberLoginForm__submitDone) {
+	var MemberDeleteForm__submitDone = false;
+	function MemberDeleteForm__submit(form) {
+		if (MemberDeleteForm__submitDone) {
 			alert('처리중입니다.');
 			return;
 		}
@@ -28,7 +28,13 @@
 
 		if (form.loginPwConfirm.value.length == 0) {
 			form.loginPwConfirm.focus();
-			alert('비밀번호를 확인을 입력해주세요');
+			alert('비밀번호 확인을 입력해주세요');
+			return;
+		}
+
+		if (form.loginPw.value != form.loginPwConfirm.value) {
+			form.loginPwConfirm.focus();
+			alert('비밀번호 확인이 일치하지 않습니다');
 			return;
 		}
 
@@ -41,13 +47,13 @@
 			form.submit();
 		}
 
-		MemberLoginForm__submitDone = true;
+		MemberDeleteForm__submitDone = true;
 	}
 </script>
 
 <h1>회원탈퇴</h1>
 <form class="table-box con form1" method="POST" action="doDelete"
-	onsubmit="MemberLoginForm__submit(this); return false;">
+	onsubmit="MemberDeleteForm__submit(this); return false;">
 	<input type="hidden" name="redirectUri" value="/home/main"> <input
 		type="hidden" name="loginPwReal">
 	<table>

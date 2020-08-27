@@ -12,7 +12,7 @@ import com.sbs.sbl.mp.dto.Board;
 @Mapper
 public interface ArticleDao {
 
-	List<Article> getArticlesForList();
+	List<Article> getArticlesForList(@Param("boardId") int boardId);
 
 	Board getBoardByCode(String code);
 
@@ -21,5 +21,11 @@ public interface ArticleDao {
 	void modify(Map<String, Object> param);
 
 	void delete(int id);
+
+	List<Board> getBoards();
+
+	int write(Map<String, Object> param, @Param("memberId") int memberId);
+
+	Board getBoardById(@Param("id") int id);
 	
 }

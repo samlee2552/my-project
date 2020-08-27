@@ -14,21 +14,36 @@ import com.sbs.sbl.mp.dto.Board;
 public class ArticleService {
 	@Autowired
 	private ArticleDao articleDao;
-	
-	public List<Article> getArticlesForList() {
-		List<Article> articles = articleDao.getArticlesForList();
-		return articles;
-	}
-
+	//게시판 관련
+	/* 시작 */
 	public Board getBoardByCode(String code) {
 		return articleDao.getBoardByCode(code);
 	}
-
+	
+	public Board getBoardById(int id) {
+		return articleDao.getBoardById(id);;
+	}
+	
+	public List<Board> getBoards() {
+		List<Board> boards = articleDao.getBoards();
+		return boards;
+	}
+	/* 끝 */
+	
+	//게시물 리스트, 상세보기
+	/* 시작 */
+	public List<Article> getArticlesForList(int boardId) {
+		List<Article> articles = articleDao.getArticlesForList(boardId);
+		return articles;
+	}
+	
 	public Article getArticleByIdForDetail(int id) {
 		Article article = articleDao.getArticleByIdForDetail(id);
 		return article;
 	}
-
+	/* 끝 */
+	
+	//CRUD
 	public void modify(Map<String, Object> param) {
 		articleDao.modify(param);
 	}
@@ -36,5 +51,12 @@ public class ArticleService {
 	public void delete(int id) {
 		articleDao.delete(id);
 	}
+
+
+
+	public int write(Map<String, Object> param, int memberId) {
+		return articleDao.write(param, memberId);
+	}
+
 
 }

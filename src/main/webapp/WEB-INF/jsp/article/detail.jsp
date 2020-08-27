@@ -25,6 +25,10 @@
 				<td>${article.extra.writer}</td>
 			</tr>
 			<tr>
+				<th>게시판</th>
+				<td>${article.extra.boardCode}</td>
+			</tr>
+			<tr>
 				<th>제목</th>
 				<td>${article.title}</td>
 			</tr>

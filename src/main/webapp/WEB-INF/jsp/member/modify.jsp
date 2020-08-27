@@ -9,9 +9,9 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 
 <script>
-	var MemberJoinForm__submitDone = false;
-	function MemberJoinForm__submit(form) {
-		if (MemberJoinForm__submitDone) {
+	var MemberModifyForm__submitDone = false;
+	function MemberModifyForm__submit(form) {
+		if (MemberModifyForm__submitDone) {
 			alert('처리중입니다.');
 			return;
 		}
@@ -81,13 +81,13 @@
 		form.loginId.value = '${member.loginId}';
 
 		form.submit();
-		MemberJoinForm__submitDone = true;
+		MemberModifyForm__submitDone = true;
 	}
 </script>
 
 <h1>회원정보 수정</h1>
 <form class="table-box con form1" method="POST" action="doModify"
-	onsubmit="MemberJoinForm__submit(this); return false;">
+	onsubmit="MemberModifyForm__submit(this); return false;">
 	<input type="hidden" name="redirectUri" value="/member/login">
 	<input type="hidden" name="loginPwReal">
 	<input type="hidden" name="loginId">

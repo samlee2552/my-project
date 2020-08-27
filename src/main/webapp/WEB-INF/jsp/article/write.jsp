@@ -2,13 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="${board.name} 게시물 수정" />
+<c:set var="pageTitle" value="${board.name} 게시물 작성" />
 <%@ include file="../part/head.jspf"%>
-<h1>게시물 수정</h1>
+<h1>게시물 작성</h1>
 <script>
-	var ArticleModifyForm__sumbitDone = false;
-	function ArticleModifyForm__submit(form) {
-		if (ArticleModifyForm__submitDone) {
+	var ArticleWriteForm__submitDone = false;
+	function ArticleWriteForm__submit(form) {
+		if (ArticleWriteForm__submitDone) {
 			alert('처리중입니다');
 			return;
 		}
@@ -31,34 +31,28 @@
 			return;
 		}
 
-		ArticleModifyForm__submitDone = true;
+		ArticleWriteForm__submitDone = true;
 		form.submit();
 	}
 </script>
 
 <form class="table-box con form1" method="POST"
-	action="${board.code}-doModify"
-	onsubmit="ArticleModifyForm__submit(this); return false;">
+	action="${board.code}-doWrite"
+	onsubmit="ArticleWriteForm__submit(this); return false;">
 	<input type="hidden" name="redirectUri"
-		value="/article/${board.code}-detail?id=${article.id}" /> <input
-		type="hidden" name="id" value="${article.id}" />
+		value="/article/${board.code}-detail?id=${article.id}" /> 
+		<input type="hidden" name="id" value="${article.id}" />
 	<table>
 		<tbody>
 			<tr>
 				<th>게시판</th>
-				<td><select name="boardId">
+				<td>
+					<select name="boardId">
 						<c:forEach items="${boards}" var="board">
 							<option value="${board.id}">${board.name}</option>
 						</c:forEach>
-				</select></td>
-			</tr>
-			<tr>
-				<th>번호</th>
-				<td>${article.id}</td>
-			</tr>
-			<tr>
-				<th>날짜</th>
-				<td>${article.regDate}</td>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<th>제목</th>

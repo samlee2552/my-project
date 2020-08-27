@@ -2,25 +2,25 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="아이디 찾기" />
+<c:set var="pageTitle" value="로그인" />
 <%@ include file="../part/head.jspf"%>
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 
 <script>
-	var FindLoginIdForm__submitDone = false;
-	function FindLoginIdForm__submit(form) {
-		if (FindLoginIdForm__submitDone) {
+	var FindLoginPwForm__submitDone = false;
+	function FindLoginPwForm__submit(form) {
+		if (FindLoginPwForm__submitDone) {
 			alert('처리중입니다.');
 			return;
 		}
 
-		form.name.value = form.name.value.trim();
+		form.loginId.value = form.name.value.trim();
 
-		if (form.name.value.length == 0) {
-			form.name.focus();
-			alert('이름을 입력해주세요.');
+		if (form.loginId.value.length == 0) {
+			form.loginId.focus();
+			alert('아이디를 입력해주세요');
 			return;
 		}
 
@@ -28,27 +28,26 @@
 
 		if (form.email.value.length == 0) {
 			form.email.focus();
-			alert('이메일을 입력해주세요.');
+			alert('비밀번호를 입력해주세요.');
 			return;
 		}
-		
+
 		form.submit();
-		FindLoginIdForm__submitDone = true;
+		FindLoginPwForm__submitDone = true;
 	}
 </script>
 
-<h1>아이디 찾기</h1>
-<form class="table-box con form1" method="POST" action="doFindLoginId"
-	onsubmit="FindLoginIdForm__submit(this); return false;">
-	<input type="hidden" name="redirectUri" value="/member/login">
-	<input type="hidden" name="loginPwReal">
+<h1>로그인</h1>
+<form class="table-box con form1" method="POST" action="doFindLoginPw"
+	onsubmit="FindLoginPwForm__submit(this); return false;">
+	<input type="hidden" name="redirectUri" value="./login">
 	<table>
 		<tbody>
 			<tr>
-				<th>이름</th>
+				<th>아이디</th>
 				<td>
 					<div class="form-control-box">
-						<input type="text" placeholder="이름을 입력해주세요" name="name"
+						<input type="text" placeholder="아이디를 입력해주세요" name="loginId"
 							maxlength="20">
 					</div>
 				</td>
@@ -63,9 +62,9 @@
 				</td>
 			</tr>
 			<tr>
-				<th>아이디 찾기</th>
+				<th>로그인</th>
 				<td>
-					<button class="btn btn-primary" type="submit">아이디 찾기</button>
+					<button class="btn btn-primary" type="submit">비밀번호 찾기</button>
 					<button class="btn btn-info" type="button"
 						onclick="history.back();">취소</button>
 				</td>

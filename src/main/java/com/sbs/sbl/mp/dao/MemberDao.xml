@@ -70,7 +70,7 @@
 	<!-- 비밀번호 변경 -->
 	<update id="updateLoginPw">
 		UPDATE member
-		SET loginPw = SHA2(#{loginPw}, 256)
+		SET loginPw = SHA2(#{newPw}, 256)
 		WHERE loginId = #{loginId}
 	</update>
 	<!-- 회원정보 수정 -->
