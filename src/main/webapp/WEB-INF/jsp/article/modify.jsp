@@ -40,7 +40,7 @@
 	action="${board.code}-doModify"
 	onsubmit="ArticleModifyForm__submit(this); return false;">
 	<input type="hidden" name="redirectUri"
-		value="/article/${board.code}-detail?id=${article.id}" /> <input
+		value="/article/#BoardCode-detail?id=${article.id}" /> <input
 		type="hidden" name="id" value="${article.id}" />
 	<table>
 		<tbody>
@@ -48,7 +48,8 @@
 				<th>게시판</th>
 				<td><select name="boardId">
 						<c:forEach items="${boards}" var="board">
-							<option value="${board.id}">${board.name}</option>
+						<!--selected, 삼항 연산자 이용해서 현재 게시판 선택되게  -->
+							<option ${article.boardId == board.id ? 'selected' : ''} value="${board.id}">${board.name}</option>
 						</c:forEach>
 				</select></td>
 			</tr>

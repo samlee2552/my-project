@@ -37,10 +37,10 @@
 </script>
 
 <form class="table-box con form1" method="POST"
-	action="doWrite"
+	action="${boardCode}-doWrite"
 	onsubmit="ArticleWriteForm__submit(this); return false;">
 	<input type="hidden" name="redirectUri"
-		value="/article/${board.code}-detail?id=${article.id}" /> 
+		value="/article/${board.code}-detail?id=#id" /> 
 		<input type="hidden" name="id" value="${article.id}" />
 	<table>
 		<tbody>

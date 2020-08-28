@@ -27,5 +27,7 @@ public interface ArticleDao {
 	int write(Map<String, Object> param);
 
 	Board getBoardById(@Param("id") int id);
+
+	int write(String title, String body, String boardId, int memberId);
 	
 }

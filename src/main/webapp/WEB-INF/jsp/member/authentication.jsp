@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>테스트</title>
+<title>이메일 인증</title>
 </head>
 <body>
-<h1>${member.id}</h1>
-<h1>${member.loginId}</h1>
-<h1>${member.name}</h1>
+<h1></h1>
+<h1></h1>
+<h1>${email}</h1>
 </body>
 </html>

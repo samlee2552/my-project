@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Article {
-
+	
 	private int id;
 	private int boardId;
 	private int memberId;
@@ -28,6 +28,6 @@ public class Article {
 	private Map<String, Object> extra;
 	
 	public String getDetailLink(String boardCode) {
-		return "/article/" + boardCode + "-detail?id=" + id;
+			return "/article/" + boardCode + "-detail?id=" + id;	
 	}
 }

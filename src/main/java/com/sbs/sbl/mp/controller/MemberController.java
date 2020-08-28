@@ -39,7 +39,8 @@ public class MemberController {
 		ResultData checkForDupEntryResultData1 = memberService.checkLoginIdJoinable(loginId);
 		ResultData checkForDupEntryResultData2 = memberService.checkNickNameJoinable(nickname);
 		ResultData checkForDupEntryResultData3 = memberService.checkEmailJoinable(email);
-
+		//중복체크
+		/* 시작 */
 		if (checkForDupEntryResultData1.isFail()) {
 			model.addAttribute("historyBack", true);
 			model.addAttribute("alertMsg", checkForDupEntryResultData1.getMsg());
@@ -55,16 +56,22 @@ public class MemberController {
 			model.addAttribute("alertMsg", checkForDupEntryResultData3.getMsg());
 			return "common/redirect";
 		}
-
-		int newMemberId = memberService.join(param);
-
+		/* 끝 */
+		
 		String redirectUri = (String) param.get("redirectUri");
 		model.addAttribute("redirectUri", redirectUri);
 		model.addAttribute("alertMsg", String.format("%s님, 회원이 되신것을 환영합니다!", nickname));
-
+		model.addAttribute("email", email);
+		int newMemberId = memberService.join(param);
 		return "common/redirect";
 	}
-
+	//회원 인증 
+	@RequestMapping("authentication")
+	public String showAuthentication(Model model) {
+		
+		return "member/authentication";
+	}
+	
 	// 회원가입 끝
 	// 로그인 시작
 	@RequestMapping("login")

@@ -25,7 +25,7 @@ public class MemberService {
 	// 회원가입
 	public int join(Map<String, Object> param) {
 		memberDao.join(param);
-		sendWelcomeMail((String) param.get("email"));
+		sendWelcome_AuthMail((String) param.get("email"));
 		return Util.getAsInt(param.get("id"));
 	}
 
@@ -37,11 +37,11 @@ public class MemberService {
 	}
 
 	// 가입환영 이메일
-	private void sendWelcomeMail(String email) {
+	private void sendWelcome_AuthMail(String email) {
 		String title = String.format("[%s] 회원이 되신 것을 환영합니다.", siteName);
 		StringBuilder body = new StringBuilder();
 
-		body.append("<h1>가입이 완료되었습니다.</h1>");
+		body.append("<h1>가입이 완려되었습니다.</h1>");
 		body.append(String.format("<p><a href=\"%s\" target=\"_blank\">%s</a>로 이동</p>", siteMainUri, siteName));
 
 		mailService.send(email, title, body.toString());
