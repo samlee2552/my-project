@@ -67,8 +67,9 @@ public class MemberController {
 	}
 	//회원 인증 
 	@RequestMapping("authentication")
-	public String showAuthentication(Model model) {
-		
+	public String doAuthentication(String email) {
+		memberService.updateAuthStatus(email);
+		https://all-record.tistory.com/109
 		return "member/authentication";
 	}
 	
@@ -101,6 +102,12 @@ public class MemberController {
 		if (member.getLoginPw().equals(loginPw) == false) {
 			model.addAttribute("historyBack", true);
 			model.addAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
+			return "common/redirect";
+		}
+		
+		if (member.isAuthStatus() == false) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("alertMsg", "이메일 인증 후 로그인 해주시기 바랍니다.");
 			return "common/redirect";
 		}
 		// 끝

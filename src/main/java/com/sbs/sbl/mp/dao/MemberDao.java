@@ -28,4 +28,6 @@ public interface MemberDao {
 	void modify(Map<String, Object> param);
 
 	void delete(@Param("id") int id);
+
+	void updateAuthStatus(@Param("email") String email);
 }

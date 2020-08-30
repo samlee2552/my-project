@@ -113,7 +113,7 @@
 <h1>이메일 주소: ${email}</h1>
 <form class="table-box con form1" method="POST" action="doJoin"
 	onsubmit="MemberJoinForm__submit(this); return false;">
-	<input type="hidden" name="redirectUri" value="/member/authentication?${email}">
+	<input type="hidden" name="redirectUri" value="/member/authentication?email=${email}">
 	<input type="hidden" name="loginPwReal">
 	<table>
 		<tbody>

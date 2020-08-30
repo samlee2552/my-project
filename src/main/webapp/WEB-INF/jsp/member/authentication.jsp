@@ -8,7 +8,7 @@
 <title>이메일 인증</title>
 </head>
 <body>
-<h1></h1>
+<h1>회원 인증 후 이용 바랍니다</h1>
 <h1></h1>
 <h1>${email}</h1>
 </body>

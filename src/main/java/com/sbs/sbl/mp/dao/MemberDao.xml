@@ -9,7 +9,7 @@
 		WHERE
 		id = #{id}
 	</select>
-
+	<!-- 회원가입 -->
 	<insert id="join" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		INTO member
@@ -83,6 +83,12 @@
 		cellphoneNo = #{cellphoneNo},
 		updateDate = NOW()
 		WHERE loginId = #{loginId}
+	</update>
+	<!-- 계정 인증 -->
+	<update id="updateAuthStatus">
+		UPDATE member
+		SET AuthStatus = 1
+		WHERE email = #{email}
 	</update>
 
 	<!-- 회원 탈퇴. 소프트 탈퇴 -->

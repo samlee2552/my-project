@@ -40,9 +40,9 @@ public class MemberService {
 	private void sendWelcome_AuthMail(String email) {
 		String title = String.format("[%s] 회원이 되신 것을 환영합니다.", siteName);
 		StringBuilder body = new StringBuilder();
-
+		String authUri = "http://localhost:8085/member/authentication?email=" + email;
 		body.append("<h1>가입이 완려되었습니다.</h1>");
-		body.append(String.format("<p><a href=\"%s\" target=\"_blank\">%s</a>로 이동</p>", siteMainUri, siteName));
+		body.append(String.format("<p><a href=\"%s\" target=\"_blank\">계정인증하러 가기</a>로 이동</p>", authUri));
 
 		mailService.send(email, title, body.toString());
 
@@ -55,6 +55,7 @@ public class MemberService {
 
 		body.append(String.format("<h1>회원님의 임시 비밀번호는 \"%s\" 입니다 </h1>", tempPw));
 		body.append("<h1>회원정보 수정 탭에서 비밀번호를 변경해주시기 바랍니다.</h1>");
+		body.append(String.format("<p><a href=\"%s\" target=\"_blank\">%s</a>로 이동</p>", siteMainUri, siteName));
 		body.append(String.format("<p><a href=\"%s\" target=\"_blank\">%s</a>로 이동</p>", siteMainUri, siteName));
 
 		mailService.send(email, title, body.toString());
@@ -123,6 +124,10 @@ public class MemberService {
 	public void delete(int id) {
 		memberDao.delete(id);
 		
+	}
+
+	public void updateAuthStatus(String email) {
+		memberDao.updateAuthStatus(email);
 	}
 
 }

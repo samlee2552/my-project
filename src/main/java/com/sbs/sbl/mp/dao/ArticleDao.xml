@@ -8,12 +8,14 @@
 		m.nickname
 		AS extra__writer,
 		b.code AS extra__boardCode
-		FROM article a
+		FROM
+		article a
 		INNER JOIN
 		MEMBER m
 		ON a.memberId = m.id
 		INNER JOIN board b
-		ON a.boardId = b.id
+		ON
+		a.boardId = b.id
 		WHERE A.displayStatus = 1
 		<if test="boardId != 0">AND boardId = #{boardId}</if>
 		ORDER BY A.id DESC;
@@ -38,9 +40,11 @@
 		SELECT *
 		FROM board
 		WHERE
-		id = #{id};
+		id =
+		#{id};
 	</select>
-
+	<!-- 게시판 불러오기 끝 -->
+	<!-- 게시물 불러오기 -->
 	<select id="getArticleByIdForDetail" resultMap="article">
 		SELECT a.*,
 		m.nickname AS extra__writer,
@@ -50,11 +54,12 @@
 		INNER JOIN MEMBER m
 		ON a.memberId = m.id
 		INNER JOIN board b
-		ON a.boardId = b.id
+		ON a.boardId
+		= b.id
 		WHERE A.displayStatus = 1
 		AND a.id = #{id};
 	</select>
-
+	<!-- 게시물 수정 -->
 	<update id="modify">
 		UPDATE article
 		<set>
@@ -65,7 +70,7 @@
 		</set>
 		WHERE id = #{id}
 	</update>
-
+	<!-- 게시물 삭제 -->
 	<update id="delete">
 		UPDATE article
 		SET delDate = NOW(),
