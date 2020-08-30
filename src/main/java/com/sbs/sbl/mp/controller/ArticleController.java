@@ -3,6 +3,7 @@ package com.sbs.sbl.mp.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,9 @@ public class ArticleController {
 		int boardId = 0;
 		Board board = articleService.getBoardByCode(boardCode);
 		List<Article> articles;
-		
+
 		if (boardCode.equals("entire") && board == null) {
 			model.addAttribute("boardName", "전체");
-			model.addAttribute("boardCode", "entire");
 			articles = articleService.getArticlesForList(boardId);
 		} else {
 			model.addAttribute("boardName", board.getName());
@@ -50,7 +50,9 @@ public class ArticleController {
 	public String showEntireList(Model model, String boardCode) {
 		int boardId = 0;
 		List<Article> articles = articleService.getArticlesForList(boardId);
-		
+		List<Board> boards = articleService.getBoards();
+
+		model.addAttribute("boards", boards);
 		model.addAttribute("boardName", "전체");
 		model.addAttribute("boardCode", "entire");
 		model.addAttribute("articles", articles);
@@ -62,7 +64,10 @@ public class ArticleController {
 	@RequestMapping("{boardCode}-detail")
 	public String showDetail(Model model, @RequestParam Map<String, Object> param,
 			@PathVariable("boardCode") String boardCode, String listUrl) {
-	
+		if (listUrl == null) {
+			listUrl = "./" + boardCode + "-list";
+		}
+
 		int id = Integer.parseInt((String) param.get("id"));
 
 		Article article = articleService.getArticleByIdForDetail(id);
@@ -104,16 +109,18 @@ public class ArticleController {
 		Map<String, Object> newParam = Util.getNewMapOf(param, "id", "boardId", "title", "body");
 		articleService.modify(newParam);
 
-		Board board = articleService.getBoardById(boardId);
 		String redirectUri = (String) param.get("redirectUri");
-		redirectUri = redirectUri.replace("#BoardCode", board.getCode() + "");
+		redirectUri = redirectUri.replace("#BoardCode", boardCode + "");
 		return "redirect:" + redirectUri;
 	}
 
 	// 글쓰기
-	@RequestMapping("write")
-	public String showWrite(Model model, @RequestParam Map<String, Object> param) {
+	@RequestMapping("{boardCode}-write")
+	public String showWrite(Model model, @RequestParam Map<String, Object> param, @PathVariable("boardCode") String boardCode) {
+		
 		List<Board> boards = articleService.getBoards();
+
+		model.addAttribute("boardCode", boardCode);
 		model.addAttribute("boards", boards);
 
 		return "article/write";
@@ -123,9 +130,7 @@ public class ArticleController {
 	public String doWrite(@PathVariable("boardCode") String boardCode, @RequestParam Map<String, Object> param,
 			Model model, HttpSession session, int boardId) {
 		int loginedMemberId = (int) session.getAttribute("loginedMemberId");
-
-		Board board = articleService.getBoardByCode(boardCode);
-		model.addAttribute("board", board);
+		Board board = articleService.getBoardById(boardId);
 
 		Map<String, Object> newParam = Util.getNewMapOf(param, "title", "body");
 		newParam.put("boardId", boardId);
@@ -135,7 +140,7 @@ public class ArticleController {
 
 		String redirectUri = (String) param.get("redirectUri");
 		redirectUri = redirectUri.replace("#id", newArticldId + "");
-
+		redirectUri = redirectUri.replace("#boardCode", board.getCode());
 		return "redirect:" + redirectUri;
 	}
 }

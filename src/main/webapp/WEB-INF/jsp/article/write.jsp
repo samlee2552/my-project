@@ -39,20 +39,16 @@
 <form class="table-box con form1" method="POST"
 	action="${boardCode}-doWrite"
 	onsubmit="ArticleWriteForm__submit(this); return false;">
-	<input type="hidden" name="redirectUri"
-		value="/article/${board.code}-detail?id=#id" /> 
-		<input type="hidden" name="id" value="${article.id}" />
+
 	<table>
 		<tbody>
 			<tr>
 				<th>게시판</th>
-				<td>
-					<select name="boardId">
+				<td><select name="boardId">
 						<c:forEach items="${boards}" var="board">
-							<option value="${board.id}">${board.name}</option>
+							<option ${boardCode == board.code ? 'selected' : ''} value="${board.id}">${board.name}</option>
 						</c:forEach>
-					</select>
-				</td>
+				</select></td>
 			</tr>
 			<tr>
 				<th>제목</th>
@@ -72,15 +68,17 @@
 				</td>
 			</tr>
 			<tr>
-				<th>글 수정</th>
+				<th>글 작성</th>
 				<td>
 					<div class="btn-box margin-top-20">
-						<button type="submit" class="btn btn-primary">수정</button>
+						<button type="submit" class="btn btn-primary">글 쓰기</button>
 					</div>
 				</td>
 			</tr>
 		</tbody>
 	</table>
+	<input type="hidden" name="redirectUri"
+		value="/article/#boardCode-detail?id=#id" />
 </form>
 
 <%@ include file="../part/foot.jspf"%>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sbs.sbl.mp.dao.ArticleDao;
 import com.sbs.sbl.mp.dto.Article;
 import com.sbs.sbl.mp.dto.Board;
+import com.sbs.sbl.mp.util.Util;
 
 @Service
 public class ArticleService {
@@ -55,7 +56,9 @@ public class ArticleService {
 
 
 	public int write(Map<String, Object> param) {
-		return articleDao.write(param);
+		articleDao.write(param);
+		int id = Util.getAsInt(param.get("id"));
+		return id;
 	}
 
 	public int write(String title, String body, String boardId, int memberId) {

@@ -43,7 +43,7 @@
 
 
 <div class="btn-box con margin-top-20">
-	<a class="btn btn-primary" href="./write">글쓰기</a> 
+	<a class="btn btn-primary" href="${board.code}-write">글쓰기</a> 
 	<a class="btn btn-info" href="${board.code}-modify?id=${article.id}">수정</a>
 	<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;" 
 	class="btn btn-info" href="${board.code}-delete?id=${article.id}">삭제</a>
