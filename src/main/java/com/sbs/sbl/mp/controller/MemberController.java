@@ -58,19 +58,22 @@ public class MemberController {
 		}
 		/* 끝 */
 		
+		
 		String redirectUri = (String) param.get("redirectUri");
 		model.addAttribute("redirectUri", redirectUri);
-		model.addAttribute("alertMsg", String.format("%s님, 회원이 되신것을 환영합니다!", nickname));
-		model.addAttribute("email", email);
+		model.addAttribute("alertMsg", String.format("%s님, 회원이 되신것을 환영합니다! 이메일 인증 후 로그인 가능합니다", nickname));
 		int newMemberId = memberService.join(param);
 		return "common/redirect";
 	}
 	//회원 인증 
 	@RequestMapping("authentication")
-	public String doAuthentication(String email) {
+	public String verifyEmail(String email, Model model) {
 		memberService.updateAuthStatus(email);
-		https://all-record.tistory.com/109
-		return "member/authentication";
+		
+		model.addAttribute("alertMsg", "이메일 인증이 완료되었습니다.");
+		String redirectUri = "/member/login";
+		model.addAttribute("redirectUri", redirectUri);
+		return "common/redirect";
 	}
 	
 	// 회원가입 끝
