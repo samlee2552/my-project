@@ -19,7 +19,7 @@ import com.sbs.sbl.mp.service.ArticleService;
 import com.sbs.sbl.mp.util.Util;
 
 @Controller
-@RequestMapping("article/*")
+@RequestMapping("usr/article/*")
 public class ArticleController {
 	@Autowired
 	private ArticleService articleService;

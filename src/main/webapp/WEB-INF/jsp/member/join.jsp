@@ -7,6 +7,8 @@
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
 	var MemberJoinForm__submitDone = false;
@@ -17,7 +19,6 @@
 		}
 
 		form.loginId.value = form.loginId.value.trim();
-		
 
 		form.loginId.value = form.loginId.value.replaceAll(' ', '');
 
@@ -107,10 +108,11 @@
 		form.submit();
 		MemberJoinForm__submitDone = true;
 	}
+
 </script>
 
 <h1>회원 가입</h1>
-<h1>이메일 주소: ${email}</h1>
+
 <form class="table-box con form1" method="POST" action="doJoin"
 	onsubmit="MemberJoinForm__submit(this); return false;">
 	<input type="hidden" name="redirectUri" value="/member/login">

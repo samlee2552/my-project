@@ -16,7 +16,7 @@ import com.sbs.sbl.mp.service.MemberService;
 import com.sbs.sbl.mp.util.Util;
 
 @Controller
-@RequestMapping("member/*")
+@RequestMapping("usr/member/*")
 public class MemberController {
 
 	@Autowired
