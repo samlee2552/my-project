@@ -78,7 +78,7 @@
 		</tbody>
 	</table>
 	<input type="hidden" name="redirectUri"
-		value="/article/#boardCode-detail?id=#id" />
+		value="/usr/article/#boardCode-detail?id=#id" />
 </form>
 
 <%@ include file="../part/foot.jspf"%>

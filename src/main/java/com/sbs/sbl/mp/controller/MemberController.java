@@ -2,6 +2,7 @@ package com.sbs.sbl.mp.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +72,7 @@ public class MemberController {
 		memberService.updateAuthStatus(email);
 		
 		model.addAttribute("alertMsg", "이메일 인증이 완료되었습니다.");
-		String redirectUri = "/member/login";
+		String redirectUri = "/usr/member/login";
 		model.addAttribute("redirectUri", redirectUri);
 		return "common/redirect";
 	}
@@ -117,7 +118,6 @@ public class MemberController {
 		boolean isLogined = true;
 
 		session.setAttribute("loginedMemberId", member.getId());
-		session.setAttribute("isLogined", isLogined);
 
 		if (redirectUri == null || redirectUri.length() == 0) {
 			redirectUri = "/home/main";
@@ -133,11 +133,10 @@ public class MemberController {
 	// 로그아웃
 	@RequestMapping("logout")
 	public String doLogout(String redirectUri, Model model, HttpSession session) {
-
 		session.removeAttribute("loginedMemberId");
-		session.setAttribute("isLogined", "false");
+	
 		if (redirectUri == null || redirectUri.length() == 0) {
-			redirectUri = "/home/main";
+			redirectUri = "/usr/home/main";
 		}
 
 		model.addAttribute("redirectUri", redirectUri);
@@ -203,8 +202,8 @@ public class MemberController {
 	// 비밀번호 찾기 끝
 	// 회원정보 수정 시작
 	@RequestMapping("modify")
-	public String showModify(HttpSession session, Model model) {
-		int loginedMemberId = (int) session.getAttribute("loginedMemberId");
+	public String showModify(HttpServletRequest req, Model model) {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		Member member = memberService.getMemberById(loginedMemberId);
 
 		model.addAttribute("member", member);
@@ -213,10 +212,10 @@ public class MemberController {
 	}
 
 	@RequestMapping("doModify")
-	public String doModify(@RequestParam Map<String, Object> param, Model model, HttpSession session) {
+	public String doModify(@RequestParam Map<String, Object> param, Model model, HttpServletRequest req) {
 		Util.changeMapKey(param, "loginPwReal", "loginPw");
 
-		int loginedMemberId = (int) session.getAttribute("loginedMemberId");
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		Member member = memberService.getMemberById(loginedMemberId);
 
 		String paramNickname = (String) param.get("nickname");
@@ -253,8 +252,8 @@ public class MemberController {
 
 	// 회원 탈퇴
 	@RequestMapping("delete")
-	public String delete(@RequestParam Map<String, Object> param, Model model, HttpSession session) {
-		int loginedMemberId = (int) session.getAttribute("loginedMemberId");
+	public String delete(@RequestParam Map<String, Object> param, Model model, HttpServletRequest req) {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 
 		return "member/delete";
 	}
@@ -276,7 +275,6 @@ public class MemberController {
 			memberService.delete(loginedMemberId);
 			//로그아웃 처리
 			session.removeAttribute("loginedMemberId");
-			session.setAttribute("isLogined", "false");
 			
 			return "common/redirect";
 	}

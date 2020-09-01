@@ -37,13 +37,14 @@
 	<div class="top-bar">
 		<nav class="flex flex-jc-c">
 			<ul class="">
-				<li><a href="/member/login">로그인</a></li>
-				<li><a href="/member/join">회원가입</a></li>
-				<li><a href="/member/logout">로그아웃</a></li>
-				<li><a href="/member/modify">회원정보 수정</a></li>
-				<li><a href="/member/delete">회원탈퇴</a></li>
-				<li><a href="/member/findLoginId">아이디 찾기</a></li>
-				<li><a href="/member/findLoginPw">비번 찾기</a></li>
+				<li><a href="/usr/member/login">로그인</a></li>
+				<li><a href="/usr/member/join">회원가입</a></li>
+				<li><a href="/usr/member/logout">로그아웃</a></li>
+				<li><a href="/usr/member/modify">회원정보 수정</a></li>
+				<li><a href="/usr/member/delete">회원탈퇴</a></li>
+				<li><a href="/usr/member/findLoginId">아이디 찾기</a></li>
+				<li><a href="/usr/member/findLoginPw">비번 찾기</a></li>
+				<li><a href="/usr/article/list">전체 게시물</a></li>
 			</ul>
 		</nav>
 	</div>

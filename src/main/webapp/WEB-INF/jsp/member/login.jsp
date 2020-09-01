@@ -46,7 +46,7 @@
 <h1>로그인</h1>
 <form class="table-box con form1" method="POST" action="doLogin"
 	onsubmit="MemberLoginForm__submit(this); return false;">
-	<input type="hidden" name="redirectUri" value="/home/main">
+	<input type="hidden" name="redirectUri" value="/usr/home/main">
 	<input type="hidden" name="loginPwReal">
 	<table>
 		<tbody>

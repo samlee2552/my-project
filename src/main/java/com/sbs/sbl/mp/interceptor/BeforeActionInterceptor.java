@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.sbs.sbl.mp.config.AppConfig;
 import com.sbs.sbl.mp.dto.Member;
 import com.sbs.sbl.mp.service.MemberService;
 import com.sbs.sbl.mp.util.Util;
@@ -27,10 +28,11 @@ public class BeforeActionInterceptor implements HandlerInterceptor {
 	private MemberService memberService;
 
 //	@Autowired
-//	private AppConfig appConfig;
+	private AppConfig appConfig;
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
 
 		// 기타 유용한 정보를 request에 담는다.
 		Map<String, Object> param = Util.getParamMap(request);
@@ -52,7 +54,9 @@ public class BeforeActionInterceptor implements HandlerInterceptor {
 
 		// 현재 페이지가 이미 로그인 페이지라면, 이 상태에서 로그인 버튼을 눌렀을 때 기존 param의 redirectUri가 계속 유지되도록
 		// 한다.
-		if (requestUri.contains("/usr/member/login") || requestUri.contains("/usr/member/join") || requestUri.contains("/usr/member/findLoginId") || requestUri.contains("/usr/member/findLoginPw")) {
+		if (requestUri.contains("/usr/member/login") || requestUri.contains("/usr/member/join")
+				|| requestUri.contains("/usr/member/findLoginId") || requestUri.contains("/usr/member/findLoginPw")
+				|| requestUri.contains("/usr/member/authentication")) {
 			afterLoginUri = Util.getString(request, "redirectUri", "");
 		}
 
@@ -88,7 +92,7 @@ public class BeforeActionInterceptor implements HandlerInterceptor {
 		boolean isLogined = false;
 		int loginedMemberId = 0;
 		Member loginedMember = null;
-		
+
 		if (session.getAttribute("loginedMemberId") != null) {
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 			isLogined = true;
@@ -101,7 +105,7 @@ public class BeforeActionInterceptor implements HandlerInterceptor {
 
 		request.setAttribute("activeProfile", activeProfile);
 
-//		request.setAttribute("appConfig", appConfig);
+		request.setAttribute("appConfig", appConfig);
 
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 	}
