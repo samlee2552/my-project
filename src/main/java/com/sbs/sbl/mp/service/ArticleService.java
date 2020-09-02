@@ -77,5 +77,9 @@ public class ArticleService {
 		return articleDao.getForPrintArticleReplies(param);
 	}
 
+	public void deleteReply(int id) {
+		articleDao.deleteReply(id);
+	}
+
 
 }

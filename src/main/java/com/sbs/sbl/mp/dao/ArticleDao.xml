@@ -69,6 +69,14 @@
 		delStatus = 1
 		WHERE id = #{id}
 	</update>
+	
+	<update id="deleteReply">
+		UPDATE articleReply
+		SET delDate = NOW(),
+		displayStatus = 0,
+		delStatus = 1
+		WHERE id = #{id}
+	</update>
 
 	<insert id="write" useGeneratedKeys="true" keyProperty="id">
 		INSERT
