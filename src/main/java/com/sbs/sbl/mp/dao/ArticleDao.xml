@@ -77,6 +77,18 @@
 		body = #{body},
 		memberId = #{memberId}
 	</insert>
+	<!-- 댓글 작성 -->
+	<insert id="writeReply" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO articleReply
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		body =
+		#{body},
+		memberId = #{memberId},
+		articleId = #{articleId},
+		displayStatus
+		= 1
+	</insert>
 
 	<resultMap type="Article" id="article">
 		<id property="id" column="id" />

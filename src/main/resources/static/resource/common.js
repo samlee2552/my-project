@@ -36,6 +36,13 @@ function isCellphoneNo(str) {
 	
 	return isNumber(str);
 }
+
 function isNumber(n) {
 	return /^-?[\d.]+(?:e-?\d+)?$/.test(n);
+}
+
+function getHtmlEncoded(raw) {
+    return raw.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
+        return '&#'+i.charCodeAt(0)+';';
+    });
 }

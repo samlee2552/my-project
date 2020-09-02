@@ -32,6 +32,16 @@
 <link rel="stylesheet" href="/resource/app.css" />
 <!-- 공통 JS -->
 <script src="/resource/app.js"></script>
+
+<script src="/resource/app.js"></script>
+<%="<script>"%>
+var activeProfile = '${activeProfile}';
+<%="</script>"%>
+<%="<script>"%>
+var param = ${paramJson};
+<%="</script>"%>
+</head>
+
 </head>
 
 	<div class="top-bar">

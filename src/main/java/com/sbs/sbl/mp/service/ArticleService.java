@@ -65,5 +65,11 @@ public class ArticleService {
 		return articleDao.write(title, body, boardId, memberId);
 	}
 
+	public int writeReply(Map<String, Object> param) {
+		articleDao.writeReply(param);
+
+		return Util.getAsInt(param.get("id"));
+	}
+
 
 }
