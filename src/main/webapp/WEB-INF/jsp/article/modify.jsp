@@ -37,22 +37,13 @@
 </script>
 
 <form class="table-box con form1" method="POST"
-	action="${board.code}-doModify"
+	action="doModify"
 	onsubmit="ArticleModifyForm__submit(this); return false;">
 	<input type="hidden" name="redirectUri"
-		value="/article/#BoardCode-detail?id=${article.id}" /> <input
+		value="/usr/article/detail?id=${article.id}" /> <input
 		type="hidden" name="id" value="${article.id}" />
 	<table>
 		<tbody>
-			<tr>
-				<th>게시판</th>
-				<td><select name="boardId">
-						<c:forEach items="${boards}" var="board">
-						<!--selected, 삼항 연산자 이용해서 현재 게시판 선택되게  -->
-							<option ${article.boardId == board.id ? 'selected' : ''} value="${board.id}">${board.name}</option>
-						</c:forEach>
-				</select></td>
-			</tr>
 			<tr>
 				<th>번호</th>
 				<td>${article.id}</td>

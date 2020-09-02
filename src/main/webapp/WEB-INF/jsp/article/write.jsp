@@ -37,19 +37,11 @@
 </script>
 
 <form class="table-box con form1" method="POST"
-	action="${boardCode}-doWrite"
+	action="doWrite"
 	onsubmit="ArticleWriteForm__submit(this); return false;">
 
 	<table>
 		<tbody>
-			<tr>
-				<th>게시판</th>
-				<td><select name="boardId">
-						<c:forEach items="${boards}" var="board">
-							<option ${boardCode == board.code ? 'selected' : ''} value="${board.id}">${board.name}</option>
-						</c:forEach>
-				</select></td>
-			</tr>
 			<tr>
 				<th>제목</th>
 				<td>
@@ -78,7 +70,7 @@
 		</tbody>
 	</table>
 	<input type="hidden" name="redirectUri"
-		value="/usr/article/#boardCode-detail?id=#id" />
+		value="/usr/article/detail?id=#id" />
 </form>
 
 <%@ include file="../part/foot.jspf"%>

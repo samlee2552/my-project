@@ -6,18 +6,13 @@
 	<select id="getArticlesForList" resultMap="article">
 		SELECT a.*,
 		m.nickname
-		AS extra__writer,
-		b.code AS extra__boardCode
+		AS extra__writer
 		FROM
 		article a
 		INNER JOIN
 		MEMBER m
 		ON a.memberId = m.id
-		INNER JOIN board b
-		ON
-		a.boardId = b.id
 		WHERE A.displayStatus = 1
-		<if test="boardId != 0">AND boardId = #{boardId}</if>
 		ORDER BY A.id DESC;
 	</select>
 
@@ -47,15 +42,11 @@
 	<!-- 게시물 불러오기 -->
 	<select id="getArticleByIdForDetail" resultMap="article">
 		SELECT a.*,
-		m.nickname AS extra__writer,
-		b.code AS extra__boardCode
+		m.nickname AS extra__writer
 		FROM
 		article a
 		INNER JOIN MEMBER m
 		ON a.memberId = m.id
-		INNER JOIN board b
-		ON a.boardId
-		= b.id
 		WHERE A.displayStatus = 1
 		AND a.id = #{id};
 	</select>
@@ -66,7 +57,6 @@
 			updateDate = NOW(),
 			<if test="title != null">title = #{title},</if>
 			<if test="body != null">body = #{body},</if>
-			<if test="boardId != null">boardId = #{boardId}</if>
 		</set>
 		WHERE id = #{id}
 	</update>
@@ -85,8 +75,7 @@
 		SET regDate = NOW(),
 		title = #{title},
 		body = #{body},
-		memberId = #{memberId},
-		boardId = #{boardId}
+		memberId = #{memberId}
 	</insert>
 
 	<resultMap type="Article" id="article">

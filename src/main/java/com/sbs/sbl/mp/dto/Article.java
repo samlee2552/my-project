@@ -27,7 +27,7 @@ public class Article {
 	private String body;
 	private Map<String, Object> extra;
 	
-	public String getDetailLink(String boardCode) {
-			return "/usr/article/" + boardCode + "-detail?id=" + id;	
+	public String getDetailLink(int id) {
+			return "/usr/article/detail?id=" + id;	
 	}
 }
