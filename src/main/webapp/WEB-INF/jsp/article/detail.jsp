@@ -145,7 +145,7 @@
 		html += '<tr>';
 		html += '<td>' + articleReply.id + '</td>';
 		html += '<td>' + articleReply.regDate + '</td>';
-		html += '<td>' + 11 + '</td>';
+		html += '<td>' + articleReply.extra.writer + '</td>';
 		html += '<td>' + articleReply.body + '</td>';
 		html += '<td>비고</td>';
 		html += '</tr>';
