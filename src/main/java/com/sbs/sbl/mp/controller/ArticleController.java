@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.sbl.mp.dto.Article;
+import com.sbs.sbl.mp.dto.ArticleReply;
 import com.sbs.sbl.mp.dto.ResultData;
 import com.sbs.sbl.mp.service.ArticleService;
 import com.sbs.sbl.mp.util.Util;
@@ -106,6 +107,17 @@ public class ArticleController {
 		rsDataBody.put("articleReplyId", newArticleReplyId);
 
 		return new ResultData("S-1", String.format("%d번 댓글이 생성되었습니다.", newArticleReplyId), rsDataBody);
+	}
+	
+	@RequestMapping("/usr/article/getForPrintArticleReplies")
+	@ResponseBody
+	public ResultData getForPrintArticleReplies(@RequestParam Map<String, Object> param) {
+		Map<String, Object> rsDataBody = new HashMap<>();
+
+		List<ArticleReply> articleReplies = articleService.getForPrintArticleReplies(param);
+		rsDataBody.put("articleReplies", articleReplies);
+
+		return new ResultData("S-1", String.format("%d개의 댓글을 불러왔습니다.", articleReplies.size()), rsDataBody);
 	}
 	
 }

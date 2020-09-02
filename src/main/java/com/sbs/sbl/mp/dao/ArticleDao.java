@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.sbs.sbl.mp.dto.Article;
+import com.sbs.sbl.mp.dto.ArticleReply;
 import com.sbs.sbl.mp.dto.Board;
 
 @Mapper
@@ -31,5 +32,7 @@ public interface ArticleDao {
 	int write(String title, String body, String boardId, int memberId);
 
 	void writeReply(Map<String, Object> param);
+
+	List<ArticleReply> getForPrintArticleReplies(Map<String, Object> param);
 	
 }
