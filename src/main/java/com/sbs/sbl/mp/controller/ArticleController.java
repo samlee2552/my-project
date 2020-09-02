@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.sbl.mp.dto.Article;
 import com.sbs.sbl.mp.dto.ArticleReply;
+import com.sbs.sbl.mp.dto.Member;
 import com.sbs.sbl.mp.dto.ResultData;
 import com.sbs.sbl.mp.service.ArticleService;
 import com.sbs.sbl.mp.util.Util;
@@ -111,9 +112,11 @@ public class ArticleController {
 	
 	@RequestMapping("/usr/article/getForPrintArticleReplies")
 	@ResponseBody
-	public ResultData getForPrintArticleReplies(@RequestParam Map<String, Object> param) {
+	public ResultData getForPrintArticleReplies(@RequestParam Map<String, Object> param, HttpServletRequest req) {
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
 		Map<String, Object> rsDataBody = new HashMap<>();
 
+		param.put("actor", loginedMember);
 		List<ArticleReply> articleReplies = articleService.getForPrintArticleReplies(param);
 		rsDataBody.put("articleReplies", articleReplies);
 
@@ -128,4 +131,19 @@ public class ArticleController {
 		return new ResultData("S-1", String.format("%d번 댓글을 삭제하였습니다.", id));
 	}
 	
+	@RequestMapping("/usr/article/doModifyReplyAjax")
+	@ResponseBody
+	public ResultData doModifyReplyAjax(@RequestParam Map<String, Object> param, HttpServletRequest req, int id) {
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
+		ArticleReply articleReply = articleService.getForPrintArticleReplyById(id);
+
+		if ( articleService.actorCanModify(loginedMember, articleReply) == false ) {
+			return new ResultData("F-1", String.format("%d번 댓글을 수정할 권한이 없습니다.", id));
+		}
+
+		Map<String, Object> modfiyReplyParam = Util.getNewMapOf(param, "id", "body");
+		ResultData rd = articleService.modfiyReply(modfiyReplyParam);
+
+		return rd;
+	}
 }

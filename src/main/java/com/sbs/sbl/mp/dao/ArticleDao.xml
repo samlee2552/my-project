@@ -77,6 +77,14 @@
 		delStatus = 1
 		WHERE id = #{id}
 	</update>
+	
+	<update id="modifyReply">
+		UPDATE articleReply
+		<set>
+			<if test="body != null">body = #{body},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
 
 	<insert id="write" useGeneratedKeys="true" keyProperty="id">
 		INSERT
@@ -111,6 +119,20 @@
 		AND AR.id >= #{from}
 		ORDER BY AR.id ASC
 		]]>
+	</select>
+	
+	<select id="getForPrintArticleReplyById"
+		resultMap="articleReply">
+		SELECT AR.*,
+		M.nickname AS extra__writer
+		FROM articleReply AS
+		AR
+		INNER JOIN member AS M
+		ON AR.memberId = M.id
+		WHERE AR.id = #{id}
+		AND
+		AR.displayStatus = 1
+		AND AR.id = #{id}
 	</select>
 
 	<resultMap type="Article" id="article">

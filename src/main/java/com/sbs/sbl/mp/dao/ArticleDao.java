@@ -30,11 +30,18 @@ public interface ArticleDao {
 	Board getBoardById(@Param("id") int id);
 
 	int write(String title, String body, String boardId, int memberId);
-
+	
+	//댓글 ==================
+	
+	//댓글 작성
 	void writeReply(Map<String, Object> param);
-
+	//댓글 리스트
 	List<ArticleReply> getForPrintArticleReplies(Map<String, Object> param);
-
+	//댓글 삭제
 	void deleteReply(@Param("id") int id);
+	
+	ArticleReply getForPrintArticleReplyById(@Param("id") int id);
+
+	void modifyReply(Map<String, Object> param);
 	
 }
