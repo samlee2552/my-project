@@ -69,23 +69,7 @@
 		delStatus = 1
 		WHERE id = #{id}
 	</update>
-	
-	<update id="deleteReply">
-		UPDATE articleReply
-		SET delDate = NOW(),
-		displayStatus = 0,
-		delStatus = 1
-		WHERE id = #{id}
-	</update>
-	
-	<update id="modifyReply">
-		UPDATE articleReply
-		<set>
-			<if test="body != null">body = #{body},</if>
-		</set>
-		WHERE id = #{id}
-	</update>
-
+	<!-- 게시물 작성 -->
 	<insert id="write" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		INTO article
@@ -94,45 +78,68 @@
 		body = #{body},
 		memberId = #{memberId}
 	</insert>
+
+	<!-- 댓글 -->
+
+	<update id="deleteReply">
+		UPDATE reply
+		SET delDate = NOW(),
+		displayStatus = 0,
+		delStatus = 1
+		WHERE id = #{id}
+	</update>
+
+	<update id="modifyReply">
+		UPDATE reply
+		<set>
+			<if test="body != null">body = #{body},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
 	<!-- 댓글 작성 -->
 	<insert id="writeReply" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO articleReply
+		INSERT INTO reply
 		SET regDate = NOW(),
 		updateDate = NOW(),
-		body =
-		#{body},
+		body = #{body},
 		memberId = #{memberId},
-		articleId = #{articleId},
+		relTypeCode = #{relTypeCode},
+		relId =	#{relId},
 		displayStatus
 		= 1
 	</insert>
 	<!-- 댓글 리스트 -->
-	<select id="getForPrintArticleReplies" resultMap="articleReply">
+	<select id="getForPrintReplies" resultMap="reply">
 	    <![CDATA[
 		SELECT AR.*,
 		M.nickname AS extra__writer
-		FROM articleReply AS AR
+		FROM reply AS AR
 		INNER JOIN member AS M
 		ON AR.memberId = M.id
-		WHERE AR.articleId = #{articleId}
+		WHERE AR.relId = #{relId}
+		AND AR.relTypeCode = #{relTypeCode}
 		AND AR.displayStatus = 1
 		AND AR.id >= #{from}
 		ORDER BY AR.id ASC
 		]]>
 	</select>
-	
-	<select id="getForPrintArticleReplyById"
-		resultMap="articleReply">
+
+	<select id="getForPrintReplyById" resultMap="reply">
 		SELECT AR.*,
 		M.nickname AS extra__writer
-		FROM articleReply AS
+		FROM reply AS
 		AR
-		INNER JOIN member AS M
-		ON AR.memberId = M.id
+		INNER JOIN member AS
+		M
+		ON
+		AR.memberId = M.id
 		WHERE AR.id = #{id}
 		AND
 		AR.displayStatus = 1
-		AND AR.id = #{id}
+		AND
+		AR.id =
+		#{id}
 	</select>
 
 	<resultMap type="Article" id="article">
@@ -151,7 +158,7 @@
 		</association>
 	</resultMap>
 	
-	<resultMap type="ArticleReply" id="articleReply">
+	<resultMap type="Reply" id="reply">
 		<id property="id" column="id" />
 		<id property="regDate" column="regDate" />
 		<id property="updateDate" column="updateDate" />
@@ -159,7 +166,8 @@
 		<id property="delStatus" column="delStatus" />
 		<id property="body" column="body" />
 		<id property="memberId" column="memberId" />
-		<id property="articleId" column="articleId" />
+		<id property="relId" column="relId" />
+		<id property="relTypeCode" column="relTypeCode" />
 		<association property="extra" javaType="map">
 			<id property="writer" column="extra__writer" />
 		</association>
