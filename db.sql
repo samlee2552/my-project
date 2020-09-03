@@ -6,7 +6,6 @@ USE `mp`;
 # article 테이블 세팅
 CREATE TABLE article (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    boardId INT(10) UNSIGNED NOT NULL,
     memberId INT(10) UNSIGNED NOT NULL,
     regDate DATETIME NOT NULL,
     updateDate DATETIME,
@@ -21,7 +20,6 @@ CREATE TABLE article (
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-boardId = 1,
 memberId = 1,
 title = '제목1',
 `body` = '내용1';
@@ -69,51 +67,26 @@ loginPw = SHA2('admin', 256),
 `email` = 'admin@admin.com',
 `cellphoneNo` = '01012341234';
 
-# 게시판 테이블 추가
-CREATE TABLE `board` (
+CREATE TABLE articleReply (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    memberId INT(10) UNSIGNED NOT NULL,
+    articleId INT(10) UNSIGNED NOT NULL,
     regDate DATETIME NOT NULL,
     updateDate DATETIME,
     delDate DATETIME,
 	delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
-    `code` CHAR(20) NOT NULL UNIQUE,
-	`name` CHAR(20) NOT NULL UNIQUE
+	displayStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+    `body` LONGTEXT NOT NULL
 );
 
-INSERT INTO `board`
+# articleReply 테이블에 테스트 데이터 삽입
+INSERT INTO articleReply
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'free',
-`name` = '자유';
-
-INSERT INTO `board`
-SET regDate = NOW(),
-updateDate = NOW(),
-`code` = 'notice',
-`name` = '공지';
-
-# 댓글 미구현
--- # article 테이블 세팅
--- CREATE TABLE articleReply (
---     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
---     regDate DATETIME,
---     updateDate DATETIME,
---     memberId INT(10) UNSIGNED NOT NULL,
---     articleId INT(10) UNSIGNED NOT NULL,
---     delDate DATETIME,
--- 	delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
--- 	displayStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
---     `body` LONGTEXT NOT NULL
--- );
-
--- # articleReply 테이블에 테스트 데이터 삽입
--- INSERT INTO articleReply
--- SET regDate = NOW(),
--- updateDate = NOW(),
--- memberId = 1,
--- articleId = 1,
--- displayStatus = 1,
--- `body` = '내용1';
+memberId = 1,
+articleId = 1,
+displayStatus = 1,
+`body` = '내용1';
 
 /* 게시물 댓글을 범용 댓글 테이블로 변경 */
 -- RENAME TABLE `articleReply` TO `reply`;
