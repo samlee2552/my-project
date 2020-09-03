@@ -39,18 +39,49 @@
 				form.body.focus();
 				return;
 			}
-			$.post('./../reply/doWriteReplyAjax', {
-				relId : param.id,
-				relTypeCode : 'article',
-				body : form.body.value
-			}, function(data) {
-			}, 'json');
-			form.body.value = '';
+			
+			var startUploadFiles = function(onSuccess) {
+				var fileUploadFormData = new FormData(form);
+				fileUploadFormData.delete("relTypeCode");
+				fileUploadFormData.delete("relId");
+				$.ajax({
+					url : './../file/doUploadAjax',
+					data : fileUploadFormData,
+					processData : false,
+					contentType : false,
+					dataType:"json",
+					type : 'POST',
+					success : onSuccess
+				});
+			}
+			alert('이제 fileIds(' + fileIdsStr + ')를 doWriteReplyAjax에서 처리해야 한다.');
+			var startWriteReply = function(fileIdsStr, onSuccess) {
+				$.ajax({
+					url : './../reply/doWriteReplyAjax',
+					data : {
+						fileIdsStr: fileIdsStr,
+						body: form.body.value,
+						relTypeCode: form.relTypeCode.value,
+						relId: form.relId.value
+					},
+					dataType:"json",
+					type : 'POST',
+					success : onSuccess
+				});
+			};
+			startUploadFiles(function(data) {
+				var idsStr = data.body.fileIdsStr;
+				startWriteReply(idsStr, function(data) {
+					form.body.value = '';
+				});
+			});
 		}
 	</script>
 
-	<form class="table-box con form1" action=""
+	<form class="table-box con form1"
 		onsubmit="ArticleWriteReplyForm__submit(this); return false;">
+		<input type="hidden" name="relTypeCode" value="article" /> <input
+			type="hidden" name="relId" value="${article.id}" />
 
 		<table>
 			<tbody>
@@ -60,6 +91,15 @@
 						<div class="form-control-box">
 							<textarea maxlength="300" name="body" placeholder="내용을 입력해주세요."
 								class="height-300"></textarea>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>첨부1</th>
+					<td>
+						<div class="form-control-box">
+							<input type="file" accept="video/*" capture
+								name="file__articleReply__0__common__attachment__1">
 						</div>
 					</td>
 				</tr>
@@ -109,8 +149,8 @@
 	background-color: rgba(0, 0, 0, 0.4);
 	display: none;
 }
-.reply-modify-form-modal-actived .reply-modify-form-modal
-	{
+
+.reply-modify-form-modal-actived .reply-modify-form-modal {
 	display: flex;
 }
 </style>
@@ -129,8 +169,7 @@
 			<div class="form-control-label">수정</div>
 			<div class="form-control-box">
 				<button type="submit">수정</button>
-				<button type="button"
-					onclick="ReplyList__hideModifyFormModal();">취소</button>
+				<button type="button" onclick="ReplyList__hideModifyFormModal();">취소</button>
 			</div>
 		</div>
 	</form>
@@ -141,17 +180,20 @@
 	var ReplyList__$tbody = ReplyList__$box.find('tbody');
 	var ReplyList__lastLodedId = 0;
 	var ReplyList__submitModifyFormDone = false;
+	
 	function ReplyList__submitModifyForm(form) {
 		if (ReplyList__submitModifyFormDone) {
 			alert('처리중입니다.');
 			return;
 		}
+		
 		form.body.value = form.body.value.trim();
 		if (form.body.value.length == 0) {
 			alert('내용을 입력해주세요.');
 			form.body.focus();
 			return;
 		}
+		
 		var id = form.id.value;
 		var body = form.body.value;
 		ReplyList__submitModifyFormDone = true;
@@ -169,6 +211,7 @@
 			ReplyList__submitModifyFormDone = false;
 		}, 'json');
 	}
+	
 	function ReplyList__showModifyFormModal(el) {
 		$('html').addClass('reply-modify-form-modal-actived');
 		var $tr = $(el).closest('tr');
@@ -178,9 +221,11 @@
 		form.id.value = id;
 		form.body.value = originBody;
 	}
+	
 	function ReplyList__hideModifyFormModal() {
 		$('html').removeClass('reply-modify-form-modal-actived');
 	}
+	
 	function ReplyList__loadMoreCallback(data) {
 		if (data.body.replies && data.body.replies.length > 0) {
 			ReplyList__lastLodedId = data.body.replies[data.body.replies.length - 1].id;
@@ -188,18 +233,21 @@
 		}
 		setTimeout(ReplyList__loadMore, 2000);
 	}
+	
 	function ReplyList__loadMore() {
 		$.get('../reply/getForPrintReplies', {
-			articleId : param.id,
+			relId : param.id,
 			from : ReplyList__lastLodedId + 1
 		}, ReplyList__loadMoreCallback, 'json');
 	}
+	
 	function ReplyList__drawReplies(replies) {
 		for (var i = 0; i < replies.length; i++) {
 			var reply = replies[i];
 			ReplyList__drawReply(reply);
 		}
 	}
+	
 	function ReplyList__delete(el) {
 		if (confirm('삭제 하시겠습니까?') == false) {
 			return;
@@ -212,6 +260,7 @@
 			$tr.remove();
 		}, 'json');
 	}
+	
 	function ReplyList__drawReply(reply) {
 		var html = '';
 		html += '<tr data-id="' + reply.id + '">';
@@ -232,6 +281,7 @@
 		$tr.data('data-originBody', reply.body);
 		ReplyList__$tbody.prepend($tr);
 	}
+	
 	ReplyList__loadMore();
 </script>
 

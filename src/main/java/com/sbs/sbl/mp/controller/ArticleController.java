@@ -38,7 +38,7 @@ public class ArticleController {
 			listUrl = "./list";
 		}
 
-		int id = Integer.parseInt((String) param.get("id"));
+		int id = Integer.parseInt((String) param.get("relId"));
 
 		Article article = articleService.getArticleByIdForDetail(id);
 
