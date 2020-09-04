@@ -25,7 +25,7 @@ public class ArticleController {
 	@RequestMapping("list")
 	public String showEntireList(Model model, String boardCode) {
 		
-		List<Article> articles = articleService.getArticlesForList();
+		List<Article> articles = articleService.getForPrintArticles();
 		model.addAttribute("articles", articles);
 
 		return "article/list";
@@ -37,7 +37,7 @@ public class ArticleController {
 
 		int id = Integer.parseInt((String) param.get("id")); 
 
-		Article article = articleService.getArticleByIdForDetail(id);
+		Article article = articleService.getForPrintArticleById(id);
 
 		model.addAttribute("article", article);
 
@@ -50,7 +50,7 @@ public class ArticleController {
 		
 		int id = Integer.parseInt((String) param.get("id"));
 
-		Article article = articleService.getArticleByIdForDetail(id);
+		Article article = articleService.getForPrintArticleById(id);
 
 		model.addAttribute("article", article);
 		model.addAttribute("listUrl", listUrl);

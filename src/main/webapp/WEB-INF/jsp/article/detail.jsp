@@ -24,11 +24,39 @@
 				<th>내용</th>
 				<td>${article.body}</td>
 			</tr>
+			<c:if test="${article.extra.file__common__attachment['1'] != null}">
+				<tr>
+					<th>첨부 파일 1</th>
+					<td>
+						<div class="video-box">
+							<video controls
+								src="/usr/file/streamVideo?id=${article.extra.file__common__attachment['1'].id}">video
+								not supported
+							</video>
+						</div>
+					</td>
+				</tr>
+			</c:if>
+			<c:if test="${article.extra.file__common__attachment['2'] != null}">
+				<tr>
+					<th>첨부 파일 2</th>
+					<td>
+						<div class="video-box">
+							<video controls
+								src="/usr/file/streamVideo?id=${article.extra.file__common__attachment['2'].id}">video
+								not supported
+							</video>
+						</div>
+					</td>
+				</tr>
+			</c:if>
 		</tbody>
 	</table>
 </div>
 
-<div class="btn btn-primary"><a href="write">글쓰기</a></div>
+<div class="btn btn-primary">
+	<a href="write">글쓰기</a>
+</div>
 
 <c:if test="${isLogined}">
 	<h2 class="con">댓글 작성</h2>
@@ -41,18 +69,50 @@
 				form.body.focus();
 				return;
 			}
-			$.post('./../reply/doWriteReplyAjax', {
-				relId : param.id,
-				relTypeCode : 'article',
-				body : form.body.value
-			}, function(data) {
-			}, 'json');
-			form.body.value = '';
+
+
+			var startUploadFiles = function(onSuccess) {
+				var fileUploadFormData = new FormData(form);
+				fileUploadFormData.delete("relTypeCode");
+				fileUploadFormData.delete("relId");
+				$.ajax({
+					url : './../file/doUploadAjax',
+					data : fileUploadFormData,
+					processData : false,
+					contentType : false,
+					dataType:"json",
+					type : 'POST',
+					success : onSuccess
+				});
+			}
+			alert('이제 fileIds(' + fileIdsStr + ')를 doWriteReplyAjax에서 처리해야 한다.');
+			var startWriteReply = function(fileIdsStr, onSuccess) {
+				$.ajax({
+					url : './../reply/doWriteReplyAjax',
+					data : {
+						fileIdsStr: fileIdsStr,
+						body: form.body.value,
+						relTypeCode: form.relTypeCode.value,
+						relId: form.relId.value
+					},
+					dataType:"json",
+					type : 'POST',
+					success : onSuccess
+				});
+			};
+			startUploadFiles(function(data) {
+				var idsStr = data.body.fileIdsStr;
+				startWriteReply(idsStr, function(data) {
+					form.body.value = '';
+				});
+			});
 		}
 	</script>
 
-	<form class="table-box con form1" action=""
+	<form class="table-box con form1"
 		onsubmit="ArticleWriteReplyForm__submit(this); return false;">
+		<input type="hidden" name="relTypeCode" value="article" /> <input
+			type="hidden" name="relId" value="${article.id}" />
 
 		<table>
 			<tbody>
@@ -62,6 +122,15 @@
 						<div class="form-control-box">
 							<textarea maxlength="300" name="body" placeholder="내용을 입력해주세요."
 								class="height-300"></textarea>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>첨부1</th>
+					<td>
+						<div class="form-control-box">
+							<input type="file" accept="img/*" capture
+								name="file__articleReply__0__common__attachment__3">
 						</div>
 					</td>
 				</tr>
@@ -111,8 +180,8 @@
 	background-color: rgba(0, 0, 0, 0.4);
 	display: none;
 }
-.reply-modify-form-modal-actived .reply-modify-form-modal
-	{
+
+.reply-modify-form-modal-actived .reply-modify-form-modal {
 	display: flex;
 }
 </style>
@@ -131,8 +200,7 @@
 			<div class="form-control-label">수정</div>
 			<div class="form-control-box">
 				<button type="submit">수정</button>
-				<button type="button"
-					onclick="ReplyList__hideModifyFormModal();">취소</button>
+				<button type="button" onclick="ReplyList__hideModifyFormModal();">취소</button>
 			</div>
 		</div>
 	</form>

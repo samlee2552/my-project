@@ -11,12 +11,12 @@ import com.sbs.sbl.mp.dto.Article;
 @Mapper
 public interface ArticleDao {
 
-	List<Article> getArticlesForList();
+	List<Article> getForPrintArticles();
 
 //	Board getBoardByCode(String code);
 //	List<Board> getBoards();
 
-	Article getArticleByIdForDetail(@Param("id") int id);
+	Article getForPrintArticleById(@Param("id") int id);
 
 	void modify(Map<String, Object> param);
 
