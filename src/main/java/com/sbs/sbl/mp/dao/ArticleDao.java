@@ -7,14 +7,14 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.sbs.sbl.mp.dto.Article;
-import com.sbs.sbl.mp.dto.Board;
 
 @Mapper
 public interface ArticleDao {
 
-	List<Article> getArticlesForList(@Param("boardId") int boardId);
+	List<Article> getArticlesForList();
 
-	Board getBoardByCode(String code);
+//	Board getBoardByCode(String code);
+//	List<Board> getBoards();
 
 	Article getArticleByIdForDetail(@Param("id") int id);
 
@@ -22,7 +22,6 @@ public interface ArticleDao {
 
 	void delete(int id);
 
-	List<Board> getBoards();
 
 	int write(Map<String, Object> param);
 

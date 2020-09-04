@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.sbs.sbl.mp.dao.ArticleDao;
 import com.sbs.sbl.mp.dto.Article;
-import com.sbs.sbl.mp.dto.Board;
 import com.sbs.sbl.mp.util.Util;
 
 @Service
@@ -17,20 +16,20 @@ public class ArticleService {
 	private ArticleDao articleDao;
 	//게시판 관련
 	/* 시작 */
-	public Board getBoardByCode(String code) {
-		return articleDao.getBoardByCode(code);
-	}
-	
-	public List<Board> getBoards() {
-		List<Board> boards = articleDao.getBoards();
-		return boards;
-	}
+//	public Board getBoardByCode(String code) {
+//		return articleDao.getBoardByCode(code);
+//	}
+//	
+//	public List<Board> getBoards() {
+//		List<Board> boards = articleDao.getBoards();
+//		return boards;
+//	}
 	/* 끝 */
 	
 	//게시물 리스트, 상세보기
 	/* 시작 */
-	public List<Article> getArticlesForList(int boardId) {
-		List<Article> articles = articleDao.getArticlesForList(boardId);
+	public List<Article> getArticlesForList() {
+		List<Article> articles = articleDao.getArticlesForList();
 		return articles;
 	}
 	

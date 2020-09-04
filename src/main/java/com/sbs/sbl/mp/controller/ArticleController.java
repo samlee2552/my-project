@@ -24,8 +24,8 @@ public class ArticleController {
 	/* 전체 리스트 */
 	@RequestMapping("list")
 	public String showEntireList(Model model, String boardCode) {
-		int boardId = 0;
-		List<Article> articles = articleService.getArticlesForList(boardId);
+		
+		List<Article> articles = articleService.getArticlesForList();
 		model.addAttribute("articles", articles);
 
 		return "article/list";
@@ -33,17 +33,13 @@ public class ArticleController {
 
 	// 상세보기
 	@RequestMapping("detail")
-	public String showDetail(Model model, @RequestParam Map<String, Object> param, String listUrl) {
-		if (listUrl == null) {
-			listUrl = "./list";
-		}
+	public String showDetail(Model model, @RequestParam Map<String, Object> param) {
 
-		int id = Integer.parseInt((String) param.get("relId"));
+		int id = Integer.parseInt((String) param.get("id")); 
 
 		Article article = articleService.getArticleByIdForDetail(id);
 
 		model.addAttribute("article", article);
-		model.addAttribute("listUrl", listUrl);
 
 		return "article/detail";
 	}

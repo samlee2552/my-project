@@ -18,11 +18,12 @@ import com.sbs.sbl.mp.service.ReplyService;
 import com.sbs.sbl.mp.util.Util;
 
 @Controller
+@RequestMapping("usr/reply/*")
 public class ReplyController {
 	@Autowired
 	private ReplyService replyService;
 
-	@RequestMapping("/usr/reply/getForPrintReplies")
+	@RequestMapping("getForPrintReplies")
 	@ResponseBody
 	public ResultData getForPrintReplies(@RequestParam Map<String, Object> param, HttpServletRequest req) {
 		Member loginedMember = (Member) req.getAttribute("loginedMember");
@@ -38,7 +39,7 @@ public class ReplyController {
 		return new ResultData("S-1", String.format("%d개의 댓글을 불러왔습니다.", replies.size()), rsDataBody);
 	}
 
-	@RequestMapping("/usr/reply/doWriteReplyAjax")
+	@RequestMapping("doWriteReplyAjax")
 	@ResponseBody
 	public ResultData doWriteReplyAjax(@RequestParam Map<String, Object> param, HttpServletRequest request) {
 		Map<String, Object> rsDataBody = new HashMap<>();
@@ -51,7 +52,7 @@ public class ReplyController {
 		return new ResultData("S-1", String.format("%d번 댓글이 생성되었습니다.", newReplyId), rsDataBody);
 	}
 
-	@RequestMapping("/usr/reply/doDeleteReplyAjax")
+	@RequestMapping("doDeleteReplyAjax")
 	@ResponseBody
 	public ResultData doDeleteReplyAjax(int id, HttpServletRequest req) {
 		Member loginedMember = (Member) req.getAttribute("loginedMember");
@@ -66,7 +67,7 @@ public class ReplyController {
 		return new ResultData("S-1", String.format("%d번 댓글을 삭제하였습니다.", id));
 	}
 
-	@RequestMapping("/usr/reply/doModifyReplyAjax")
+	@RequestMapping("doModifyReplyAjax")
 	@ResponseBody
 	public ResultData doModifyReplyAjax(@RequestParam Map<String, Object> param, HttpServletRequest req, int id) {
 		Member loginedMember = (Member) req.getAttribute("loginedMember");
