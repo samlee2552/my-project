@@ -28,6 +28,8 @@
 	</table>
 </div>
 
+<div class="btn btn-primary"><a href="write">글쓰기</a></div>
+
 <c:if test="${isLogined}">
 	<h2 class="con">댓글 작성</h2>
 
@@ -190,7 +192,7 @@
 	}
 	function ReplyList__loadMore() {
 		$.get('../reply/getForPrintReplies', {
-			articleId : param.id,
+			relId : param.id,
 			from : ReplyList__lastLodedId + 1
 		}, ReplyList__loadMoreCallback, 'json');
 	}

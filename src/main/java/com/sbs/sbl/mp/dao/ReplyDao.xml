@@ -3,82 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sbs.sbl.mp.dao.ReplyDao">
-	<select id="getArticlesForList" resultMap="article">
-		SELECT a.*,
-		m.nickname
-		AS extra__writer
-		FROM
-		article a
-		INNER JOIN
-		MEMBER m
-		ON a.memberId = m.id
-		WHERE A.displayStatus = 1
-		ORDER BY A.id DESC;
-	</select>
-
-	<!-- 게시판 불러오기 -->
-	<select id="getBoardByCode" resultType="Board">
-		SELECT *
-		FROM board
-		WHERE
-		code = #{code};
-	</select>
-
-	<select id="getBoards" resultType="Board">
-		SELECT *
-		FROM board
-		WHERE
-		delStatus = 0;
-	</select>
-
-	<select id="getBoardById" resultType="Board">
-		SELECT *
-		FROM board
-		WHERE
-		id =
-		#{id};
-	</select>
-	<!-- 게시판 불러오기 끝 -->
-	<!-- 게시물 불러오기 -->
-	<select id="getArticleByIdForDetail" resultMap="article">
-		SELECT a.*,
-		m.nickname AS extra__writer
-		FROM
-		article a
-		INNER JOIN MEMBER m
-		ON
-		a.memberId = m.id
-		WHERE A.displayStatus = 1
-		AND a.id = #{id};
-	</select>
-	<!-- 게시물 수정 -->
-	<update id="modify">
-		UPDATE article
-		<set>
-			updateDate = NOW(),
-			<if test="title != null">title = #{title},</if>
-			<if test="body != null">body = #{body},</if>
-		</set>
-		WHERE id = #{id}
-	</update>
-	<!-- 게시물 삭제 -->
-	<update id="delete">
-		UPDATE article
-		SET delDate = NOW(),
-		displayStatus = 0,
-		delStatus = 1
-		WHERE id = #{id}
-	</update>
-	<!-- 게시물 작성 -->
-	<insert id="write" useGeneratedKeys="true" keyProperty="id">
-		INSERT
-		INTO article
-		SET regDate = NOW(),
-		title = #{title},
-		body = #{body},
-		memberId = #{memberId}
-	</insert>
-
 	<!-- 댓글 -->
 
 	<update id="deleteReply">
@@ -101,7 +25,6 @@
 	<insert id="writeReply" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO reply
 		SET regDate = NOW(),
-		updateDate = NOW(),
 		body = #{body},
 		memberId = #{memberId},
 		relTypeCode = #{relTypeCode},

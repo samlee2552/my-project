@@ -30,7 +30,6 @@ public class ReplyController {
 		Map<String, Object> rsDataBody = new HashMap<>();
 
 		param.put("relTypeCode", "article");
-		Util.changeMapKey(param, "articleId", "relId");
 
 		param.put("actor", loginedMember);
 		List<Reply> replies = replyService.getForPrintReplies(param);
