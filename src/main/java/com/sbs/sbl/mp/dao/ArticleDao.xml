@@ -13,7 +13,8 @@
 		MEMBER m
 		ON a.memberId = m.id
 		WHERE A.displayStatus = 1
-		ORDER BY A.id DESC;
+		ORDER BY A.id DESC
+		LIMIT 0, #{count};
 	</select>
 
 	<select id="getForPrintArticleById" resultMap="article">

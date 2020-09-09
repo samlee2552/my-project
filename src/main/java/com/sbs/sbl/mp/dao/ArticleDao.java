@@ -11,7 +11,7 @@ import com.sbs.sbl.mp.dto.Article;
 @Mapper
 public interface ArticleDao {
 
-	List<Article> getForPrintArticles();
+	List<Article> getForPrintArticles(@Param("count") int count);
 
 //	Board getBoardByCode(String code);
 //	List<Board> getBoards();

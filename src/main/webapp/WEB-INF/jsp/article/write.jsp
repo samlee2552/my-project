@@ -71,32 +71,37 @@
 		startLoading();
 		startUploadFiles(function(data) {
 			var fileIdsStr = '';
+
 			if (data && data.body && data.body.fileIdsStr) {
 				fileIdsStr = data.body.fileIdsStr;
 			}
+
 			form.fileIdsStr.value = fileIdsStr;
 			form.file__article__0__common__attachment__1.value = '';
 			form.file__article__0__common__attachment__2.value = '';
-			if (bodyEditor.inBodyFileIdsStr) {
-				form.fileIdsStr.value += bodyEditor.inBodyFileIdsStr;
-			}
+
 			form.submit();
 		});
 	}
 </script>
 
-<form class="table-box con form1" method="POST"
+<form method="POST" class="table-box con form1"
 	action="doWrite"
 	onsubmit="ArticleWriteForm__submit(this); return false;">
+	<input type="hidden" name="fileIdsStr" /> <input type="hidden"
+		name="redirectUri" value="/usr/article/detail?id=#id">
 
 	<table>
+		<colgroup>
+			<col width="100"></col>
+		</colgroup>
 		<tbody>
 			<tr>
 				<th>제목</th>
 				<td>
 					<div class="form-control-box">
-						<input type="text" value="${article.title}" name="title"
-							placeholder="제목을 입력해주세요." />
+						<input type="text" placeholder="제목을 입력해주세요." name="title"
+							maxlength="100" />
 					</div>
 				</td>
 			</tr>
@@ -104,22 +109,46 @@
 				<th>내용</th>
 				<td>
 					<div class="form-control-box">
-						<textarea name="body" placeholder="내용을 입력해주세요.">${article.body}</textarea>
+						<textarea placeholder="내용을 입력해주세요." name="body" maxlength="2000"></textarea>
 					</div>
 				</td>
 			</tr>
 			<tr>
-				<th>글 작성</th>
+				<th>첨부1 비디오</th>
 				<td>
-					<div class="btn-box margin-top-20">
-						<button type="submit" class="btn btn-primary">글 쓰기</button>
+					<div class="form-control-box">
+						<input type="file" accept="video/*"
+							name="file__article__0__common__attachment__1">
 					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>첨부2 비디오</th>
+				<td>
+					<div class="form-control-box">
+						<input type="file" accept="video/*"
+							name="file__article__0__common__attachment__2">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>첨부3 이미지</th>
+				<td>
+					<div class="form-control-box">
+						<input type="file" accept="image/*"
+							name="file__article__0__common__attachment__3">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>작성</th>
+				<td>
+					<button class="btn btn-primary" type="submit">작성</button> <a
+					class="btn btn-info" href="${listUrl}">리스트</a>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	<input type="hidden" name="redirectUri"
-		value="/usr/article/detail?id=#id" />
 </form>
 
 <%@ include file="../part/foot.jspf"%>

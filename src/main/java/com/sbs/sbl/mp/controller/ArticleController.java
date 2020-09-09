@@ -25,7 +25,8 @@ public class ArticleController {
 	@RequestMapping("list")
 	public String showEntireList(Model model, String boardCode) {
 		
-		List<Article> articles = articleService.getForPrintArticles();
+		int articleCount = 10;
+		List<Article> articles = articleService.getForPrintArticles(articleCount);
 		model.addAttribute("articles", articles);
 
 		return "article/list";
@@ -70,7 +71,10 @@ public class ArticleController {
 
 	// 글쓰기
 	@RequestMapping("write")
-	public String showWrite(Model model, @RequestParam Map<String, Object> param) {
+	public String showWrite(Model model, @RequestParam Map<String, Object> param, String listUrl) {
+		if ( listUrl == null ) {
+			listUrl = "./list";
+		}
 		
 		return "article/write";
 	}
@@ -79,7 +83,7 @@ public class ArticleController {
 	public String doWrite(@RequestParam Map<String, Object> param,	Model model, HttpSession session) {
 		int loginedMemberId = (int) session.getAttribute("loginedMemberId");
 
-		Map<String, Object> newParam = Util.getNewMapOf(param, "title", "body");
+		Map<String, Object> newParam = Util.getNewMapOf(param, "title", "body", "fileIdsStr");
 		newParam.put("memberId", loginedMemberId);
 
 		int newArticldId = articleService.write(newParam);

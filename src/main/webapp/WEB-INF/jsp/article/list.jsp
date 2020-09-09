@@ -18,6 +18,7 @@
 				<th>번호</th>
 				<th>날짜</th>
 				<th>제목</th>
+				<th>내용</th>
 				<th>작성자</th>
 			</tr>
 		</thead>
@@ -29,12 +30,15 @@
 					<td>
 						<a href="${article.getDetailLink(article.id)}">${article.title}</a>
 					</td>
+					<td>${article.body}</td>
 					<td>${article.extra.writer}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 </div>
+
+<div><a href="./write">글쓰기</a></div>
 
 <!-- 모바일 용 -->
 <!-- <div class="table-box con visible-on-sm-down">

@@ -23,8 +23,8 @@ public class ArticleService {
 
 	//게시물 리스트, 상세보기
 	/* 시작 */
-	public List<Article> getForPrintArticles() {
-		List<Article> articles = articleDao.getForPrintArticles();
+	public List<Article> getForPrintArticles(int count) {
+		List<Article> articles = articleDao.getForPrintArticles(count);
 		return articles;
 	}
 

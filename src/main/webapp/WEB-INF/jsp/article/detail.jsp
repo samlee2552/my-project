@@ -1,12 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page import="com.sbs.sbl.mp.util.Util"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="pageTitle" value="게시물 상세내용" />
 <%@ include file="../part/head.jspf"%>
 
-<div class="table-box con">
+<div class="article-detail-box table-box table-box-vertical con">
 	<table>
+		<colgroup>
+			<col class="table-first-col">
+		</colgroup>
 		<tbody>
 			<tr>
 				<th>번호</th>
@@ -22,40 +25,44 @@
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td>${article.body}</td>
+				<td>
+				    ${article.body}
+				</td>
 			</tr>
-			<c:if test="${article.extra.file__common__attachment['1'] != null}">
-				<tr>
-					<th>첨부 파일 1</th>
-					<td>
-						<div class="video-box">
-							<video controls
-								src="/usr/file/streamVideo?id=${article.extra.file__common__attachment['1'].id}">video
-								not supported
-							</video>
-						</div>
-					</td>
-				</tr>
-			</c:if>
-			<c:if test="${article.extra.file__common__attachment['2'] != null}">
-				<tr>
-					<th>첨부 파일 2</th>
-					<td>
-						<div class="video-box">
-							<video controls
-								src="/usr/file/streamVideo?id=${article.extra.file__common__attachment['2'].id}">video
-								not supported
-							</video>
-						</div>
-					</td>
-				</tr>
-			</c:if>
+			<c:forEach var="i" begin="1" end="3" step="1">
+				<c:set var="fileNo" value="${String.valueOf(i)}" />
+				<c:set var="file" value="${article.extra.file__common__attachment[fileNo]}" />
+				<c:if test="${file != null}">
+					<tr>
+						<th>첨부파일 ${fileNo}</th>
+						<td>
+							<c:if test="${file.fileExtTypeCode == 'video'}">
+								<div class="video-box">
+									<video controls src="/usr/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}"></video>
+								</div>
+							</c:if>
+							<c:if test="${file.fileExtTypeCode == 'img'}">
+								<div class="img-box img-box-auto">
+									<img src="/usr/file/img?id=${file.id}&updateDate=${file.updateDate}" alt="" />
+								</div>
+							</c:if>
+						</td>
+					</tr>
+				</c:if>
+			</c:forEach>
 		</tbody>
 	</table>
 </div>
 
-<div class="btn btn-primary">
-	<a href="write">글쓰기</a>
+<div class="btn-box con margin-top-20">
+	<c:if test="${article.extra.actorCanModify}">
+		<a class="btn btn-info" href="modify?id=${article.id}&listUrl=${Util.getUriEncoded(listUrl)}">수정</a>
+	</c:if>
+	<c:if test="${article.extra.actorCanDelete}">
+		<a class="btn btn-danger" href="doDelete?id=${article.id}" onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;">삭제</a>
+	</c:if>
+
+	<a href="${listUrl}" class="btn btn-info">목록</a>
 </div>
 
 <c:if test="${isLogined}">
@@ -69,50 +76,18 @@
 				form.body.focus();
 				return;
 			}
-
-
-			var startUploadFiles = function(onSuccess) {
-				var fileUploadFormData = new FormData(form);
-				fileUploadFormData.delete("relTypeCode");
-				fileUploadFormData.delete("relId");
-				$.ajax({
-					url : './../file/doUploadAjax',
-					data : fileUploadFormData,
-					processData : false,
-					contentType : false,
-					dataType:"json",
-					type : 'POST',
-					success : onSuccess
-				});
-			}
-			alert('이제 fileIds(' + fileIdsStr + ')를 doWriteReplyAjax에서 처리해야 한다.');
-			var startWriteReply = function(fileIdsStr, onSuccess) {
-				$.ajax({
-					url : './../reply/doWriteReplyAjax',
-					data : {
-						fileIdsStr: fileIdsStr,
-						body: form.body.value,
-						relTypeCode: form.relTypeCode.value,
-						relId: form.relId.value
-					},
-					dataType:"json",
-					type : 'POST',
-					success : onSuccess
-				});
-			};
-			startUploadFiles(function(data) {
-				var idsStr = data.body.fileIdsStr;
-				startWriteReply(idsStr, function(data) {
-					form.body.value = '';
-				});
-			});
+			$.post('./../reply/doWriteReplyAjax', {
+				relId : param.id,
+				relTypeCode : 'article',
+				body : form.body.value
+			}, function(data) {
+			}, 'json');
+			form.body.value = '';
 		}
 	</script>
 
-	<form class="table-box con form1"
+	<form class="table-box con form1" action=""
 		onsubmit="ArticleWriteReplyForm__submit(this); return false;">
-		<input type="hidden" name="relTypeCode" value="article" /> <input
-			type="hidden" name="relId" value="${article.id}" />
 
 		<table>
 			<tbody>
@@ -122,15 +97,6 @@
 						<div class="form-control-box">
 							<textarea maxlength="300" name="body" placeholder="내용을 입력해주세요."
 								class="height-300"></textarea>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<th>첨부1</th>
-					<td>
-						<div class="form-control-box">
-							<input type="file" accept="img/*" capture
-								name="file__articleReply__0__common__attachment__3">
 						</div>
 					</td>
 				</tr>
@@ -180,8 +146,8 @@
 	background-color: rgba(0, 0, 0, 0.4);
 	display: none;
 }
-
-.reply-modify-form-modal-actived .reply-modify-form-modal {
+.reply-modify-form-modal-actived .reply-modify-form-modal
+	{
 	display: flex;
 }
 </style>
@@ -200,7 +166,8 @@
 			<div class="form-control-label">수정</div>
 			<div class="form-control-box">
 				<button type="submit">수정</button>
-				<button type="button" onclick="ReplyList__hideModifyFormModal();">취소</button>
+				<button type="button"
+					onclick="ReplyList__hideModifyFormModal();">취소</button>
 			</div>
 		</div>
 	</form>
@@ -260,7 +227,7 @@
 	}
 	function ReplyList__loadMore() {
 		$.get('../reply/getForPrintReplies', {
-			relId : param.id,
+			articleId : param.id,
 			from : ReplyList__lastLodedId + 1
 		}, ReplyList__loadMoreCallback, 'json');
 	}
@@ -305,4 +272,4 @@
 	ReplyList__loadMore();
 </script>
 
-<%@ include file="../part/foot.jspf"%>
+<%@ include file="../part/foot.jspf"%> 
