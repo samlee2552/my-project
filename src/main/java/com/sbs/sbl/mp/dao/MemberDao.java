@@ -12,11 +12,12 @@ public interface MemberDao {
 	//회원가입
 	void join(Map<String, Object> param);
 
-	//로그인, 아이디 / 비번 찾기
+	//회원 불러오기
 	Member getMemberByLoginId(@Param("loginId") String loginId);
 	Member getMemberByName_email(@Param("name") String name, @Param("email") String email );
 	Member getMemberByLoginId_email(@Param("loginId") String loginId,@Param("email") String email);
 	Member getMemberById(@Param("id") int id);
+	Member getMemberByEmail(@Param("email") String email);
 	//회원가입 중복체크 
 	int getLoginIdCount(@Param("loginId") String loginId);
 	int getNicknameCount(@Param("nickname") String nickname);
@@ -30,4 +31,5 @@ public interface MemberDao {
 	void delete(@Param("id") int id);
 
 	void updateAuthStatus(@Param("email") String email);
+
 }

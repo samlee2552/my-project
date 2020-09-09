@@ -9,6 +9,13 @@
 		WHERE
 		id = #{id}
 	</select>
+	
+	<select id="getMemberByEmail" resultType="Member">
+		SELECT *
+		FROM member
+		WHERE
+		email = #{email}
+	</select>
 	<!-- 회원가입 -->
 	<insert id="join" useGeneratedKeys="true" keyProperty="id">
 		INSERT

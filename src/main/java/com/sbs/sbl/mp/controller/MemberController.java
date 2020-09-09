@@ -40,7 +40,7 @@ public class MemberController {
 		ResultData checkForDupEntryResultData1 = memberService.checkLoginIdJoinable(loginId);
 		ResultData checkForDupEntryResultData2 = memberService.checkNickNameJoinable(nickname);
 		ResultData checkForDupEntryResultData3 = memberService.checkEmailJoinable(email);
-		//중복체크
+		// 중복체크
 		/* 시작 */
 		if (checkForDupEntryResultData1.isFail()) {
 			model.addAttribute("historyBack", true);
@@ -58,25 +58,25 @@ public class MemberController {
 			return "common/redirect";
 		}
 		/* 끝 */
-		
-		
+
 		String redirectUri = (String) param.get("redirectUri");
 		model.addAttribute("redirectUri", redirectUri);
 		model.addAttribute("alertMsg", String.format("%s님, 회원이 되신것을 환영합니다! 이메일 인증 후 로그인 가능합니다", nickname));
 		int newMemberId = memberService.join(param);
 		return "common/redirect";
 	}
-	//회원 인증 
+
+	// 회원 이메일 인증
 	@RequestMapping("authentication")
 	public String verifyEmail(String email, Model model) {
 		memberService.updateAuthStatus(email);
-		
+
 		model.addAttribute("alertMsg", "이메일 인증이 완료되었습니다.");
 		String redirectUri = "/usr/member/login";
 		model.addAttribute("redirectUri", redirectUri);
 		return "common/redirect";
 	}
-	
+
 	// 회원가입 끝
 	// 로그인 시작
 	@RequestMapping("login")
@@ -96,7 +96,7 @@ public class MemberController {
 			model.addAttribute("alertMsg", "존재하지 않는 회원입니다.");
 			return "common/redirect"; // WEB-INF/jsp/common/redirect.jsp
 		}
-		
+
 		if (member.isDelStatus() == true) {
 			model.addAttribute("historyBack", true);
 			model.addAttribute("alertMsg", "탈퇴회원입니다. 회원가입 탭에서 탈퇴 철회가 가능합니다.");
@@ -108,7 +108,7 @@ public class MemberController {
 			model.addAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
 			return "common/redirect";
 		}
-		
+
 		if (member.isAuthStatus() == false) {
 			model.addAttribute("historyBack", true);
 			model.addAttribute("alertMsg", "이메일 인증 후 로그인 해주시기 바랍니다.");
@@ -134,7 +134,7 @@ public class MemberController {
 	@RequestMapping("logout")
 	public String doLogout(String redirectUri, Model model, HttpSession session) {
 		session.removeAttribute("loginedMemberId");
-	
+
 		if (redirectUri == null || redirectUri.length() == 0) {
 			redirectUri = "/usr/home/main";
 		}
@@ -259,23 +259,24 @@ public class MemberController {
 	}
 
 	@RequestMapping("doDelete")
-	public String doDelete(Model model, HttpSession session, String loginPwReal, String loginPwConfirm, String redirectUri) {
+	public String doDelete(Model model, HttpSession session, String loginPwReal, String loginPwConfirm,
+			String redirectUri) {
 		String loginPw = loginPwReal;
 		int loginedMemberId = (int) session.getAttribute("loginedMemberId");
 		Member member = memberService.getMemberById(loginedMemberId);
-		
+
 		if (member.getLoginPw().equals(loginPw) == false) {
 			model.addAttribute("historyBack", true);
 			model.addAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
 			return "common/redirect";
 		}
-			model.addAttribute("redirectUri", redirectUri);
-			model.addAttribute("alertMsg", "탈퇴완료.");
-			
-			memberService.delete(loginedMemberId);
-			//로그아웃 처리
-			session.removeAttribute("loginedMemberId");
-			
-			return "common/redirect";
+		model.addAttribute("redirectUri", redirectUri);
+		model.addAttribute("alertMsg", "탈퇴완료.");
+
+		memberService.delete(loginedMemberId);
+		// 로그아웃 처리
+		session.removeAttribute("loginedMemberId");
+
+		return "common/redirect";
 	}
 }

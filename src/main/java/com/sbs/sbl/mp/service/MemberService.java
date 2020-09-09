@@ -40,7 +40,9 @@ public class MemberService {
 	private void sendWelcome_AuthMail(String email) {
 		String title = String.format("[%s] 회원이 되신 것을 환영합니다.", siteName);
 		StringBuilder body = new StringBuilder();
-		String authUri = "http://localhost:8085/usr/member/authentication?email=" + email;
+		
+		String authQStr = "email=" + Util.getUriEncoded(email) + "&code=" + Util.getTempPassword(10);
+		String authUri = "http://localhost:8085/usr/member/authentication?" + (authQStr);
 		body.append("<h1>가입이 완료되었습니다.</h1>");
 		body.append(String.format("<p><a href=\"%s\" target=\"_blank\">계정인증하러 가기</a>로 이동</p>", authUri));
 
@@ -128,6 +130,11 @@ public class MemberService {
 
 	public void updateAuthStatus(String email) {
 		memberDao.updateAuthStatus(email);
+	}
+
+	public Member getMemberByEmail(String email) {
+		// TODO Auto-generated method stub
+		return getMemberByEmail(email);
 	}
 
 }
