@@ -9,19 +9,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.sbl.mp.dto.Member;
 import com.sbs.sbl.mp.service.MemberService;
 
 @Controller
+@RequestMapping("usr/test/*")
 public class TestController {
 	@Autowired
 	private MemberService memberService;
 
 	@RequestMapping("/test")
+	@ResponseBody
 	public String showMember(Model model, HttpSession session) {
 
-		return "member/list";
+		return "1234";
 	}
 	
 	@RequestMapping("/test/count")

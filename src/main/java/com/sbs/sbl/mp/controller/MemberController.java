@@ -179,7 +179,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("/doFindLoginPw")
-	public String doFindLoginPw(String loginId, String email, String redirectUri, Model model) {
+	public String doFindLoginPw(String loginId, String email, String redirectUri, Model model, HttpSession session) {
 		Member member = memberService.getMemberByLoginId_email(loginId, email);
 
 		if (member == null) {
@@ -194,6 +194,7 @@ public class MemberController {
 
 		model.addAttribute("redirectUri", redirectUri);
 		model.addAttribute("alertMsg", String.format("\"%s\" 로 임시 비밀번호를 발송했습니다.", email));
+		session.removeAttribute("loginedMemberId");
 		memberService.recoverLoginPw(loginId, email);
 
 		return "common/redirect";
@@ -207,6 +208,7 @@ public class MemberController {
 		Member member = memberService.getMemberById(loginedMemberId);
 
 		model.addAttribute("member", member);
+		req.removeAttribute("loginedMemberId");
 
 		return "member/modify";
 	}

@@ -88,7 +88,7 @@
 <h1>회원정보 수정</h1>
 <form class="table-box con form1" method="POST" action="doModify"
 	onsubmit="MemberModifyForm__submit(this); return false;">
-	<input type="hidden" name="redirectUri" value="/member/login">
+	<input type="hidden" name="redirectUri" value="/usr/member/login">
 	<input type="hidden" name="loginPwReal">
 	<input type="hidden" name="loginId">
 	<table>

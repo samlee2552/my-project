@@ -10,10 +10,10 @@
 		FROM
 		article a
 		INNER JOIN
-		MEMBER m
+		`member` m
 		ON a.memberId = m.id
-		WHERE A.displayStatus = 1
-		ORDER BY A.id DESC
+		WHERE a.displayStatus = 1
+		ORDER BY a.id DESC
 		LIMIT 0, #{count};
 	</select>
 
@@ -22,10 +22,10 @@
 		m.nickname AS extra__writer
 		FROM
 		article a
-		INNER JOIN MEMBER m
+		INNER JOIN `member` m
 		ON
 		a.memberId = m.id
-		WHERE A.displayStatus = 1
+		WHERE a.displayStatus = 1
 		AND a.id = #{id};
 	</select>
 	<!-- 게시물 수정 -->
