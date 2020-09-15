@@ -122,10 +122,8 @@
 				<version>2.2</version>
 				<configuration>
 					<url>http://service.petflick.site:8080/manager/text</url>
-					<server>TomcatServer</server>
+					<server>service_petflick_site__manager_text</server>
 					<path>/</path>
-					<username>deployer</username>
-					<password>Rhrhtld25_</password>
 				</configuration>
 			</plugin>
 			<plugin>
