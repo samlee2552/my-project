@@ -100,10 +100,22 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- 세션관리를 위한 REDIS -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-data-redis</artifactId>
+			<version>2.3.0.RELEASE</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<!-- 원격배포 플러그인 -->
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>

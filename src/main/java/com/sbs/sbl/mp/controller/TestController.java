@@ -27,6 +27,20 @@ public class TestController {
 		return "1234";
 	}
 	
+	@RequestMapping("/doSetSessionA")
+	@ResponseBody
+	public String doSetSessionA(HttpSession session) {
+		session.setAttribute("a", 16);
+
+		return "세션설정완료";
+	}
+
+	@RequestMapping("/getSessionA")
+	@ResponseBody
+	public int getSessionA(HttpSession session) {
+		return (int) session.getAttribute("a");
+	}
+	
 	@RequestMapping("/test/count")
 	public String showMemberCount(String loginId, Model model) {
 		int count = memberService.getCount(loginId);
