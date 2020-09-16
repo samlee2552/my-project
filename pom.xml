@@ -109,7 +109,6 @@
 		<dependency>
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-data-redis</artifactId>
-			<version>2.3.0.RELEASE</version>
 		</dependency>
 	</dependencies>
 
@@ -121,7 +120,7 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<url>http://service.petflick.site:8080/manager/text</url>
+					<url>http://petflick.site:8080/manager/text</url>
 					<server>service_petflick_site__manager_text</server>
 					<path>/</path>
 				</configuration>
