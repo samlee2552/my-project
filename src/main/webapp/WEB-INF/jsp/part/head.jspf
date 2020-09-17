@@ -50,9 +50,6 @@
   padding-right:20px;
 }
 
-.navbar {
-  padding:0 100px;
-}
 </style>
 
 <%="<script>"%>
@@ -64,7 +61,7 @@ var param = ${paramJson};
 
 </head>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light position-fixed container-fluid">
   <a class="navbar-brand" href="/usr/home/main"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FN9r0U%2FbtqIS5kwoRk%2FSuy31jwX2lgyfGXtRFdk61%2Fimg.png" height="60px"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>

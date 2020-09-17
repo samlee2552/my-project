@@ -74,6 +74,7 @@
 span {
 	font-size: 12px;
 }
+
 </style>
 <!--  -->
 	<form class="form-signin text-center shadow" method="POST"
