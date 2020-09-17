@@ -63,6 +63,10 @@ nav {
     }
 }
 
+.navbar {
+	z-index:1000;
+}
+
 </style>
 
 <%="<script>"%>
@@ -128,7 +132,7 @@ var param = ${paramJson};
 							d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
 </svg>
 			</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown z-index">
 					<a class="dropdown-item" href="/usr/member/join">회원가입</a> <a
 						class="dropdown-item" href="/usr/member/modify">회원정보 수정</a>
 					<div class="dropdown-divider"></div>

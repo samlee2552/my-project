@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <style>
 .foot-text {
-	margin-top:7%;
+	margin-top:5%;
 	margin-bottom:2%;
 }
 

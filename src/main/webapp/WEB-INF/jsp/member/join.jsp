@@ -111,93 +111,115 @@
 
 </script>
 
-<h1>회원 가입</h1>
+<style>
+.form-signup {
+	width: 100%;
+	max-width: 330px;
+	padding: 30px;
+	margin: 0 auto;
+	
+	border-radius: 1rem;
+}
 
-<div class="main">
+.form-signup .checkbox {
+	font-weight: 400;
+}
 
-        <!-- Sign up form -->
-        <section class="signup">
-            <div class="container">
-                <div class="signup-content">
-                    <div class="signup-form">
-                        <h2 class="form-title">Sign up</h2>
-                        <form method="POST" class="register-form" id="register-form">
-                            <div class="form-group">
-                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="name" placeholder="Your Name"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" name="email" id="email" placeholder="Your Email"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="pass" id="pass" placeholder="Password"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-                                <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
-                            </div>
-                            <div class="form-group form-button">
-                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="signup-image">
-                        <figure><img src="images/signup-image.jpg" alt="sing up image"></figure>
-                        <a href="#" class="signup-image-link">I am already member</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+.form-signup .form-control {
+	position: relative;
+	box-sizing: border-box;
+	height: auto;
+	padding: 3 10px;
+	font-size: 14px;
+}
 
-        <!-- Sing in  Form -->
-        <section class="sign-in">
-            <div class="container">
-                <div class="signin-content">
-                    <div class="signin-image">
-                        <figure><img src="images/signin-image.jpg" alt="sing up image"></figure>
-                        <a href="#" class="signup-image-link">Create an account</a>
-                    </div>
+.form-signup .form-control:focus {
+	z-index: 2;
+}
 
-                    <div class="signin-form">
-                        <h2 class="form-title">Sign up</h2>
-                        <form method="POST" class="register-form" id="login-form">
-                            <div class="form-group">
-                                <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="your_name" id="your_name" placeholder="Your Name"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="your_pass" id="your_pass" placeholder="Password"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
-                                <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
-                            </div>
-                            <div class="form-group form-button">
-                                <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
-                            </div>
-                        </form>
-                        <div class="social-login">
-                            <span class="social-label">Or login with</span>
-                            <ul class="socials">
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+.form-signup input {
+	margin-bottom: 20px;
+	border-radius: 1rem;
+}
 
+.btn {
+	border-radius: 1rem;
+}
+
+.checkbox>label {
+	margin-right: 40%;
+}
+
+span {
+	font-size: 12px;
+}
+
+#text {
+  margin-top:30%;
+}
+
+h3 {
+background: linear-gradient(to right, #5f2c82, #49a09d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+</style>
+
+<!--  -->
+<div class="container">
+  <div class="row">
+    <div class="col visible-on-md-up">
+      <img id="text" class="mb-5" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc1SgIK%2FbtqIOnGsacc%2FKNPfUEarGV1n8lwYhDQHsk%2Fimg.png" width="100%" alt="">
+      <h3 class="font-weight-bold">당신의 반려동물이 그렇게 귀엽다면서요?</h3>
+      &nbsp 
+      <h3 class="font-weight-bold">전세계에 있는 사람들에게 자랑해보세요!</h3>
     </div>
-
+    <div class="col">
+      <form class="form-signup text-center shadow" method="POST"
+		action="doJoin"
+		onsubmit="MemberJoinForm__submit(this); return false;">
+  
+		<input type="hidden" name="redirectUri" value="/usr/home/login">
+		<input type="hidden" name="loginPwReal"> <img
+			class="mb-4 mt-2 shadow-sm rounded-circle"
+			src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkTvFl%2FbtqIVHwUIcT%2FI2ZkRU3ekXkUgSdwtbikZ0%2Fimg.png"
+			alt="" width="100">
+		<h1 class="h3 mb-3 font-weight-normal">회원가입</h1>
+		<label for="loginId" class="sr-only">아이디</label> <input type="text"
+			id="inputEmail" class="form-control" placeholder="아이디" name="loginId"
+			maxlength="20" required autofocus> <label for="loginPw"
+			class="sr-only">비밀번호</label> <input type="password" id="inputPassword"
+			class="form-control" name="loginPw" maxlength="20" placeholder="비밀번호"
+			required>
+      <label for="loginPwConfirm"
+			class="sr-only">비밀번호</label> <input type="password" id="inputPassword"
+			class="form-control" name="loginPw" maxlength="20" placeholder="비밀번호 확인"
+			required>
+      <label for="name" class="sr-only">이름</label> <input type="text"
+			id="inputName" class="form-control" placeholder="이름" name="name"
+			maxlength="20" required>
+      <label for="nickname" class="sr-only">닉네임</label> <input type="text"
+			id="inpuNickname" class="form-control" placeholder="닉네임" name="nickname"
+			maxlength="20" required>
+      <label for="email" class="sr-only">이메일</label> <input type="email"
+			id="inpuNickname" class="form-control" placeholder="이메일" name="email"
+			maxlength="20" required>
+      <label for="cellphoneNo" class="sr-only">전화번호</label> <input type="tel"
+			id="inpuNickname" class="form-control" placeholder="전화번호 (선택사항)" name="cellphoneNo"
+			maxlength="11">
+		<div class="checkbox">
+		</div>
+		<button class="btn btn-lg btn-primary btn-block mb-3" type="submit">회원가입</button>
+	
+		<div id="extra">
+			<span class="text-muted">PETFLICK 회원이신가요?</span> 
+			<span><a href="/usr/member/join" class=""> 로그인하러 가기</a></span> 
+		</div>
+	</form>
+    </div>
+  </div>
+</div>
 
 
 <!-- 
