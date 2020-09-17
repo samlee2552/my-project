@@ -22,12 +22,6 @@
 
 		form.loginId.value = form.loginId.value.replaceAll(' ', '');
 
-		if (form.loginId.value.length == 0) {
-			form.loginId.focus();
-			alert('로그인 아이디를 입력해주세요');
-			return;
-		}
-
 		if (form.loginId.value.length < 4) {
 			form.loginId.focus();
 			alert('로그인 아이디 4자 이상 입력해주세요.');
@@ -36,22 +30,9 @@
 
 		form.loginPw.value = form.loginPw.value.trim();
 
-		if (form.loginPw.value.length == 0) {
-			form.loginPw.focus();
-			alert('로그인 비밀번호를 입력해주세요.');
-			return;
-		}
-
 		if (form.loginPw.value.length < 5) {
 			form.loginPw.focus();
 			alert('로그인 비밀번호를 5자 이상 입력해주세요.');
-			return;
-		}
-
-		if (form.loginPwConfirm.value.length == 0) {
-			form.loginPwConfirm.focus();
-			alert('로그인 비밀번호 확인을 입력해주세요.');
-
 			return;
 		}
 
@@ -194,7 +175,7 @@ background: linear-gradient(to right, #5f2c82, #49a09d);
 			required>
       <label for="loginPwConfirm"
 			class="sr-only">비밀번호</label> <input type="password" id="inputPassword"
-			class="form-control" name="loginPw" maxlength="20" placeholder="비밀번호 확인"
+			class="form-control" name="loginPwConfirm" maxlength="20" placeholder="비밀번호 확인"
 			required>
       <label for="name" class="sr-only">이름</label> <input type="text"
 			id="inputName" class="form-control" placeholder="이름" name="name"

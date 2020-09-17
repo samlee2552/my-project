@@ -15,16 +15,11 @@
 			alert('처리중입니다.');
 			return;
 		}
-
 		form.loginId.value = form.loginId.value.trim();
-
 		form.loginId.value = form.loginId.value.replaceAll(' ', '');
-
 		form.loginPw.value = form.loginPw.value.trim();
-
 		form.loginPwReal.value = sha256(form.loginPw.value);
 		form.loginPw.value = '';
-
 		form.submit();
 		MemberLoginForm__submitDone = true;
 	}
@@ -38,11 +33,9 @@
 	margin: 0 auto;
 	border-radius: 1rem;
 }
-
 .form-signin .checkbox {
 	font-weight: 400;
 }
-
 .form-signin .form-control {
 	position: relative;
 	box-sizing: border-box;
@@ -50,38 +43,30 @@
 	padding: 10px;
 	font-size: 14px;
 }
-
 .form-signin .form-control:focus {
 	z-index: 2;
 }
-
 .form-signin input {
 	margin-bottom: 20px;
 	border-radius: 1rem;
 }
-
 .btn {
 	border-radius: 1rem;
 }
-
 .checkbox>label {
 	margin-right: 45%;
 }
-
 span {
 	font-size: 12px;
 }
-
 #text {
 	margin-top: 30%;
 }
-
 h3 {
 	background: linear-gradient(to right, #5f2c82, #49a09d);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
-
 .checkbox {
 	font-size: 14px;
 }
@@ -169,7 +154,6 @@ h3 {
 			</tr>
 		</tbody>
 	</table>
-
 </form>
  -->
 <%@ include file="../part/foot.jspf"%>
