@@ -31,14 +31,12 @@
 </script>
 
 <style>
-
-
 .form-signin {
 	width: 100%;
 	max-width: 330px;
 	padding: 30px;
 	margin: 0 auto;
-	margin-top: 70px;
+	
 	border-radius: 1rem;
 }
 
@@ -75,11 +73,27 @@ span {
 	font-size: 12px;
 }
 
+#text {
+  margin-top:25%;
+}
+
+
 </style>
-<!--  -->
-	<form class="form-signin text-center shadow" method="POST"
+
+
+<div class="container">
+  <div class="row">
+    <div class="col visible-on-md-up">
+      <img id="text" class="mb-5" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc1SgIK%2FbtqIOnGsacc%2FKNPfUEarGV1n8lwYhDQHsk%2Fimg.png" width="100%" alt="">
+      <h3 class="font-weight-bold">당신의 고양이가 그렇게 귀엽다면서요?</h3>
+      &nbsp 
+      <h3 class="font-weight-bold">전세계에 있는 사람들에게 자랑해보세요!</h3>
+    </div>
+    <div class="col">
+      <form class="form-signin text-center shadow" method="POST"
 		action="doLogin"
 		onsubmit="MemberLoginForm__submit(this); return false;">
+  
 		<input type="hidden" name="redirectUri" value="/usr/home/main">
 		<input type="hidden" name="loginPwReal"> <img
 			class="mb-4 mt-2 shadow-sm rounded-circle"
@@ -108,6 +122,10 @@ span {
 			<a href="/usr/member/findLoginPw" class="text-danger">비번 찾기</a></span>
 		</div>
 	</form>
+    </div>
+  </div>
+</div>
+
 
 <!-- 
 <form class="table-box con form1" method="POST" action="doLogin"
