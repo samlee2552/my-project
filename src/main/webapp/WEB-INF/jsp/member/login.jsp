@@ -17,23 +17,10 @@
 		}
 
 		form.loginId.value = form.loginId.value.trim();
-		
 
 		form.loginId.value = form.loginId.value.replaceAll(' ', '');
 
-		if (form.loginId.value.length == 0) {
-			form.loginId.focus();
-			alert('아이디를 입력해주세요');
-			return;
-		}
-
 		form.loginPw.value = form.loginPw.value.trim();
-
-		if (form.loginPw.value.length == 0) {
-			form.loginPw.focus();
-			alert('비밀번호를 입력해주세요.');
-			return;
-		}
 
 		form.loginPwReal.value = sha256(form.loginPw.value);
 		form.loginPw.value = '';
@@ -43,7 +30,85 @@
 	}
 </script>
 
-<h1>로그인</h1>
+<style>
+
+
+.form-signin {
+	width: 100%;
+	max-width: 330px;
+	padding: 30px;
+	margin: 0 auto;
+	margin-top: 70px;
+	border-radius: 1rem;
+}
+
+.form-signin .checkbox {
+	font-weight: 400;
+}
+
+.form-signin .form-control {
+	position: relative;
+	box-sizing: border-box;
+	height: auto;
+	padding: 10px;
+	font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+	z-index: 2;
+}
+
+.form-signin input {
+	margin-bottom: 20px;
+	border-radius: 1rem;
+}
+
+.btn {
+	border-radius: 1rem;
+}
+
+.checkbox>label {
+	margin-right: 40%;
+}
+
+span {
+	font-size: 12px;
+}
+</style>
+<!--  -->
+	<form class="form-signin text-center shadow" method="POST"
+		action="doLogin"
+		onsubmit="MemberLoginForm__submit(this); return false;">
+		<input type="hidden" name="redirectUri" value="/usr/home/main">
+		<input type="hidden" name="loginPwReal"> <img
+			class="mb-4 mt-2 shadow-sm rounded-circle"
+			src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkTvFl%2FbtqIVHwUIcT%2FI2ZkRU3ekXkUgSdwtbikZ0%2Fimg.png"
+			alt="" width="200">
+		<h1 class="h3 mb-4 font-weight-normal">로그인</h1>
+		<label for="loginId" class="sr-only">아이디</label> <input type="text"
+			id="inputEmail" class="form-control" placeholder="아이디" name="loginId"
+			maxlength="20" required autofocus> <label for="loginPw"
+			class="sr-only">비밀번호</label> <input type="password" id="inputPassword"
+			class="form-control" name="loginPw" maxlength="20" placeholder="비밀번호"
+			required>
+		<div class="checkbox">
+			<label class="text-muted"> <input type="checkbox" value="">
+				로그인 상태 유지
+			</label>
+		</div>
+		<button class="btn btn-lg btn-primary btn-block mb-3" type="submit">로그인</button>
+	
+		<div id="extra">
+			<span class="text-muted">아직 회원이 아니신가요?</span> 
+			<span><a href="/usr/member/join" class="">회원가입하러 가기</a></span> 
+			<br /> 
+			<span class="text-muted">정보를 잊어버리셨나요?</span> 
+			<span><a href="/usr/member/findLoginId" class="text-danger">아이디 </a> / 
+			<a href="/usr/member/findLoginPw" class="text-danger">비번 찾기</a></span>
+		</div>
+	</form>
+
+<!-- 
 <form class="table-box con form1" method="POST" action="doLogin"
 	onsubmit="MemberLoginForm__submit(this); return false;">
 	<input type="hidden" name="redirectUri" value="/usr/home/main">
@@ -80,5 +145,5 @@
 	</table>
 
 </form>
-
+ -->
 <%@ include file="../part/foot.jspf"%>

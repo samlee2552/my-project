@@ -37,7 +37,7 @@
 	}
 </script>
 
-<h1>로그인</h1>
+<h1>비번찾기</h1>
 <form class="table-box con form1" method="POST" action="doFindLoginPw"
 	onsubmit="FindLoginPwForm__submit(this); return false;">
 	<input type="hidden" name="redirectUri" value="./login">
