@@ -70,6 +70,16 @@ h3 {
 .checkbox {
 	font-size: 14px;
 }
+
+.input-group-text {
+  border-radius:1rem;
+  background:inherit;
+}
+
+i {
+  color:#AEB6BF;
+}
+
 </style>
 
 <!--  -->
@@ -92,13 +102,27 @@ h3 {
 				<img class="mb-4 mt-2 shadow-sm rounded-circle"
 					src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkTvFl%2FbtqIVHwUIcT%2FI2ZkRU3ekXkUgSdwtbikZ0%2Fimg.png"
 					alt="" width="200">
-				<h1 class="h3 mb-4 font-weight-normal">로그인</h1>
-				<label for="loginId" class="sr-only">아이디</label> 
-					<input type="text" id="inputLoginId" class="form-control" placeholder="아이디"
+				<h1 class="h3 mb-3 font-weight-normal">로그인</h1>
+				<label for="loginId" class="sr-only">아이디</label>
+          <div class="input-group mb-4">
+            <div class="input-group-prepend ">
+              <div class="input-group-text">
+                  <i class="fas fa-user"></i>          
+              </div>
+            </div>
+					<input type="text" id="inputLoginId" class="form-control border-left-0" placeholder="아이디"
 					name="loginId" maxlength="20" required autofocus> 
-				<label for="loginPw" class="sr-only">비밀번호</label> 
-					<input type="password" id="inputPassword" class="form-control" name="loginPw"
+          </div>
+				<label for="loginPw" class="sr-only">비밀번호</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend ">
+              <div class="input-group-text">
+                <i class="fas fa-key"></i>   
+              </div>
+            </div>
+					<input type="password" id="inputPassword" class="form-control border-left-0" name="loginPw"
 					maxlength="20" placeholder="비밀번호" required>
+            </div>
 				<div class="checkbox">
 					<label class="text-muted"> <input type="checkbox" value="">
 						로그인 상태 유지

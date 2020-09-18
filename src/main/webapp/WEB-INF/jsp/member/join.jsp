@@ -110,7 +110,6 @@
 	position: relative;
 	box-sizing: border-box;
 	height: auto;
-	padding: 3 10px;
 	font-size: 14px;
 }
 
@@ -145,6 +144,16 @@ background: linear-gradient(to right, #5f2c82, #49a09d);
   -webkit-text-fill-color: transparent;
 }
 
+.input-group-text {
+  border-radius:1rem;
+  background:inherit;
+}
+
+i {
+  color:#AEB6BF;
+}
+
+
 </style>
 
 <!--  -->
@@ -167,28 +176,91 @@ background: linear-gradient(to right, #5f2c82, #49a09d);
 			src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkTvFl%2FbtqIVHwUIcT%2FI2ZkRU3ekXkUgSdwtbikZ0%2Fimg.png"
 			alt="" width="100">
 		<h1 class="h3 mb-3 font-weight-normal">회원가입</h1>
-		<label for="loginId" class="sr-only">아이디</label> <input type="text"
-			id="inputEmail" class="form-control" placeholder="아이디" name="loginId"
-			maxlength="20" required autofocus> <label for="loginPw"
-			class="sr-only">비밀번호</label> <input type="password" id="inputPassword"
-			class="form-control" name="loginPw" maxlength="20" placeholder="비밀번호"
+		<label for="loginId" class="sr-only">아이디</label>
+      <div class="input-group mb-3">
+            <div class="input-group-prepend ">
+              <div class="input-group-text ">
+                <i class="fas fa-user"></i>    
+              </div>
+            </div>
+				      <input type="text" id="inputEmail" class="form-control border-left-0" placeholder="아이디" name="loginId"
+			maxlength="20" required autofocus>
+            </div>
+       
+    <label for="loginPw"
+			class="sr-only">비밀번호</label>
+      <div class="input-group mb-3">
+            <div class="input-group-prepend ">
+              <div class="input-group-text ">
+                <i class="fas fa-key"></i> 
+              </div>
+            </div>
+				       <input type="password" id="inputPassword"
+			class="form-control border-left-0" name="loginPw" maxlength="20" placeholder="비밀번호"
 			required>
-      <label for="loginPwConfirm"
-			class="sr-only">비밀번호</label> <input type="password" id="inputPassword"
-			class="form-control" name="loginPwConfirm" maxlength="20" placeholder="비밀번호 확인"
+            </div>
+     
+    <label for="loginPwConfirm"
+			class="sr-only">비밀번호 확인</label>
+      <div class="input-group mb-3">
+            <div class="input-group-prepend ">
+              <div class="input-group-text ">
+                <i class="fas fa-lock "></i>      
+              </div>
+            </div>
+				      <input type="password" id="inputPassword"
+			class="form-control border-left-0" name="loginPwConfirm" maxlength="20" placeholder="비밀번호 확인"
 			required>
-      <label for="name" class="sr-only">이름</label> <input type="text"
-			id="inputName" class="form-control" placeholder="이름" name="name"
+            </div>
+      
+      <label for="name" class="sr-only">이름</label>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend ">
+              <div class="input-group-text ">
+                <i class="fas fa-id-badge"></i>   
+              </div>
+            </div>
+				       <input type="text"
+			id="inputName" class="form-control border-left-0" placeholder="이름" name="name"
 			maxlength="20" required>
-      <label for="nickname" class="sr-only">닉네임</label> <input type="text"
-			id="inpuNickname" class="form-control" placeholder="닉네임" name="nickname"
+            </div>
+       
+      <label for="nickname" class="sr-only">닉네임</label>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend ">
+              <div class="input-group-text ">
+                <i class="far fa-user"></i>   
+              </div>
+            </div>
+				       <input type="text"
+			id="inpuNickname" class="form-control border-left-0" placeholder="닉네임" name="nickname"
 			maxlength="20" required>
-      <label for="email" class="sr-only">이메일</label> <input type="email"
-			id="inpuNickname" class="form-control" placeholder="이메일" name="email"
+            </div>
+       
+      <label for="email" class="sr-only">이메일</label>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend ">
+              <div class="input-group-text ">
+               <i class="fas fa-envelope"></i>    
+              </div>
+            </div>
+				      <input type="email"
+			id="inpuNickname" class="form-control border-left-0" placeholder="이메일" name="email"
 			maxlength="20" required>
-      <label for="cellphoneNo" class="sr-only">전화번호</label> <input type="tel"
-			id="inpuNickname" class="form-control" placeholder="전화번호 (선택사항)" name="cellphoneNo"
+            </div>
+        
+      <label for="cellphoneNo" class="sr-only">전화번호</label>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend ">
+              <div class="input-group-text ">
+                <i class="fas fa-mobile-alt"></i>    
+              </div>
+            </div>
+				      <input type="tel"
+			id="inpuNickname" class="form-control border-left-0" placeholder="전화번호 (선택사항)" name="cellphoneNo"
 			maxlength="11">
+            </div>
+        
 		<div class="checkbox">
 		</div>
 		<button class="btn btn-lg btn-primary btn-block mb-3" type="submit">회원가입</button>
@@ -201,7 +273,6 @@ background: linear-gradient(to right, #5f2c82, #49a09d);
     </div>
   </div>
 </div>
-
 
 <!-- 
 <form class="table-box con form1" method="POST" action="doJoin"
