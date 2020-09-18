@@ -25,7 +25,7 @@ public class ArticleController {
 	@RequestMapping("list")
 	public String showEntireList(Model model, String boardCode) {
 		
-		int articleCount = 100;
+		int articleCount = 10;
 		List<Article> articles = articleService.getForPrintArticles(articleCount);
 		model.addAttribute("articles", articles);
 
