@@ -27,6 +27,12 @@ public class ArticleService {
 		List<Article> articles = articleDao.getForPrintArticles(count);
 		return articles;
 	}
+	//프로필 화면용 게시물 불러오기
+	public List<Article> getForPrintArticlesByMemberId(int memberId) {
+		List<Article> articles = articleDao.getForPrintArticlesByMemberId(memberId);
+		return articles;
+	}
+
 
 	
 	public Article getForPrintArticleById(int id) {

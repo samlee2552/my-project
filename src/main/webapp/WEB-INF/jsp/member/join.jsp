@@ -159,7 +159,7 @@ i {
 <!--  -->
 <div class="container">
   <div class="row">
-    <div class="col visible-on-md-up">
+    <div class="col d-none d-sm-block">
       <img id="text" class="mb-5" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc1SgIK%2FbtqIOnGsacc%2FKNPfUEarGV1n8lwYhDQHsk%2Fimg.png" width="100%" alt="">
       <h3 class="font-weight-bold">당신의 반려동물이 그렇게 귀엽다면서요?</h3>
       &nbsp 

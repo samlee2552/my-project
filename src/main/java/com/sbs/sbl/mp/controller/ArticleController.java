@@ -31,6 +31,7 @@ public class ArticleController {
 
 		return "article/list";
 	}
+	
 
 	// 상세보기
 	@RequestMapping("detail")

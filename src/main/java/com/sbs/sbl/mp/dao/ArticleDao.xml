@@ -16,6 +16,20 @@
 		ORDER BY a.id DESC
 		LIMIT 0, #{count};
 	</select>
+	
+	<select id="getForPrintArticlesByMemberId" resultMap="article">
+		SELECT a.*,
+		m.nickname
+		AS extra__writer
+		FROM
+		article a
+		INNER JOIN
+		`member` m
+		ON a.memberId = m.id
+		WHERE a.displayStatus = 1
+		AND m.id = #{memberId}
+		ORDER BY a.id DESC;
+	</select>
 
 	<select id="getForPrintArticleById" resultMap="article">
 		SELECT a.*,

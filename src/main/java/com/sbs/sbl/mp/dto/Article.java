@@ -30,4 +30,8 @@ public class Article {
 	public String getDetailLink(int id) {
 			return "/usr/article/detail?id=" + id;	
 	}
+	
+	public String getListLinkByMemberId() {
+		return "/usr/member/profile?memberId=" + memberId;
+	}
 }

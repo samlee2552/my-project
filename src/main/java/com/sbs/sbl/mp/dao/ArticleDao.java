@@ -24,5 +24,7 @@ public interface ArticleDao {
 
 
 	int write(Map<String, Object> param);
+	//개인 프로필 게시물 불러오기
+	List<Article> getForPrintArticlesByMemberId(@Param("memberId") int memberId);
 
 }

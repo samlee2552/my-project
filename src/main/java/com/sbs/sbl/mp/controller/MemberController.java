@@ -1,5 +1,6 @@
 package com.sbs.sbl.mp.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sbs.sbl.mp.dto.Article;
 import com.sbs.sbl.mp.dto.Member;
 import com.sbs.sbl.mp.dto.ResultData;
+import com.sbs.sbl.mp.service.ArticleService;
 import com.sbs.sbl.mp.service.MemberService;
 import com.sbs.sbl.mp.util.Util;
 
@@ -22,6 +25,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private ArticleService articleService;
 
 	// 회원가입 시작
 	@RequestMapping("join")
@@ -208,7 +214,6 @@ public class MemberController {
 		Member member = memberService.getMemberById(loginedMemberId);
 
 		model.addAttribute("member", member);
-		req.removeAttribute("loginedMemberId");
 
 		return "member/modify";
 	}
@@ -280,5 +285,17 @@ public class MemberController {
 		session.removeAttribute("loginedMemberId");
 
 		return "common/redirect";
+	}
+	
+	@RequestMapping("profile")
+	public String showProfile(@RequestParam Map<String, Object> param, Model model, HttpServletRequest req) {
+		int memberId = Integer.parseInt((String) param.get("memberId")); 
+		
+		Member member = memberService.getMemberById(memberId);
+		List<Article> articles = articleService.getForPrintArticlesByMemberId(memberId);
+
+		model.addAttribute("member", member);
+		model.addAttribute("articles", articles);
+		return "member/profile";
 	}
 }
