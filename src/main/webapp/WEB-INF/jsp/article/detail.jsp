@@ -152,7 +152,7 @@
 }
 </style>
 
-<div class="reply-modify-form-modal flex flex-ai-c flex-jc-c">
+<div class="reply-modify-form-modal container" style="margin-top:100px">
 	<form action="" class="form1 bg-white padding-10"
 		onsubmit="ReplyList__submitModifyForm(this); return false;">
 		<input type="hidden" name="id" />

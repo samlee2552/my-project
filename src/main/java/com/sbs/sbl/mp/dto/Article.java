@@ -23,7 +23,6 @@ public class Article {
 	private String delDate;
 	private boolean delStatus;
 	private boolean authStatus;
-	private String title;
 	private String body;
 	private Map<String, Object> extra;
 	

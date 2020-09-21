@@ -23,7 +23,7 @@ public class ArticleController {
 
 	/* 전체 리스트 */
 	@RequestMapping("list")
-	public String showEntireList(Model model, String boardCode) {
+	public String showEntireList(Model model) {
 		
 		int articleCount = 10;
 		List<Article> articles = articleService.getForPrintArticles(articleCount);
@@ -63,7 +63,7 @@ public class ArticleController {
 	@RequestMapping("doModify")
 	public String doModify(Model model, @RequestParam Map<String, Object> param, int id) {
 
-		Map<String, Object> newParam = Util.getNewMapOf(param, "id", "title", "body");
+		Map<String, Object> newParam = Util.getNewMapOf(param, "id", "body");
 		articleService.modify(newParam);
 
 		String redirectUri = (String) param.get("redirectUri");
@@ -84,7 +84,7 @@ public class ArticleController {
 	public String doWrite(@RequestParam Map<String, Object> param,	Model model, HttpSession session) {
 		int loginedMemberId = (int) session.getAttribute("loginedMemberId");
 
-		Map<String, Object> newParam = Util.getNewMapOf(param, "title", "body", "fileIdsStr");
+		Map<String, Object> newParam = Util.getNewMapOf(param, "body", "fileIdsStr");
 		newParam.put("memberId", loginedMemberId);
 
 		int newArticldId = articleService.write(newParam);

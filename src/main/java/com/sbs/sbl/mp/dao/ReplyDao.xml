@@ -71,7 +71,6 @@
 		<id property="updateDate" column="updateDate" />
 		<id property="delDate" column="delDate" />
 		<id property="delStatus" column="delStatus" />
-		<id property="title" column="title" />
 		<id property="body" column="body" />
 		<id property="memberId" column="memberId" />
 		<id property="boardId" column="boardId" />

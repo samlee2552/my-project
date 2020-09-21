@@ -47,8 +47,8 @@
 		UPDATE article
 		<set>
 			updateDate = NOW(),
-			<if test="title != null">title = #{title},</if>
-			<if test="body != null">body = #{body},</if>
+			
+			<if test="body != null">body = #{body}</if>
 		</set>
 		WHERE id = #{id}
 	</update>
@@ -65,7 +65,6 @@
 		INSERT
 		INTO article
 		SET regDate = NOW(),
-		title = #{title},
 		body = #{body},
 		memberId = #{memberId}
 	</insert>
@@ -76,7 +75,6 @@
 		<id property="updateDate" column="updateDate" />
 		<id property="delDate" column="delDate" />
 		<id property="delStatus" column="delStatus" />
-		<id property="title" column="title" />
 		<id property="body" column="body" />
 		<id property="memberId" column="memberId" />
 		<id property="boardId" column="boardId" />
