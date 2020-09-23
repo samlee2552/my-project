@@ -70,6 +70,7 @@
 			return;
 		}
 
+		/*
 		if (form.cellphoneNo.value.length == 0) {
 			form.cellphoneNo.focus();
 			alert('휴대전화번호를 입력해주세요.');
@@ -81,7 +82,8 @@
 			alert('휴대폰번호를 10자 이상 입력해주세요.');
 			return;
 		}
-
+		*/
+		
 		form.loginPwReal.value = sha256(form.loginPw.value);
 		form.loginPw.value = '';
 		form.loginPwConfirm.value = '';
@@ -170,7 +172,7 @@ i {
 		action="doJoin"
 		onsubmit="MemberJoinForm__submit(this); return false;">
   
-		<input type="hidden" name="redirectUri" value="/usr/home/login">
+		<input type="hidden" name="redirectUri" value="/usr/member/login">
 		<input type="hidden" name="loginPwReal"> <img
 			class="mb-4 mt-2 shadow-sm rounded-circle"
 			src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkTvFl%2FbtqIVHwUIcT%2FI2ZkRU3ekXkUgSdwtbikZ0%2Fimg.png"

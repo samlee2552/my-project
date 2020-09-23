@@ -201,7 +201,7 @@ public class MemberController {
 		model.addAttribute("redirectUri", redirectUri);
 		model.addAttribute("alertMsg", String.format("\"%s\" 로 임시 비밀번호를 발송했습니다.", email));
 		session.removeAttribute("loginedMemberId");
-		memberService.recoverLoginPw(loginId, email);
+		memberService.sendTempPw(loginId, email);
 
 		return "common/redirect";
 	}

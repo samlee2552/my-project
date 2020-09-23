@@ -65,7 +65,7 @@ tr{
 }
 </style>
 
-<<div class="container">
+<div class="container">
   <table class="table text-center table-borderless">
     <tbody>
       <tr>
@@ -73,13 +73,13 @@ tr{
           <img src="https://i.pinimg.com/originals/ce/d4/e1/ced4e117b0f2f490c79e9e820d14cd99.jpg" class="rounded-circle profile-img"/>
         </td>
 
-        <td colspan="" class="align-middle font-weight-bold">${member.nickname}</td>
-        <td colspan="" class="align-middle">
+        <td colspan="" class="align-bottom font-weight-bold w-25">${member.nickname}</td>
+        <td colspan="" class="align-bottom">
           <a href="#" class="btn btn-link btn-sm text-dark" role="button" aria-pressed="true"><i class="fas fa-user-edit"></i></a>
         
           </div>
         </td>
-        <td colspan="" class="align-middle">
+        <td colspan="" class="align-bottom">
           <a href="#" class="btn btn-link btn-sm text-dark" role="button" aria-pressed="true"><i class="fas fa-user-cog"></i></a>
         
           </div>
@@ -94,9 +94,9 @@ tr{
         
       </tr>
       <tr>
-        <td colspan="" class="align-middle">123</td>
-        <td colspan="" class="align-middle">234</td>
-        <td colspan="" class="align-middle">345</td>
+        <td colspan="" class="align-top">123</td>
+        <td colspan="" class="align-top">234</td>
+        <td colspan="" class="align-top">345</td>
       </tr>
       <tr>
         <td colspan="4" class="text-left">

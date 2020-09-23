@@ -30,7 +30,7 @@ public class MemberService {
 	}
 
 	// 임시 비밀번호 발급
-	public void recoverLoginPw(String loginId, String email) {
+	public void sendTempPw(String loginId, String email) {
 		String newPw = Util.getTempPassword(8);
 		sendTempPwMail(email, newPw);
 		memberDao.updateLoginPw(loginId, newPw);
