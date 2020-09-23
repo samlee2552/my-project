@@ -59,6 +59,9 @@ nav {
     .visible-on-md-up {
         display: none;
     }
+    nav {
+	margin-bottom: 2vh;
+}
 }
 
 .navbar {
