@@ -21,23 +21,38 @@ public class ArticleService {
 	@Autowired
 	private FileService fileService;
 
-	//게시물 리스트, 상세보기
+	// 게시물 리스트, 상세보기
 	/* 시작 */
 	public List<Article> getForPrintArticles(int count) {
 		List<Article> articles = articleDao.getForPrintArticles(count);
 		return articles;
 	}
-	//프로필 화면용 게시물 불러오기
+
+	// 프로필 화면용 게시물 불러오기
 	public List<Article> getForPrintArticlesByMemberId(int memberId) {
 		List<Article> articles = articleDao.getForPrintArticlesByMemberId(memberId);
+		for(Article article: articles) {
+			List<File> files = fileService.getFiles("article", article.getId(), "common", "attachment");
+			Map<String, File> filesMap = new HashMap<>();
+			
+			for (File file : files) {
+				filesMap.put(file.getFileNo() + "", file);
+			}
+			
+			if (article.getExtra() == null) {
+				article.setExtra(new HashMap<>());
+			}
+			
+			article.getExtra().put("file__common__attachment", filesMap);
+		
+		}
+
 		return articles;
 	}
 
-
-	
 	public Article getForPrintArticleById(int id) {
 		Article article = articleDao.getForPrintArticleById(id);
-		List<File> files = fileService.getFilesMapKeyFileNo("article", article.getId(), "common", "attachment");
+		List<File> files = fileService.getFiles("article", article.getId(), "common", "attachment");
 
 		Map<String, File> filesMap = new HashMap<>();
 
@@ -54,8 +69,8 @@ public class ArticleService {
 		return article;
 	}
 	/* 끝 */
-	
-	//게시물 CRUD
+
+	// 게시물 CRUD
 	/* 시작 */
 	public void modify(Map<String, Object> param) {
 		articleDao.modify(param);
@@ -72,6 +87,22 @@ public class ArticleService {
 		String fileIdsStr = (String) param.get("fileIdsStr");
 
 		if (fileIdsStr != null && fileIdsStr.length() > 0) {
+			fileIdsStr = fileIdsStr.trim();
+
+			if (fileIdsStr.startsWith(",")) {
+				fileIdsStr = fileIdsStr.substring(1);
+			}
+		}
+
+		if (fileIdsStr != null && fileIdsStr.length() > 0) {
+			fileIdsStr = fileIdsStr.trim();
+
+			if (fileIdsStr.equals(",")) {
+				fileIdsStr = "";
+			}
+		}
+
+		if (fileIdsStr != null && fileIdsStr.length() > 0) {
 			List<Integer> fileIds = Arrays.asList(fileIdsStr.split(",")).stream().map(s -> Integer.parseInt(s.trim()))
 					.collect(Collectors.toList());
 
@@ -81,6 +112,7 @@ public class ArticleService {
 				fileService.changeRelId(fileId, id);
 			}
 		}
+
 		return id;
 	}
 }

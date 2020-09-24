@@ -25,8 +25,9 @@ public class ArticleController {
 	@RequestMapping("list")
 	public String showEntireList(Model model) {
 		
-		int articleCount = 10;
+		int articleCount = 9;
 		List<Article> articles = articleService.getForPrintArticles(articleCount);
+		
 		model.addAttribute("articles", articles);
 
 		return "article/list";

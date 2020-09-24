@@ -4,44 +4,81 @@
 <%@ include file="../part/head.jspf"%>
 
 <style>
-.carousel-item>img {
-	height: 50rem;
-	max-width: 100%;
-	object-fit: cover;
+header {
+  position: relative;
+  background-color: black;
+  height: 75vh;
+  min-height: 25rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+header video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+header .container {
+  position: relative;
+  z-index: 2;
+}
+
+header .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+@media (pointer: coarse) and (hover: none) {
+  header {
+    background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
+  }
+  header video {
+    display: none;
+  }
 }
 </style>
 
-<div class="container">
-	<div id="carouselExampleInterval" class="carousel slide"
-		data-ride="carousel">
-		<div class="carousel-inner">
-			<div class="carousel-item active" data-interval="5000">
-				<img
-					src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdYQFpu%2FbtqIXf1SUNl%2FDxAycXUs5vzWclc3xAMKK0%2Fimg.jpg"
-					class="d-block w-100" alt="...">
-			</div>
-			<div class="carousel-item" data-interval="5000">
-				<img
-					src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F6zzIv%2FbtqIWRG3F0X%2Frdg9JB0SVd33Vqaov4bYt0%2Fimg.jpg"
-					class="d-block w-100" alt="...">
-			</div>
-			<div class="carousel-item" data-interval="5000">
-				<img
-					src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb4OVv3%2FbtqIZk2RXs5%2FcBOw0X9Llte8KUUkmAtEsk%2Fimg.jpg"
-					class="d-block w-100" alt="...">
-			</div>
-		</div>
-		<a class="carousel-control-prev" href="#carouselExampleInterval"
-			role="button" data-slide="prev"> <span
-			class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-			class="sr-only">Previous</span>
-		</a> <a class="carousel-control-next" href="#carouselExampleInterval"
-			role="button" data-slide="next"> <span
-			class="carousel-control-next-icon" aria-hidden="true"></span> <span
-			class="sr-only">Next</span>
-		</a>
-	</div>
-</div>
+<header>
+  <div class="overlay"></div>
+  <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+    <source src="/resource/video/main_vid.mp4"" type="video/mp4">
+  </video>
+  <div class="container h-100">
+    <div class="d-flex h-100 text-center align-items-center">
+      <div class="w-100 text-white">
+        <h1 class="display-3">Welcome to PETFLICK!</h1>
+        <p class="lead mb-0">당신의 반려 동물을 자랑해보세요!</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="my-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <p>Welcome to PETFLICK!</p>
+        <p>Flick your finger on the screen to check these adorable creatures!</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <%@ include file="../part/foot.jspf"%>
 

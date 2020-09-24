@@ -20,7 +20,7 @@ public class FileService {
 
 	public int saveFile(String relTypeCode, int relId, String typeCode, String type2Code, int fileNo, String originFileName, String fileExtTypeCode, String fileExtType2Code, String fileExt, byte[] body, int fileSize) {
 
-		Map<String, Object> param = new HashMap<String, Object>();
+		Map<String, Object> param = new HashMap();
 		param.put("relTypeCode", relTypeCode);
 		param.put("relId", relId);
 		param.put("typeCode", typeCode);
@@ -127,10 +127,16 @@ public class FileService {
 		fileDao.deleteFile(id);
 	}
 
-	public List<File> getFilesMapKeyFileNo(String relTypeCode, int relId, String typeCode, String type2Code) {
-		List<File> files = fileDao.getFilesRelTypeCodeAndRelIdAndTypeCodeAndType2Code(relTypeCode, relId, typeCode, type2Code);
-		return files;
-	}
+	public Map<Integer, File> getFilesMapKeyFileNo(String relTypeCode, int relId, String typeCode, String type2Code) {
+		List<File> files = getFiles(relTypeCode, relId, typeCode, type2Code);
 
+		Map<Integer, File> filesMap = new HashMap<>();
+
+		for (File file : files) {
+			filesMap.put(file.getFileNo(), file);
+		}
+
+		return filesMap;
+	}
 
 }

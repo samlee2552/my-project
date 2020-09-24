@@ -293,7 +293,8 @@ public class MemberController {
 		
 		Member member = memberService.getMemberById(memberId);
 		List<Article> articles = articleService.getForPrintArticlesByMemberId(memberId);
-
+		
+		
 		model.addAttribute("member", member);
 		model.addAttribute("articles", articles);
 		return "member/profile";

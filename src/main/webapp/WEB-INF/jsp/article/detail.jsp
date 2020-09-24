@@ -19,10 +19,7 @@
 				<th>날짜</th>
 				<td>${article.regDate}</td>
 			</tr>
-			<tr>
-				<th>제목</th>
-				<td>${article.title}</td>
-			</tr>
+		
 			<tr>
 				<th>내용</th>
 				<td>

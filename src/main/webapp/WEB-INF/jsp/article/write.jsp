@@ -11,19 +11,6 @@
 			alert('처리중입니다.');
 			return;
 		}
-		form.title.value = form.title.value.trim();
-		if (form.title.value.length == 0) {
-			form.title.focus();
-			alert('제목을 입력해주세요.');
-			return;
-		}
-
-		form.body.value = form.body.value.trim();
-		if (form.body.value == 0) {
-			form.body.focus();
-			alert('내용을 입력해주세요.');
-			return;
-		}
 		
 		var maxSizeMb = 50;
 		var maxSize = maxSizeMb * 1024 * 1024 //50MB
@@ -71,15 +58,12 @@
 		startLoading();
 		startUploadFiles(function(data) {
 			var fileIdsStr = '';
-
 			if (data && data.body && data.body.fileIdsStr) {
 				fileIdsStr = data.body.fileIdsStr;
 			}
-
 			form.fileIdsStr.value = fileIdsStr;
 			form.file__article__0__common__attachment__1.value = '';
 			form.file__article__0__common__attachment__2.value = '';
-
 			form.submit();
 		});
 	}
@@ -96,15 +80,7 @@
 			<col width="100"></col>
 		</colgroup>
 		<tbody>
-			<tr>
-				<th>제목</th>
-				<td>
-					<div class="form-control-box">
-						<input type="text" placeholder="제목을 입력해주세요." name="title"
-							maxlength="100" />
-					</div>
-				</td>
-			</tr>
+
 			<tr>
 				<th>내용</th>
 				<td>
@@ -135,7 +111,7 @@
 				<th>첨부3 이미지</th>
 				<td>
 					<div class="form-control-box">
-						<input type="file" accept="image/*"
+						<input multiple="multiple" type="file" accept="image/*"
 							name="file__article__0__common__attachment__3">
 					</div>
 				</td>
@@ -143,12 +119,24 @@
 			<tr>
 				<th>작성</th>
 				<td>
-					<button class="btn btn-primary" type="submit">작성</button> <a
+					<button class="btn btn-primary" type="submit" disabled>작성</button> <a
 					class="btn btn-info" href="${listUrl}">리스트</a>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 </form>
+
+<script>
+$('input[type=file]').change(function(){
+    if($('input[name=file]').val()==''){
+        $('button').attr('disabled',true)
+    } 
+    else{
+      $('button').attr('disabled',false);
+    }
+})
+
+</script>
 
 <%@ include file="../part/foot.jspf"%>

@@ -64,7 +64,7 @@ table {
 }
 
 /*Gallery part*/
-.gallery img {
+.gallery img, .gallery video {
   height:32vw;
   width:32vw;
   max-height:308px;
@@ -80,10 +80,17 @@ table {
 }
 
 @media (max-width: 767.98px) { 
- .gallery img {
+ .gallery img, .gallery video {
     padding:3px 3px;
   }
  }
+
+.vid-icon{
+    right:7%;
+    top:7%;
+    color: rgba(112, 112, 112, 0.9);
+    
+}
 
 </style>
 
@@ -145,8 +152,8 @@ table {
       <tr>
         <td rowspan="3" class="w-25 align-middle">
           <img src="https://i.pinimg.com/originals/ce/d4/e1/ced4e117b0f2f490c79e9e820d14cd99.jpg" class="rounded-circle profile-img"/>
-        </td
-       <tr>
+        </td>
+       
         <td colspan="" class="align-bottom font-weight-bold w-25 profile-name" >${member.nickname}</td>
         <td colspan="" class="align-bottom">
           <a href="#" class="btn btn-link btn-sm text-dark" role="button" aria-pressed="true"><i class="fas fa-user-edit"></i></a>
@@ -178,37 +185,30 @@ table {
 <!-- gallery -->
 <div class="gallery my-4">
   <div class="row d-flex justify-content-around">
-    <div class="col-4-sm no-gutters">
-      <img src="https://i.pinimg.com/originals/ce/d4/e1/ced4e117b0f2f490c79e9e820d14cd99.jpg" alt="">
-    </div>
-    <div class="col-4-sm ">
-      <img class="" src="https://i.pinimg.com/originals/ce/d4/e1/ced4e117b0f2f490c79e9e820d14cd99.jpg" alt="">
-    </div>
-    <div class="col-4-sm">
-      <img src="https://i.pinimg.com/originals/ce/d4/e1/ced4e117b0f2f490c79e9e820d14cd99.jpg" alt="">
-    </div>
-  </div>
-  <div class="row d-flex justify-content-around">
-    <div class="col-4-sm no-gutters">
-      <img src="https://i.pinimg.com/originals/ce/d4/e1/ced4e117b0f2f490c79e9e820d14cd99.jpg" alt="">
-    </div>
-    <div class="col-4-sm ">
-      <img class="" src="https://i.pinimg.com/originals/ce/d4/e1/ced4e117b0f2f490c79e9e820d14cd99.jpg" alt="">
-    </div>
-    <div class="col-4-sm">
-      <img src="https://i.pinimg.com/originals/ce/d4/e1/ced4e117b0f2f490c79e9e820d14cd99.jpg" alt="">
-    </div>
-  </div>
-  <div class="row d-flex justify-content-around">
-    <div class="col-4-sm no-gutters">
-      <img src="https://i.pinimg.com/originals/ce/d4/e1/ced4e117b0f2f490c79e9e820d14cd99.jpg" alt="">
-    </div>
-    <div class="col-4-sm ">
-      <img class="" src="https://i.pinimg.com/originals/ce/d4/e1/ced4e117b0f2f490c79e9e820d14cd99.jpg" alt="">
-    </div>
-    <div class="col-4-sm">
-      <img src="https://i.pinimg.com/originals/ce/d4/e1/ced4e117b0f2f490c79e9e820d14cd99.jpg" alt="">
-    </div>
+ 	
+ 	<c:forEach items="${articles}" var="article">
+  		<c:forEach var="i" begin="1" end="3" step="1">
+				<c:set var="fileNo" value="${String.valueOf(i)}" />
+				<c:set var="file" value="${article.extra.file__common__attachment[fileNo]}" />
+				<c:if test="${file != null}">
+					<tr>
+						<td>
+							<c:if test="${file.fileExtTypeCode == 'video'}">
+								<div class="video-box position-relative">
+									<video src="/usr/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}"></video>
+									<span class="position-absolute vid-icon"><i class="fas fa-video"></i></span>
+								</div>
+							</c:if>
+							<c:if test="${file.fileExtTypeCode == 'img'}">
+								<div class="img-box img-box-auto">
+									<img src="/usr/file/img?id=${file.id}&updateDate=${file.updateDate}" alt="" />
+								</div>
+							</c:if>
+						</td>
+					</tr>
+				</c:if>
+			</c:forEach>
+		  </c:forEach>
   </div>
 </div>
 
