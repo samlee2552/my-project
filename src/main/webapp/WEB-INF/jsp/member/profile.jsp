@@ -64,24 +64,27 @@ table {
 }
 
 /*Gallery part*/
+
+
 .gallery img, .gallery video {
   height:32vw;
   width:32vw;
   max-height:308px;
   max-width:308px;
   object-fit:cover;
-  padding:4px 3px;
-  border-radius:3%;
+  padding:7px 10px;
+  border-radius:9%;
 
 }
 
 .con {
   max-width:950px;
+
 }
 
 @media (max-width: 767.98px) { 
  .gallery img, .gallery video {
-    padding:3px 3px;
+    padding:1px 3px;
   }
  }
 
@@ -112,7 +115,9 @@ table {
    <div class="row border-top p-1">
     <div class="col mobile-profile-text mb-1">
       <span>
-      ${member.profile_text} <a href="#" class="text-dark p-2"><i class="fas fa-pen fa-sm"></i></a>        
+      ${member.profile_text} <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">
+  <i class="fas fa-pen fa-sm"></i>
+</button>      
       </span>
 
     </div>
@@ -175,26 +180,66 @@ table {
       </tr>
       <tr>
         <td colspan="12" class="text-left border-top">
-        		<span>${member.profile_text}
-<a href="#" class="text-dark p-2"><i class="fas fa-pen fa-sm"></i></a></span>
+        		<span>${member.profile_text}</span>
+				<button type="button" class="btn btn-light" data-toggle="modal" data-target="#edit_profile_modal">
+  					<i class="fas fa-pen fa-sm"></i>
+				</button>
         </td>     
       </tr>
     </tbody>
   </table>
 
+<!-- edit profile text modal -->
+
+
+<div class="modal fade" id="edit_profile_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form method="POST" action="editProfileText">
+        <input type="hidden" name="redirectUri"	value="/usr/member/profile?memberId=${loginedMemberId}" />
+          <div class="form-group">
+            <label for="profile-text" class="col-form-label sr-only">
+              profile_text
+            </label>
+            <textarea class="form-control" id="message-text" placeholder="본인을 소개해주세요!" name="profile_text">${member.profile_text}</textarea>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        <button type="submit" class="btn btn-primary">수정</button>
+	      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+$('#edit_profile_modal').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var recipient = button.data('whatever') // Extract info from data-* attributes
+	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+	  var modal = $(this)
+	  modal.find('.modal-title').text('New message to ' + recipient)
+	  modal.find('.modal-body input').val(recipient)
+	})
+</script>
+
+
 <!-- gallery -->
 <div class="gallery my-4">
-  <div class="row d-flex justify-content-around">
+  <div class="row">
  	
  	<c:forEach items="${articles}" var="article">
   		<c:forEach var="i" begin="1" end="3" step="1">
 				<c:set var="fileNo" value="${String.valueOf(i)}" />
 				<c:set var="file" value="${article.extra.file__common__attachment[fileNo]}" />
 				<c:if test="${file != null}">
-					<tr>
-						<td>
+					 <div class="col-4-sm ">
 							<c:if test="${file.fileExtTypeCode == 'video'}">
-								<div class="video-box position-relative">
+								<div class="video-box position-relative ">
 									<video src="/usr/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}"></video>
 									<span class="position-absolute vid-icon"><i class="fas fa-video"></i></span>
 								</div>
@@ -204,12 +249,12 @@ table {
 									<img src="/usr/file/img?id=${file.id}&updateDate=${file.updateDate}" alt="" />
 								</div>
 							</c:if>
-						</td>
-					</tr>
+					</div>
 				</c:if>
 			</c:forEach>
 		  </c:forEach>
-  </div>
+  		</div>
+	</div>
 </div>
 
 

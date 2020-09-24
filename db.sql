@@ -19,24 +19,21 @@ CREATE TABLE article (
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-memberId = 1,
-title = '제목1',
+memberId = 1
 `body` = '내용1';
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 boardId = 1,
-memberId = 1,
-title = '제목2',
+memberId = 1
 `body` = '내용2';
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 boardId = 2,
-memberId = 1,
-title = '제목3',
+memberId = 1
 `body` = '내용3';
 
 # member 테이블 세팅

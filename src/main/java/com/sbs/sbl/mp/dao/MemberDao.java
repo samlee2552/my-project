@@ -32,4 +32,6 @@ public interface MemberDao {
 
 	void updateAuthStatus(@Param("email") String email);
 
+	void updateProfileText(@Param("profile_text") String profile_text,@Param("id") int id);
+
 }

@@ -21,10 +21,9 @@ public class TestController {
 	private MemberService memberService;
 
 	@RequestMapping("/test")
-	@ResponseBody
 	public String showMember(Model model, HttpSession session) {
 
-		return "1234";
+		return "test/test";
 	}
 	
 	@RequestMapping("/doSetSessionA")
@@ -69,7 +68,7 @@ public class TestController {
 		System.out.println(member);
 		System.out.println(member);
 	
-		return "home/main";
+		return "test/main";
 	}
 	
 }

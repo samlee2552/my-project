@@ -105,5 +105,11 @@
 		delStatus = 1
 		WHERE id = #{id}
 	</update>
+	<!-- 프로필 문구 변경 -->
+	<update id="updateProfileText">
+		UPDATE member
+		SET profile_text = #{profile_text}
+		WHERE id = #{id}
+	</update>
 
 </mapper>

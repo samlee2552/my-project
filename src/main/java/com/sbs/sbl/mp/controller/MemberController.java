@@ -287,6 +287,9 @@ public class MemberController {
 		return "common/redirect";
 	}
 	
+	//프로필 관련 ==============================================================
+	
+	
 	@RequestMapping("profile")
 	public String showProfile(@RequestParam Map<String, Object> param, Model model, HttpServletRequest req) {
 		int memberId = Integer.parseInt((String) param.get("memberId")); 
@@ -298,5 +301,14 @@ public class MemberController {
 		model.addAttribute("member", member);
 		model.addAttribute("articles", articles);
 		return "member/profile";
+	}
+	
+	@RequestMapping("editProfileText")
+	public String editProfileText(@RequestParam Map<String, Object> param, String profile_text, HttpServletRequest req) {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		memberService.updateProfileText(profile_text, loginedMemberId);
+		String redirectUri = (String) param.get("redirectUri");
+		System.out.println(redirectUri);
+		return "redirect:" + redirectUri;
 	}
 }
