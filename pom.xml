@@ -9,7 +9,7 @@
 		<version>2.3.3.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.sbs.sbl</groupId>
+	<groupId>com.sbs.sbl.mp</groupId>
 	<artifactId>mp</artifactId>
 	<version>1</version>
 	<packaging>war</packaging>
@@ -34,8 +34,9 @@
 		</dependency>
 		<!-- JSTL -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
+			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
+			<version>1.2</version>
 		</dependency>
 		<!-- SQL 로거 -->
 		<dependency>

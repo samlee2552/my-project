@@ -1,5 +1,6 @@
 package com.sbs.sbl.mp.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.sbl.mp.dto.Article;
 import com.sbs.sbl.mp.dto.Member;
@@ -304,11 +306,18 @@ public class MemberController {
 	}
 	
 	@RequestMapping("editProfileText")
-	public String editProfileText(@RequestParam Map<String, Object> param, String profile_text, HttpServletRequest req) {
+	public String editProfileText(String redirectUri, String profile_text, HttpServletRequest req) {
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		memberService.updateProfileText(profile_text, loginedMemberId);
-		String redirectUri = (String) param.get("redirectUri");
-		System.out.println(redirectUri);
 		return "redirect:" + redirectUri;
+	}
+	
+	@RequestMapping("editProfileTextAjax")
+	@ResponseBody
+	public ResultData editProfileTextAjax(String redirectUri, String profile_text, HttpServletRequest req) {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		memberService.updateProfileText(profile_text, loginedMemberId);
+		
+		return new ResultData("S-1", "asd");
 	}
 }

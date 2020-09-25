@@ -192,11 +192,11 @@ table {
 <!-- edit profile text modal -->
 
 
+<form method="POST" action="" id="edit_profile_text_form">
 <div class="modal fade" id="edit_profile_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <form method="POST" action="editProfileText">
         <input type="hidden" name="redirectUri"	value="/usr/member/profile?memberId=${loginedMemberId}" />
           <div class="form-group">
             <label for="profile-text" class="col-form-label sr-only">
@@ -208,24 +208,35 @@ table {
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
         <button type="submit" class="btn btn-primary">수정</button>
-	      </form>
       </div>
     </div>
   </div>
 </div>
-
+</form>
 
 <script>
-$('#edit_profile_modal').on('show.bs.modal', function (event) {
-	  var button = $(event.relatedTarget) // Button that triggered the modal
-	  var recipient = button.data('whatever') // Extract info from data-* attributes
-	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-	  var modal = $(this)
-	  modal.find('.modal-title').text('New message to ' + recipient)
-	  modal.find('.modal-body input').val(recipient)
-	})
+
+$(function sumbit_edit_form() {
+
+    $('#edit_profile_text_form').submit(function() {
+        $.ajax({
+            type: "POST",
+            url: "../member/editProfileTextAjax",
+            data: $('form').serialize(),
+            success: function(response) {
+                alert('수정되었습니다');
+            },
+            error: function() {
+                alert('Error');
+            }
+        });
+        return false;
+    });
+});
+
 </script>
+
+
 
 
 <!-- gallery -->

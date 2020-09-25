@@ -50,6 +50,9 @@ custom:
   logoText: PET FLICK
   emailFrom: no-reply@petflick.site
   emailFromName: PET FLICK
+  logging:
+    dir: log
+    level: info
 
 ---
 
@@ -70,3 +73,7 @@ spring:
     password: sbs123414
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/mp?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+custom:
+  logging:
+    dir: /tmp/mp-log
+    level: info

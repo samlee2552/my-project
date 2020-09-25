@@ -138,6 +138,7 @@ public class MemberService {
 	}
 
 	public void updateProfileText(String profile_text, int memberId) {
+	
 		memberDao.updateProfileText(profile_text, memberId);
 	}
 
