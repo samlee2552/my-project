@@ -248,7 +248,8 @@ public class MemberController {
 			}
 		}
 		// 중복검사 끝
-
+		// 권한 검사
+		
 		memberService.modify(param);
 
 		String redirectUri = (String) param.get("redirectUri");
@@ -311,23 +312,26 @@ public class MemberController {
 		return "redirect:" + redirectUri;
 	}
 	
-	@RequestMapping("editProfileTextAjax")
+	@RequestMapping("modifyProfileTextAjax")
 	@ResponseBody
-	public ResultData editProfileTextAjax(String redirectUri, String profile_text, HttpServletRequest req) {
+	public ResultData modifyProfileTextAjax(@RequestParam Map<String, Object> param, HttpServletRequest req) {
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
-		memberService.updateProfileText(profile_text, loginedMemberId);
+		String newProfile_text = memberService.getMemberById(loginedMemberId).getProfile_text();
 		
+		Map<String, Object> modfiyProfileTextParam = Util.getNewMapOf(param, "id", "body");
+		ResultData rd = memberService.updateProfileText(profile_text, loginedMemberId);
 		return new ResultData("S-1", "asd");
+		return rd;
 	}
 	
 	@RequestMapping("getNewProfileText")
 	@ResponseBody
-	public ResultData getNewProfileText(String redirectUri, String profile_text, HttpServletRequest req) {
+	public String getNewProfileText(String redirectUri, String profile_text, HttpServletRequest req) {
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		Member member = memberService.getMemberById(loginedMemberId);
 		String rsDataBody = member.getProfile_text();
 		
-		return new ResultData("S-1", "", rsDataBody);
+		return rsDataBody;
 	}
 	
 	

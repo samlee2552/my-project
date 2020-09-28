@@ -202,7 +202,7 @@ table {
 		<form method="POST" action="" id="edit_profile_text_form">
         <input type="hidden" name="redirectUri"	value="/usr/member/profile?memberId=${loginedMemberId}" />
           <div class="form-group">
-            <label for="profile-text" class="col-form-label sr-only">
+            <label for="profile-text" class="col-form-label sr-only" id="profile_text">
               profile_text
             </label>
             <textarea class="form-control" id="message-text" placeholder="본인을 소개해주세요!" name="profile_text">${member.profile_text}</textarea>
@@ -228,7 +228,7 @@ $(function sumbit_edit_form() {
             url: "../member/editProfileTextAjax",
             data: $('form').serialize(),
             success: function(response) {
-            	window.location.reload();
+            	
             },
             error: function() {
                 alert('Error');
@@ -237,6 +237,27 @@ $(function sumbit_edit_form() {
         $('#edit_profile_modal').modal('hide'); //or  $('#IDModal').modal('hide');
         return false;
     });
+
+
+	$.ajax({
+        url: "../member/getNewProfileText",
+        data: {
+            txtsearch: $('#profile_text').val()
+        },
+        type: "GET",
+        dataType : "html",
+        success: function( data ) {
+            $('#profile_text').replaceWith($('#profile_text').json(data));
+        },
+        error: function( json, status ) {
+        alert( "Sorry, there was a problem!" );
+        },
+        complete: function( json, status ) {
+            //$('#showresults').slideDown('slow')
+        }
+        });
+    });
+
 });
 
 </script>

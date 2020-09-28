@@ -37,4 +37,6 @@ public interface MemberDao {
 
 	Member getMemberByNickname(@Param("nickname") String nickname);
 
+	String getProfile_textByMemberId(@Param("memberId") int memberId);
+
 }

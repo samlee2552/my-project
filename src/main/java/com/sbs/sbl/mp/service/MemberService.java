@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sbs.sbl.mp.util.Util;
 import com.sbs.sbl.mp.dao.MemberDao;
 import com.sbs.sbl.mp.dto.Member;
+import com.sbs.sbl.mp.dto.Reply;
 import com.sbs.sbl.mp.dto.ResultData;
 
 @Service
@@ -119,6 +120,17 @@ public class MemberService {
 		}
 		return new ResultData("S-1", "등록 가능한 이메일입니다.");
 	}
+	
+	// 액터가 회원 정보를 수정 할 수 있는지 알려준다.	
+	public boolean actorCanModify(Member actor, Member loginedMember) {
+		return actor != null && actor.getId() == loginedMember.getId() ? true : false;
+	}
+
+	// 액터가 회원 정보를  삭제할 수 있는지 알려준다.
+	public boolean actorCanDelete(Member actor, Member loginedMember) {
+		return actorCanModify(actor, loginedMember);
+	}
+	
 
 	public int getCount(String loginId) {
 		return memberDao.getLoginIdCount(loginId);
@@ -142,9 +154,14 @@ public class MemberService {
 		return getMemberByEmail(email);
 	}
 
-	public void updateProfileText(String profile_text, int memberId) {
+	public ResultData updateProfileText(String profile_text, int memberId) {
 	
 		memberDao.updateProfileText(profile_text, memberId);
+		return new ResultData("S-1", "프로필 문구를 수정하였습니다.", param);
+	}
+
+	public String getProfile_textByMemberId(int memberId) {
+		return memberDao.getProfile_textByMemberId(memberId);
 	}
 
 }
