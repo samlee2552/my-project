@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.sbl.mp.dto.Article;
 import com.sbs.sbl.mp.dto.Member;
+import com.sbs.sbl.mp.dto.Reply;
 import com.sbs.sbl.mp.dto.ResultData;
 import com.sbs.sbl.mp.service.ArticleService;
 import com.sbs.sbl.mp.service.MemberService;
@@ -320,4 +321,16 @@ public class MemberController {
 		
 		return new ResultData("S-1", "asd");
 	}
+	
+	@RequestMapping("getNewProfileText")
+	@ResponseBody
+	public ResultData getNewProfileText(String redirectUri, String profile_text, HttpServletRequest req) {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		Member member = memberService.getMemberById(loginedMemberId);
+		String rsDataBody = member.getProfile_text();
+		
+		return new ResultData("S-1", "", rsDataBody);
+	}
+	
+	
 }

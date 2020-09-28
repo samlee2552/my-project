@@ -85,8 +85,8 @@
 	}
 </script>
 
-<h1>회원정보 수정</h1>
-<form class="table-box con form1" method="POST" action="doModify"
+<h1 class="d-flex justify-content-center">회원정보 수정</h1>
+<form class="table-box con form1 d-flex justify-content-center" method="POST" action="doModify"
 	onsubmit="MemberModifyForm__submit(this); return false;">
 	<input type="hidden" name="redirectUri" value="/usr/member/login">
 	<input type="hidden" name="loginPwReal">

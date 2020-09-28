@@ -68,6 +68,11 @@ public class MemberService {
 		return memberDao.getMemberById(id);
 	}
 
+	// 닉네임으로 멤버 찾기
+	public Member getMemberByNickname(String nickname) {
+		return memberDao.getMemberByNickname(nickname);
+	}
+	
 	// 로그인
 	public Member getMemberByLoginId(String loginId) {
 		return memberDao.getMemberByLoginId(loginId);

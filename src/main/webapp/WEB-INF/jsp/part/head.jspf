@@ -157,7 +157,7 @@ var param = ${paramJson};
 					<a class="dropdown-item" href="/usr/member/modify">회원정보 수정</a>
 					
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="/usr/member/profile?memberId=${loginedMemberId}">회원 프로필</a>
+					<a class="dropdown-item" href="/usr/member/profile?memberId=${loginedMemberId}">${loginedMember.nickname}'s 갤러리</a>
 					<div class="dropdown-divider"></div>
 					</c:if>
 					<c:if test="${isLogined == false}">

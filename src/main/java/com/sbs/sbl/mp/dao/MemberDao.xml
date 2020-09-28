@@ -10,6 +10,13 @@
 		id = #{id}
 	</select>
 	
+	<select id="getMemberByNickname" resultType="Member">
+		SELECT *
+		FROM member
+		WHERE
+		nickname = #{nickname}
+	</select>
+	
 	<select id="getMemberByEmail" resultType="Member">
 		SELECT *
 		FROM member

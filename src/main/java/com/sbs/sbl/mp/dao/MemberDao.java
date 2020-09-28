@@ -35,4 +35,6 @@ public interface MemberDao {
 
 	void updateProfileText(@Param("profile_text") String profile_text,@Param("id") int id);
 
+	Member getMemberByNickname(@Param("nickname") String nickname);
+
 }

@@ -5,7 +5,22 @@
 <c:set var="pageTitle" value="게시물 상세내용" />
 <%@ include file="../part/head.jspf"%>
 
-<div class="article-detail-box table-box table-box-vertical con">
+<style>
+.article-detail-box img, .article-detail-box video {
+  height:52vw;
+  width:auto;
+  max-height:500px;
+  max-width:auto;
+  object-fit:cover;
+  padding:7px 10px;
+  border-radius:0;
+
+}
+
+</style>
+
+
+<div class="article-detail-box table-box table-box-vertical con container">
 	<table>
 		<colgroup>
 			<col class="table-first-col">
@@ -51,7 +66,7 @@
 	</table>
 </div>
 
-<div class="btn-box con margin-top-20">
+<div class="btn-box con margin-top-20 container">
 	<c:if test="${article.extra.actorCanModify}">
 		<a class="btn btn-info" href="modify?id=${article.id}&listUrl=${Util.getUriEncoded(listUrl)}">수정</a>
 	</c:if>
@@ -63,7 +78,7 @@
 </div>
 
 <c:if test="${isLogined}">
-	<h2 class="con">댓글 작성</h2>
+	<h2 class="container">댓글 작성</h2>
 
 	<script>
 		function ArticleWriteReplyForm__submit(form) {
@@ -83,7 +98,7 @@
 		}
 	</script>
 
-	<form class="table-box con form1" action=""
+	<form class="table-box container form1" action=""
 		onsubmit="ArticleWriteReplyForm__submit(this); return false;">
 
 		<table>
@@ -107,9 +122,9 @@
 
 </c:if>
 
-<h2 class="con">댓글 리스트</h2>
+<h2 class="container">댓글 리스트</h2>
 
-<div class="reply-list-box table-box con">
+<div class="reply-list-box table-box container">
 	<table>
 		<colgroup>
 			<col width="80">

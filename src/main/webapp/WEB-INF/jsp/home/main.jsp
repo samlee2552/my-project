@@ -64,6 +64,9 @@ header .overlay {
       <div class="w-100 text-white">
         <h1 class="display-3">Welcome to PETFLICK!</h1>
         <p class="lead mb-0">당신의 반려 동물을 자랑해보세요!</p>
+        <br />
+        <br />
+        <p class="lead mb-0">이달의 인기 영상, 고양이's 냥펀치! by 쌤리</p>
       </div>
     </div>
   </div>
@@ -72,7 +75,7 @@ header .overlay {
 <section class="my-5">
   <div class="container">
     <div class="row">
-      <div class="col-md-8 mx-auto">
+      <div class="col-xs-8 mx-auto">
         <p>Welcome to PETFLICK!</p>
         <p>Flick your finger on the screen to check these adorable creatures!</p>
       </div>

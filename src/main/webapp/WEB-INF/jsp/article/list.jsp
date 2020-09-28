@@ -6,7 +6,7 @@
 <%@ include file="../part/head.jspf"%>
 
 <!-- PC용 -->
-<div class="table-box con visible-on-md-up">
+<div class="table-box con visible-on-md-up d-flex justify-content-center">
 	<div>게시판</div>
 	<table>
 		<colgroup>
@@ -25,11 +25,8 @@
 		<tbody>
 			<c:forEach items="${articles}" var="article">
 				<tr>
-					<td>${article.id}</td>
+					<td><a href="${article.getDetailLink(article.id)}">${article.id}</a></td>
 					<td>${article.regDate}</td>
-					<td>
-						<a href="${article.getDetailLink(article.id)}"></a>
-					</td>
 					<td>${article.body}</td>
 					<td>${article.extra.writer}</td>
 				</tr>

@@ -28,4 +28,8 @@ public class File {
 	private int fileNo;
 	private String fileExt;
 	private Map<String, Object> extra;
+
+	public String getDetailLink(int relId) {
+		return "/usr/article/detail?id=" + relId;
+	}
 }

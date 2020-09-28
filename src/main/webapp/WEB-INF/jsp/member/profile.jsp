@@ -115,7 +115,7 @@ table {
    <div class="row border-top p-1">
     <div class="col mobile-profile-text mb-1">
       <span>
-      ${member.profile_text} <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">
+      ${member.profile_text} <button type="button" class="btn btn-light" data-toggle="modal" data-target="#edit_profile_modal">
   <i class="fas fa-pen fa-sm"></i>
 </button>      
       </span>
@@ -192,11 +192,11 @@ table {
 <!-- edit profile text modal -->
 
 
-<form method="POST" action="" id="edit_profile_text_form">
 <div class="modal fade" id="edit_profile_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
+		<form method="POST" action="" id="edit_profile_text_form">
         <input type="hidden" name="redirectUri"	value="/usr/member/profile?memberId=${loginedMemberId}" />
           <div class="form-group">
             <label for="profile-text" class="col-form-label sr-only">
@@ -207,16 +207,17 @@ table {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-        <button type="submit" class="btn btn-primary">수정</button>
+        <button type="submit" class="btn btn-primary" >수정</button>
+		</form>
       </div>
     </div>
   </div>
 </div>
-</form>
 
 <script>
 
 $(function sumbit_edit_form() {
+	
 
     $('#edit_profile_text_form').submit(function() {
         $.ajax({
@@ -224,12 +225,13 @@ $(function sumbit_edit_form() {
             url: "../member/editProfileTextAjax",
             data: $('form').serialize(),
             success: function(response) {
-                alert('수정되었습니다');
+            	window.location.reload();
             },
             error: function() {
                 alert('Error');
             }
         });
+        $('#edit_profile_modal').modal('hide'); //or  $('#IDModal').modal('hide');
         return false;
     });
 });
@@ -249,9 +251,10 @@ $(function sumbit_edit_form() {
 				<c:set var="file" value="${article.extra.file__common__attachment[fileNo]}" />
 				<c:if test="${file != null}">
 					 <div class="col-4-sm ">
+					 <a href="${file.getDetailLink(file.relId)}">
 							<c:if test="${file.fileExtTypeCode == 'video'}">
 								<div class="video-box position-relative ">
-									<video src="/usr/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}"></video>
+								<video src="/usr/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}"></video>
 									<span class="position-absolute vid-icon"><i class="fas fa-video"></i></span>
 								</div>
 							</c:if>
@@ -260,6 +263,7 @@ $(function sumbit_edit_form() {
 									<img src="/usr/file/img?id=${file.id}&updateDate=${file.updateDate}" alt="" />
 								</div>
 							</c:if>
+						</a>
 					</div>
 				</c:if>
 			</c:forEach>
