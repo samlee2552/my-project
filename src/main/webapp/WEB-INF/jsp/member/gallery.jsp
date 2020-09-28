@@ -115,9 +115,10 @@ table {
    <div class="row border-top p-1">
     <div class="col mobile-profile-text mb-1">
       <span>
+      <c:if test="${loginedMemberId == member.id}"> <!-- 본인에게만 수정 아이콘 보이게  -->
       ${member.profile_text} <button type="button" class="btn btn-light" data-toggle="modal" data-target="#edit_profile_modal">
   <i class="fas fa-pen fa-sm"></i>
-</button>      
+</button></c:if>      
       </span>
 
     </div>
@@ -181,9 +182,11 @@ table {
       <tr>
         <td colspan="12" class="text-left border-top">
         		<span>${member.profile_text}</span>
+        		<c:if test="${loginedMemberId == member.id}">
 				<button type="button" class="btn btn-light" data-toggle="modal" data-target="#edit_profile_modal">
   					<i class="fas fa-pen fa-sm"></i>
 				</button>
+				</c:if>
         </td>     
       </tr>
     </tbody>
@@ -254,7 +257,7 @@ $(function sumbit_edit_form() {
 					 <a href="${file.getDetailLink(file.relId)}">
 							<c:if test="${file.fileExtTypeCode == 'video'}">
 								<div class="video-box position-relative ">
-								<video src="/usr/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}"></video>
+								<video src="/usr/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}#t=0.5" preload="metadata"></video>
 									<span class="position-absolute vid-icon"><i class="fas fa-video"></i></span>
 								</div>
 							</c:if>

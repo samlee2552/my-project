@@ -48,6 +48,11 @@
 
 
 <style>
+
+body {
+	background:#FAFAFA;
+}
+
 .navbar-nav>li {
 	padding-left: 20px;
 	padding-right: 20px;
@@ -77,6 +82,8 @@ nav {
 .navbar-brand {
   padding:0;
 }
+
+
 </style>
 
 <%="<script>"%>
@@ -88,11 +95,11 @@ var param = ${paramJson};
 
 </head>
 <body>
-<nav
-	class="navbar navbar-expand-lg navbar-light bg-light container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light bg-light container-fluid">
 	<a class="navbar-brand" href="/usr/home/main"><img
 		src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FN9r0U%2FbtqIS5kwoRk%2FSuy31jwX2lgyfGXtRFdk61%2Fimg.png"
 		height="45"></a>
+		<!-- 모바일 토글 버튼 -->
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
 		aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -157,7 +164,7 @@ var param = ${paramJson};
 					<a class="dropdown-item" href="/usr/member/modify">회원정보 수정</a>
 					
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="/usr/member/profile?memberId=${loginedMemberId}">${loginedMember.nickname}'s 갤러리</a>
+					<a class="dropdown-item" href="/usr/member/gallery?memberId=${loginedMemberId}">${loginedMember.nickname}'s 갤러리</a>
 					<div class="dropdown-divider"></div>
 					</c:if>
 					<c:if test="${isLogined == false}">

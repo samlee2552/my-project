@@ -1,6 +1,5 @@
 package com.sbs.sbl.mp.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.sbl.mp.dto.Article;
 import com.sbs.sbl.mp.dto.Member;
-import com.sbs.sbl.mp.dto.Reply;
 import com.sbs.sbl.mp.dto.ResultData;
 import com.sbs.sbl.mp.service.ArticleService;
 import com.sbs.sbl.mp.service.MemberService;
@@ -293,8 +291,8 @@ public class MemberController {
 	//프로필 관련 ==============================================================
 	
 	
-	@RequestMapping("profile")
-	public String showProfile(@RequestParam Map<String, Object> param, Model model, HttpServletRequest req) {
+	@RequestMapping("gallery")
+	public String showGallery(@RequestParam Map<String, Object> param, Model model, HttpServletRequest req) {
 		int memberId = Integer.parseInt((String) param.get("memberId")); 
 		
 		Member member = memberService.getMemberById(memberId);
@@ -303,7 +301,7 @@ public class MemberController {
 		
 		model.addAttribute("member", member);
 		model.addAttribute("articles", articles);
-		return "member/profile";
+		return "member/gallery";
 	}
 	
 	@RequestMapping("editProfileText")
