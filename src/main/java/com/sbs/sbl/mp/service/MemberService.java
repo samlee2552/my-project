@@ -154,10 +154,8 @@ public class MemberService {
 		return getMemberByEmail(email);
 	}
 
-	public ResultData updateProfileText(String profile_text, int memberId) {
-	
+	public void updateProfileText(String profile_text, int memberId) {
 		memberDao.updateProfileText(profile_text, memberId);
-		return new ResultData("S-1", "프로필 문구를 수정하였습니다.", param);
 	}
 
 	public String getProfile_textByMemberId(int memberId) {

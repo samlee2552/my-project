@@ -1,11 +1,76 @@
 <%@ page import="com.sbs.sbl.mp.util.Util"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="게시물 상세내용" />
-<%@ include file="../part/head.jspf"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<!-- 모바일에서 사이트가 PC에서의 픽셀크기 기준으로 작동하게 하기(반응형 하려면 필요) -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- 구글 폰트 불러오기 -->
+<!-- rotobo(400/700/900), notosanskr(400/600/900) 	-->
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Roboto:wght@400;700&display=swap"
+	rel="stylesheet">
+
+<!-- 폰트어썸 불러오기 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+
+
+<!-- 제이쿼리 불러오기 -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- 공통(라이브러리) CSS -->
+<link rel="stylesheet" href="/resource/common.css" />
+
+<!-- 공통(라이브러리) JS -->
+<script src="/resource/common.js"></script>
+
+<!-- 공통 JS -->
+<script src="/resource/app.js"></script>
+<!-- bootstrap css 
+<link rel="stylesheet" href="/resource/bootstrap.css" />
+-->
+
+<!-- boostrap JS -->
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+	integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+	crossorigin="anonymous"></script>
+	
+<!-- bootstrap css -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 <style>
+
+body {
+	background:#FAFAFA;
+}
+
+/* input focus outline override */
+textarea:focus, 
+textarea.form-control:focus, 
+input.form-control:focus, 
+input[type=text]:focus, 
+input[type=password]:focus, 
+input[type=email]:focus, 
+input[type=number]:focus, 
+[type=text].form-control:focus, 
+[type=password].form-control:focus, 
+[type=email].form-control:focus, 
+[type=tel].form-control:focus, 
+[contenteditable].form-control:focus {
+  box-shadow: inset 0 0 0 0 #162739;
+}
+
+
 .article-detail-box img, .article-detail-box video {
   height:52vw;
   width:auto;
@@ -14,10 +79,38 @@
   object-fit:cover;
   padding:7px 10px;
   border-radius:0;
-
 }
 
+.reply-modify-form-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	display: none;
+}
+.reply-modify-form-modal-actived .reply-modify-form-modal
+	{
+	display: flex;
+}
+
+
 </style>
+
+<%="<script>"%>
+var activeProfile = '${activeProfile}';
+<%="</script>"%>
+<%="<script>"%>
+var param = ${paramJson};
+<%="</script>"%>
+
+
+</head>
+
+
+
+
 
 
 <div class="article-detail-box table-box table-box-vertical con container">
@@ -148,41 +241,39 @@
 	</table>
 </div>
 
-<style>
-.reply-modify-form-modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.4);
-	display: none;
-}
-.reply-modify-form-modal-actived .reply-modify-form-modal
-	{
-	display: flex;
-}
-</style>
 
-<div class="reply-modify-form-modal container" style="margin-top:100px">
-	<form action="" class="form1 bg-white padding-10"
-		onsubmit="ReplyList__submitModifyForm(this); return false;">
-		<input type="hidden" name="id" />
-		<div class="form-row">
-			<div class="form-control-label">내용</div>
-			<div class="form-control-box">
-				<textarea name="body" placeholder="내용을 입력해주세요."></textarea>
-			</div>
-		</div>
-		<div class="form-row">
-			<div class="form-control-label">수정</div>
-			<div class="form-control-box">
-				<button type="submit">수정</button>
-				<button type="button"
-					onclick="ReplyList__hideModifyFormModal();">취소</button>
-			</div>
-		</div>
-	</form>
+
+<div class="popup-1 reply-modify-form-modal">
+	<div>
+		<h1>댓글 수정</h1>
+		<form action="" class="form1 padding-10 table-box table-box-vertical" onsubmit="ReplyList__submitModifyForm(this); return false;">
+			<input type="hidden" name="id" />
+			<table>
+				<colgroup>
+					<col class="table-first-col">
+				</colgroup>
+				<tbody>
+					<tr>
+						<th>내용</th>
+						<td>
+							<div class="form-control-box">
+								<textarea name="body" placeholder="내용을 입력해주세요."></textarea>
+							</div>
+						</td>
+					</tr>
+
+					<tr class="tr-do">
+						<th>수정</th>
+						<td>
+							<button class="btn btn-primary" type="submit">수정</button>
+							<button class="btn btn-info" type="button" onclick="ReplyList__hideModifyFormModal();">취소</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</form>
+	</div>
 </div>
 
 <script>
@@ -215,7 +306,7 @@
 				$tr.empty().append(body);
 			}
 			ReplyList__hideModifyFormModal();
-			ReplyList__submitModifyFormDone = false;
+			ReplyList__submitModifyFormDone = true;
 		}, 'json');
 	}
 	function ReplyList__showModifyFormModal(el) {
@@ -282,6 +373,4 @@
 		ReplyList__$tbody.prepend($tr);
 	}
 	ReplyList__loadMore();
-</script>
-
-<%@ include file="../part/foot.jspf"%> 
+</script> 

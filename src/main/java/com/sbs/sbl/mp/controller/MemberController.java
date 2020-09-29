@@ -305,34 +305,13 @@ public class MemberController {
 		return "member/gallery";
 	}
 	
-	@RequestMapping("editProfileText")
-	public String editProfileText(String redirectUri, String profile_text, HttpServletRequest req) {
+	@RequestMapping("editProfileTextAjax")
+	@ResponseBody
+	public ResultData editProfileTextAjax(String profile_text, HttpServletRequest req) {
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		memberService.updateProfileText(profile_text, loginedMemberId);
-		return "redirect:" + redirectUri;
-	}
-	
-	@RequestMapping("modifyProfileTextAjax")
-	@ResponseBody
-	public ResultData modifyProfileTextAjax(@RequestParam Map<String, Object> param, HttpServletRequest req) {
-		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
-		String newProfile_text = memberService.getMemberById(loginedMemberId).getProfile_text();
 		
-		Map<String, Object> modfiyProfileTextParam = Util.getNewMapOf(param, "id", "body");
-		ResultData rd = memberService.updateProfileText(profile_text, loginedMemberId);
-		return new ResultData("S-1", "asd");
-		return rd;
+		return new ResultData("S-1", "");
 	}
-	
-	@RequestMapping("getNewProfileText")
-	@ResponseBody
-	public String getNewProfileText(String redirectUri, String profile_text, HttpServletRequest req) {
-		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
-		Member member = memberService.getMemberById(loginedMemberId);
-		String rsDataBody = member.getProfile_text();
-		
-		return rsDataBody;
-	}
-	
 	
 }

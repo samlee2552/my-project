@@ -33,9 +33,11 @@
 	margin: 0 auto;
 	border-radius: 1rem;
 }
+
 .form-signin .checkbox {
 	font-weight: 400;
 }
+
 .form-signin .form-control {
 	position: relative;
 	box-sizing: border-box;
@@ -43,51 +45,57 @@
 	padding: 10px;
 	font-size: 14px;
 }
+
 .form-signin .form-control:focus {
 	z-index: 2;
 }
+
 .form-signin input {
 	margin-bottom: 20px;
 	border-radius: 1rem;
 }
-.btn {
-	border-radius: 1rem;
-}
+
 .checkbox>label {
 	margin-right: 45%;
 }
+
 span {
 	font-size: 12px;
 }
+
 #text {
 	margin-top: 30%;
 }
+
 h3 {
 	background: linear-gradient(to right, #5f2c82, #49a09d);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
+
 .checkbox {
 	font-size: 14px;
 }
 
 .input-group-text {
-  border-radius:1rem;
-  background:inherit;
+	border-radius: 1rem;
+	background: inherit;
 }
 
 i {
-  color:#AEB6BF;
+	color: #AEB6BF;
 }
 
+.form-signin > .btn {
+	border-radius: 1rem;
+}
 </style>
 
 <!--  -->
 <div class="container">
 	<div class="row">
 		<div class="col d-none d-sm-block">
-			<img id="text" class="mb-5"
-				src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc1SgIK%2FbtqIOnGsacc%2FKNPfUEarGV1n8lwYhDQHsk%2Fimg.png"
+			<img id="text" class="mb-5" src="/resource/img/logo-lg.png"
 				width="100%" alt="">
 			<h3 class="font-weight-bold">당신의 반려동물이 그렇게 귀엽다면서요?</h3>
 			&nbsp
@@ -98,31 +106,33 @@ i {
 				action="doLogin"
 				onsubmit="MemberLoginForm__submit(this); return false;">
 				<input type="hidden" name="redirectUri" value="/usr/home/main">
-				<input type="hidden" name="loginPwReal"> 
-				<img class="mb-4 mt-2 shadow-sm rounded-circle"
+				<input type="hidden" name="loginPwReal"> <img
+					class="mb-4 mt-2 shadow-sm rounded-circle"
 					src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkTvFl%2FbtqIVHwUIcT%2FI2ZkRU3ekXkUgSdwtbikZ0%2Fimg.png"
 					alt="" width="200">
 				<h1 class="h3 mb-3 font-weight-normal">로그인</h1>
 				<label for="loginId" class="sr-only">아이디</label>
-          <div class="input-group mb-4">
-            <div class="input-group-prepend ">
-              <div class="input-group-text">
-                  <i class="fas fa-user"></i>          
-              </div>
-            </div>
-					<input type="text" id="inputLoginId" class="form-control border-left-0" placeholder="아이디"
-					name="loginId" maxlength="20" required autofocus> 
-          </div>
+				<div class="input-group mb-4">
+					<div class="input-group-prepend ">
+						<div class="input-group-text">
+							<i class="fas fa-user"></i>
+						</div>
+					</div>
+					<input type="text" id="inputLoginId"
+						class="form-control border-left-0" placeholder="아이디"
+						name="loginId" maxlength="20" required autofocus>
+				</div>
 				<label for="loginPw" class="sr-only">비밀번호</label>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend ">
-              <div class="input-group-text">
-                <i class="fas fa-key"></i>   
-              </div>
-            </div>
-					<input type="password" id="inputPassword" class="form-control border-left-0" name="loginPw"
-					maxlength="20" placeholder="비밀번호" required>
-            </div>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend ">
+						<div class="input-group-text">
+							<i class="fas fa-key"></i>
+						</div>
+					</div>
+					<input type="password" id="inputPassword"
+						class="form-control border-left-0" name="loginPw" maxlength="20"
+						placeholder="비밀번호" required>
+				</div>
 				<div class="checkbox">
 					<label class="text-muted"> <input type="checkbox" value="">
 						로그인 상태 유지

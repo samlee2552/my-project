@@ -50,9 +50,6 @@
 	margin-bottom: 20px;
 	border-radius: 1rem;
 }
-.btn {
-	border-radius: 1rem;
-}
 
 span {
 	font-size: 12px;
@@ -78,6 +75,9 @@ i {
   color:#AEB6BF;
 }
 
+.form-findLoginPw >.btn {
+	border-radius: 1rem;
+}
 
 </style>
 
@@ -85,7 +85,7 @@ i {
 	<div class="row">
 		<div class="col d-none d-sm-block">
 			<img id="text" class="mb-5"
-				src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc1SgIK%2FbtqIOnGsacc%2FKNPfUEarGV1n8lwYhDQHsk%2Fimg.png"
+				src="/resource/img/logo-lg.png"
 				width="100%" alt="">
 			<h3 class="font-weight-bold">WHAT!? 비밀번호를 잊으셨다고요?</h3>
 			&nbsp

@@ -46,7 +46,6 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
-
 <style>
 
 body {
@@ -77,12 +76,28 @@ nav {
     top: 0px;
     border-bottom: 1px solid #dcdcdc;
     padding: 2px 16px; 
+    background:white;
 }
 
 .navbar-brand {
   padding:0;
 }
 
+/* input focus outline override */
+textarea:focus, 
+textarea.form-control:focus, 
+input.form-control:focus, 
+input[type=text]:focus, 
+input[type=password]:focus, 
+input[type=email]:focus, 
+input[type=number]:focus, 
+[type=text].form-control:focus, 
+[type=password].form-control:focus, 
+[type=email].form-control:focus, 
+[type=tel].form-control:focus, 
+[contenteditable].form-control:focus {
+  box-shadow: inset 0 0 0 0 #162739;
+}
 
 </style>
 
@@ -95,9 +110,9 @@ var param = ${paramJson};
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light container-fluid">
 	<a class="navbar-brand" href="/usr/home/main"><img
-		src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FN9r0U%2FbtqIS5kwoRk%2FSuy31jwX2lgyfGXtRFdk61%2Fimg.png"
+		src="/resource/img/logo-lg.png"
 		height="45"></a>
 		<!-- 모바일 토글 버튼 -->
 	<button class="navbar-toggler" type="button" data-toggle="collapse"

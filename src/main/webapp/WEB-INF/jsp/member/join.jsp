@@ -82,8 +82,8 @@
 			alert('휴대폰번호를 10자 이상 입력해주세요.');
 			return;
 		}
-		*/
-		
+		 */
+
 		form.loginPwReal.value = sha256(form.loginPw.value);
 		form.loginPw.value = '';
 		form.loginPwConfirm.value = '';
@@ -91,7 +91,6 @@
 		form.submit();
 		MemberJoinForm__submitDone = true;
 	}
-
 </script>
 
 <style>
@@ -100,7 +99,6 @@
 	max-width: 330px;
 	padding: 30px;
 	margin: 0 auto;
-	
 	border-radius: 1rem;
 }
 
@@ -124,10 +122,6 @@
 	border-radius: 1rem;
 }
 
-.btn {
-	border-radius: 1rem;
-}
-
 .checkbox>label {
 	margin-right: 40%;
 }
@@ -137,143 +131,144 @@ span {
 }
 
 #text {
-  margin-top:30%;
+	margin-top: 30%;
 }
 
 h3 {
-background: linear-gradient(to right, #5f2c82, #49a09d);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+	background: linear-gradient(to right, #5f2c82, #49a09d);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 .input-group-text {
-  border-radius:1rem;
-  background:inherit;
+	border-radius: 1rem;
+	background: inherit;
 }
 
 i {
-  color:#AEB6BF;
+	color: #AEB6BF;
 }
 
-
+.form-signup >.btn {
+	border-radius: 1rem;
+}
 </style>
 
 <!--  -->
 <div class="container">
-  <div class="row">
-    <div class="col d-none d-sm-block">
-      <img id="text" class="mb-5" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc1SgIK%2FbtqIOnGsacc%2FKNPfUEarGV1n8lwYhDQHsk%2Fimg.png" width="100%" alt="">
-      <h3 class="font-weight-bold">당신의 반려동물이 그렇게 귀엽다면서요?</h3>
-      &nbsp 
-      <h3 class="font-weight-bold">전세계에 있는 사람들에게 자랑해보세요!</h3>
-    </div>
-    <div class="col">
-      <form class="form-signup text-center shadow" method="POST"
-		action="doJoin"
-		onsubmit="MemberJoinForm__submit(this); return false;">
-  
-		<input type="hidden" name="redirectUri" value="/usr/member/login">
-		<input type="hidden" name="loginPwReal"> <img
-			class="mb-4 mt-2 shadow-sm rounded-circle"
-			src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkTvFl%2FbtqIVHwUIcT%2FI2ZkRU3ekXkUgSdwtbikZ0%2Fimg.png"
-			alt="" width="100">
-		<h1 class="h3 mb-3 font-weight-normal">회원가입</h1>
-		<label for="loginId" class="sr-only">아이디</label>
-      <div class="input-group mb-3">
-            <div class="input-group-prepend ">
-              <div class="input-group-text ">
-                <i class="fas fa-user"></i>    
-              </div>
-            </div>
-				      <input type="text" id="inputEmail" class="form-control border-left-0" placeholder="아이디" name="loginId"
-			maxlength="20" required autofocus>
-            </div>
-       
-    <label for="loginPw"
-			class="sr-only">비밀번호</label>
-      <div class="input-group mb-3">
-            <div class="input-group-prepend ">
-              <div class="input-group-text ">
-                <i class="fas fa-key"></i> 
-              </div>
-            </div>
-				       <input type="password" id="inputPassword"
-			class="form-control border-left-0" name="loginPw" maxlength="20" placeholder="비밀번호"
-			required>
-            </div>
-     
-    <label for="loginPwConfirm"
-			class="sr-only">비밀번호 확인</label>
-      <div class="input-group mb-3">
-            <div class="input-group-prepend ">
-              <div class="input-group-text ">
-                <i class="fas fa-lock "></i>      
-              </div>
-            </div>
-				      <input type="password" id="inputPassword"
-			class="form-control border-left-0" name="loginPwConfirm" maxlength="20" placeholder="비밀번호 확인"
-			required>
-            </div>
-      
-      <label for="name" class="sr-only">이름</label>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend ">
-              <div class="input-group-text ">
-                <i class="fas fa-id-badge"></i>   
-              </div>
-            </div>
-				       <input type="text"
-			id="inputName" class="form-control border-left-0" placeholder="이름" name="name"
-			maxlength="20" required>
-            </div>
-       
-      <label for="nickname" class="sr-only">닉네임</label>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend ">
-              <div class="input-group-text ">
-                <i class="far fa-user"></i>   
-              </div>
-            </div>
-				       <input type="text"
-			id="inpuNickname" class="form-control border-left-0" placeholder="닉네임" name="nickname"
-			maxlength="20" required>
-            </div>
-       
-      <label for="email" class="sr-only">이메일</label>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend ">
-              <div class="input-group-text ">
-               <i class="fas fa-envelope"></i>    
-              </div>
-            </div>
-				      <input type="email"
-			id="inpuNickname" class="form-control border-left-0" placeholder="이메일" name="email"
-			maxlength="20" required>
-            </div>
-        
-      <label for="cellphoneNo" class="sr-only">전화번호</label>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend ">
-              <div class="input-group-text ">
-                <i class="fas fa-mobile-alt"></i>    
-              </div>
-            </div>
-				      <input type="tel"
-			id="inpuNickname" class="form-control border-left-0" placeholder="전화번호 (선택사항)" name="cellphoneNo"
-			maxlength="11">
-            </div>
-        
-		<div class="checkbox">
+	<div class="row">
+		<div class="col d-none d-sm-block">
+			<img id="text" class="mb-5" src="/resource/img/logo-lg.png"
+				width="100%" alt="">
+			<h3 class="font-weight-bold">당신의 반려동물이 그렇게 귀엽다면서요?</h3>
+			&nbsp
+			<h3 class="font-weight-bold">전세계에 있는 사람들에게 자랑해보세요!</h3>
 		</div>
-		<button class="btn btn-lg btn-primary btn-block mb-3" type="submit">회원가입</button>
-	
-		<div id="extra">
-			<span class="text-muted">PETFLICK 회원이신가요?</span> 
-			<span><a href="/usr/member/join" class=""> 로그인하러 가기</a></span> 
+		<div class="col">
+			<form class="form-signup text-center shadow" method="POST"
+				action="doJoin"
+				onsubmit="MemberJoinForm__submit(this); return false;">
+
+				<input type="hidden" name="redirectUri" value="/usr/member/login">
+				<input type="hidden" name="loginPwReal"> <img
+					class="mb-4 mt-2 shadow-sm rounded-circle"
+					src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkTvFl%2FbtqIVHwUIcT%2FI2ZkRU3ekXkUgSdwtbikZ0%2Fimg.png"
+					alt="" width="100">
+				<h1 class="h3 mb-3 font-weight-normal">회원가입</h1>
+				<label for="loginId" class="sr-only">아이디</label>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend ">
+						<div class="input-group-text ">
+							<i class="fas fa-user"></i>
+						</div>
+					</div>
+					<input type="text" id="inputEmail"
+						class="form-control border-left-0" placeholder="아이디"
+						name="loginId" maxlength="20" required autofocus>
+				</div>
+
+				<label for="loginPw" class="sr-only">비밀번호</label>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend ">
+						<div class="input-group-text ">
+							<i class="fas fa-key"></i>
+						</div>
+					</div>
+					<input type="password" id="inputPassword"
+						class="form-control border-left-0" name="loginPw" maxlength="20"
+						placeholder="비밀번호" required>
+				</div>
+
+				<label for="loginPwConfirm" class="sr-only">비밀번호 확인</label>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend ">
+						<div class="input-group-text ">
+							<i class="fas fa-lock "></i>
+						</div>
+					</div>
+					<input type="password" id="inputPassword"
+						class="form-control border-left-0" name="loginPwConfirm"
+						maxlength="20" placeholder="비밀번호 확인" required>
+				</div>
+
+				<label for="name" class="sr-only">이름</label>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend ">
+						<div class="input-group-text ">
+							<i class="fas fa-id-badge"></i>
+						</div>
+					</div>
+					<input type="text" id="inputName"
+						class="form-control border-left-0" placeholder="이름" name="name"
+						maxlength="20" required>
+				</div>
+
+				<label for="nickname" class="sr-only">닉네임</label>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend ">
+						<div class="input-group-text ">
+							<i class="far fa-user"></i>
+						</div>
+					</div>
+					<input type="text" id="inpuNickname"
+						class="form-control border-left-0" placeholder="닉네임"
+						name="nickname" maxlength="20" required>
+				</div>
+
+				<label for="email" class="sr-only">이메일</label>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend ">
+						<div class="input-group-text ">
+							<i class="fas fa-envelope"></i>
+						</div>
+					</div>
+					<input type="email" id="inpuNickname"
+						class="form-control border-left-0" placeholder="이메일" name="email"
+						maxlength="20" required>
+				</div>
+
+				<label for="cellphoneNo" class="sr-only">전화번호</label>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend ">
+						<div class="input-group-text ">
+							<i class="fas fa-mobile-alt"></i>
+						</div>
+					</div>
+					<input type="tel" id="inpuNickname"
+						class="form-control border-left-0" placeholder="전화번호 (선택사항)"
+						name="cellphoneNo" maxlength="11">
+				</div>
+
+				<div class="checkbox"></div>
+				<button class="btn btn-lg btn-primary btn-block mb-3" type="submit">회원가입</button>
+
+				<div id="extra">
+					<span class="text-muted">PETFLICK 회원이신가요?</span> <span><a
+						href="/usr/member/join" class=""> 로그인하러 가기</a></span>
+				</div>
+			</form>
 		</div>
-	</form>
-    </div>
-  </div>
+	</div>
 </div>
 
 <!-- 

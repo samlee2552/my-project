@@ -199,7 +199,7 @@ table {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-		<form method="POST" action="" id="edit_profile_text_form">
+		<form method="" action="" id="edit_profile_text_form">
         <input type="hidden" name="redirectUri"	value="/usr/member/profile?memberId=${loginedMemberId}" />
           <div class="form-group">
             <label for="profile-text" class="col-form-label sr-only" id="profile_text">
@@ -221,49 +221,24 @@ table {
 
 $(function sumbit_edit_form() {
 	
-
     $('#edit_profile_text_form').submit(function() {
         $.ajax({
             type: "POST",
             url: "../member/editProfileTextAjax",
             data: $('form').serialize(),
             success: function(response) {
-            	
+            	window.location.reload();
             },
             error: function() {
                 alert('Error');
             }
         });
-        $('#edit_profile_modal').modal('hide'); //or  $('#IDModal').modal('hide');
+         //or  $('#IDModal').modal('hide');
         return false;
     });
-
-
-	$.ajax({
-        url: "../member/getNewProfileText",
-        data: {
-            txtsearch: $('#profile_text').val()
-        },
-        type: "GET",
-        dataType : "html",
-        success: function( data ) {
-            $('#profile_text').replaceWith($('#profile_text').json(data));
-        },
-        error: function( json, status ) {
-        alert( "Sorry, there was a problem!" );
-        },
-        complete: function( json, status ) {
-            //$('#showresults').slideDown('slow')
-        }
-        });
-    });
-
 });
 
 </script>
-
-
-
 
 <!-- gallery -->
 <div class="gallery my-4">
@@ -274,8 +249,9 @@ $(function sumbit_edit_form() {
 				<c:set var="fileNo" value="${String.valueOf(i)}" />
 				<c:set var="file" value="${article.extra.file__common__attachment[fileNo]}" />
 				<c:if test="${file != null}">
+			 	<div data-toggle="modal" data-target="#exampleModalCenter">
 					 <div class="col-4-sm ">
-					 <a href="${file.getDetailLink(file.relId)}">
+					 <a href="javascript:void(0);" data-href="${file.getDetailLink(file.relId)}" class="openPopup">
 							<c:if test="${file.fileExtTypeCode == 'video'}">
 								<div class="video-box position-relative ">
 								<video src="/usr/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}#t=0.5" preload="metadata"></video>
@@ -288,7 +264,8 @@ $(function sumbit_edit_form() {
 								</div>
 							</c:if>
 						</a>
-					</div>
+					</div>	
+				</div>
 				</c:if>
 			</c:forEach>
 		  </c:forEach>
@@ -296,6 +273,40 @@ $(function sumbit_edit_form() {
 	</div>
 </div>
 
+<!-- gallery detail modal -->
 
+
+<!-- Modal -->
+
+<div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg"  role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">사진</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function(){
+    $('.openPopup').on('click',function(){
+        var dataURL = $(this).attr('data-href');
+        $('.modal-body').load(dataURL,function(){
+            $('#exampleModalCenter').modal({show:true});
+        });
+    }); 
+});
+</script>
 
 <%@ include file="../part/foot.jspf"%>
