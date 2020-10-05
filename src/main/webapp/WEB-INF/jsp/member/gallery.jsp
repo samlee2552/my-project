@@ -251,7 +251,7 @@ $(function sumbit_edit_form() {
 				<c:if test="${file != null}">
 			 	<div data-toggle="modal" data-target="#exampleModalCenter">
 					 <div class="col-4-sm ">
-					 <a href="javascript:void(0);" data-href="${file.getDetailLink(file.relId)}" class="openPopup">
+					 <a href="javascript:void(0);" data-href="${article.getDetailLink(article.id)}" class="openPopup">
 							<c:if test="${file.fileExtTypeCode == 'video'}">
 								<div class="video-box position-relative ">
 								<video src="/usr/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}#t=0.5" preload="metadata"></video>
@@ -276,6 +276,19 @@ $(function sumbit_edit_form() {
 <!-- gallery detail modal -->
 
 
+<script>
+
+
+$(document).ready(function(){
+	
+    $('.openPopup').on('click',function(){
+        var dataURL = $(this).attr('data-href');
+        $('.modal-body').load(dataURL,function(){
+            $('#exampleModalCenter').modal({show:true});
+        });
+    }); 
+});
+</script>
 <!-- Modal -->
 
 <div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -298,15 +311,5 @@ $(function sumbit_edit_form() {
   </div>
 </div>
 
-<script>
-$(document).ready(function(){
-    $('.openPopup').on('click',function(){
-        var dataURL = $(this).attr('data-href');
-        $('.modal-body').load(dataURL,function(){
-            $('#exampleModalCenter').modal({show:true});
-        });
-    }); 
-});
-</script>
 
 <%@ include file="../part/foot.jspf"%>

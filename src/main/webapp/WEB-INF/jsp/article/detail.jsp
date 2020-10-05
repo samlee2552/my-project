@@ -24,7 +24,8 @@
 
 <!-- 제이쿼리 불러오기 -->
 <script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
 
 <!-- 공통(라이브러리) CSS -->
 <link rel="stylesheet" href="/resource/common.css" />
@@ -39,11 +40,7 @@
 -->
 
 <!-- boostrap JS -->
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-	integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-	crossorigin="anonymous"></script>
-	
+
 <!-- bootstrap css -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -72,9 +69,9 @@ input[type=number]:focus,
 
 
 .article-detail-box img, .article-detail-box video {
-  height:52vw;
+  height:40vw;
   width:auto;
-  max-height:500px;
+  max-height:400px;
   max-width:auto;
   object-fit:cover;
   padding:7px 10px;
@@ -113,33 +110,23 @@ var param = ${paramJson};
 
 
 
-<div class="article-detail-box table-box table-box-vertical con container">
+<div class="article-detail-box table-box table-box-vertical container d-flex justify-content-center">
 	<table>
 		<colgroup>
 			<col class="table-first-col">
 		</colgroup>
 		<tbody>
 			<tr>
-				<th>번호</th>
-				<td>${article.id}</td>
-			</tr>
-			<tr>
 				<th>날짜</th>
 				<td>${article.regDate}</td>
 			</tr>
 		
-			<tr>
-				<th>내용</th>
-				<td>
-				    ${article.body}
-				</td>
-			</tr>
 			<c:forEach var="i" begin="1" end="3" step="1">
 				<c:set var="fileNo" value="${String.valueOf(i)}" />
 				<c:set var="file" value="${article.extra.file__common__attachment[fileNo]}" />
 				<c:if test="${file != null}">
 					<tr>
-						<th>첨부파일 ${fileNo}</th>
+			
 						<td>
 							<c:if test="${file.fileExtTypeCode == 'video'}">
 								<div class="video-box">
@@ -155,6 +142,16 @@ var param = ${paramJson};
 					</tr>
 				</c:if>
 			</c:forEach>
+			
+			
+			<tr>
+				<th>내용</th>
+				<td>
+				    ${article.body}
+				</td>
+			</tr>
+			
+			
 		</tbody>
 	</table>
 </div>
@@ -171,7 +168,7 @@ var param = ${paramJson};
 </div>
 
 <c:if test="${isLogined}">
-	<h2 class="container">댓글 작성</h2>
+	<h2 class="con">댓글 작성</h2>
 
 	<script>
 		function ArticleWriteReplyForm__submit(form) {
@@ -191,7 +188,7 @@ var param = ${paramJson};
 		}
 	</script>
 
-	<form class="table-box container form1" action=""
+	<form class="table-box con form1" action=""
 		onsubmit="ArticleWriteReplyForm__submit(this); return false;">
 
 		<table>
@@ -215,9 +212,9 @@ var param = ${paramJson};
 
 </c:if>
 
-<h2 class="container">댓글 리스트</h2>
+<h2 class="con">댓글 리스트</h2>
 
-<div class="reply-list-box table-box container">
+<div class="reply-list-box table-box con">
 	<table>
 		<colgroup>
 			<col width="80">
@@ -241,39 +238,41 @@ var param = ${paramJson};
 	</table>
 </div>
 
+<style>
+.reply-modify-form-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	display: none;
+}
+.reply-modify-form-modal-actived .reply-modify-form-modal
+	{
+	display: flex;
+}
+</style>
 
-
-<div class="popup-1 reply-modify-form-modal">
-	<div>
-		<h1>댓글 수정</h1>
-		<form action="" class="form1 padding-10 table-box table-box-vertical" onsubmit="ReplyList__submitModifyForm(this); return false;">
-			<input type="hidden" name="id" />
-			<table>
-				<colgroup>
-					<col class="table-first-col">
-				</colgroup>
-				<tbody>
-					<tr>
-						<th>내용</th>
-						<td>
-							<div class="form-control-box">
-								<textarea name="body" placeholder="내용을 입력해주세요."></textarea>
-							</div>
-						</td>
-					</tr>
-
-					<tr class="tr-do">
-						<th>수정</th>
-						<td>
-							<button class="btn btn-primary" type="submit">수정</button>
-							<button class="btn btn-info" type="button" onclick="ReplyList__hideModifyFormModal();">취소</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
-		</form>
-	</div>
+<div class="reply-modify-form-modal flex flex-ai-c flex-jc-c">
+	<form action="" class="form1 bg-white padding-10"
+		onsubmit="ReplyList__submitModifyForm(this); return false;">
+		<input type="hidden" name="id" />
+		<div class="form-row">
+			<div class="form-control-label">내용</div>
+			<div class="form-control-box">
+				<textarea name="body" placeholder="내용을 입력해주세요."></textarea>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-control-label">수정</div>
+			<div class="form-control-box">
+				<button type="submit">수정</button>
+				<button type="button"
+					onclick="ReplyList__hideModifyFormModal();">취소</button>
+			</div>
+		</div>
+	</form>
 </div>
 
 <script>
@@ -306,7 +305,7 @@ var param = ${paramJson};
 				$tr.empty().append(body);
 			}
 			ReplyList__hideModifyFormModal();
-			ReplyList__submitModifyFormDone = true;
+			ReplyList__submitModifyFormDone = false;
 		}, 'json');
 	}
 	function ReplyList__showModifyFormModal(el) {
@@ -373,4 +372,4 @@ var param = ${paramJson};
 		ReplyList__$tbody.prepend($tr);
 	}
 	ReplyList__loadMore();
-</script> 
+</script>
