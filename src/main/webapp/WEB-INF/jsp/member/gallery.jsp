@@ -249,7 +249,7 @@ $(function sumbit_edit_form() {
 				<c:set var="fileNo" value="${String.valueOf(i)}" />
 				<c:set var="file" value="${article.extra.file__common__attachment[fileNo]}" />
 				<c:if test="${file != null}">
-			 	<div data-toggle="modal" data-target="#exampleModalCenter">
+			 	<div data-toggle="modal"  data-dismiss="modal" data-target="#detailModal">
 					 <div class="col-4-sm ">
 					 <a href="javascript:void(0);" data-href="${article.getDetailLink(article.id)}" class="openPopup">
 							<c:if test="${file.fileExtTypeCode == 'video'}">
@@ -284,14 +284,14 @@ $(document).ready(function(){
     $('.openPopup').on('click',function(){
         var dataURL = $(this).attr('data-href');
         $('.modal-body').load(dataURL,function(){
-            $('#exampleModalCenter').modal({show:true});
+            $('#detailModal').modal({show:true});
         });
     }); 
 });
 </script>
 <!-- Modal -->
 
-<div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade " id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg"  role="document">
     <div class="modal-content">
       <div class="modal-header">
