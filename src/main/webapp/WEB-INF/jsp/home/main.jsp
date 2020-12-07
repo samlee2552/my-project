@@ -17,10 +17,10 @@ header video {
   position: absolute;
   top: 50%;
   left: 50%;
-  min-width: 100%;
+  min-width: 80%;
   min-height: 100%;
   width: auto;
-  height: auto;
+  height: 150vh;
   z-index: 0;
   -ms-transform: translateX(-50%) translateY(-50%);
   -moz-transform: translateX(-50%) translateY(-50%);
@@ -44,6 +44,7 @@ header .overlay {
   z-index: 1;
 }
 
+/*
 @media (pointer: coarse) and (hover: none) {
   header {
     background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
@@ -52,12 +53,12 @@ header .overlay {
     display: none;
   }
 }
+*/
 </style>
 
 <header>
   <div class="overlay"></div>
-  <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-    <source src="/resource/video/main_vid.mp4" type="video/mp4">
+  <video autoplay loop muted playsinline src="/resource/video/rengar_hana_vid.mp4" type="video/mp4">
   </video>
   <div class="container h-100">
     <div class="d-flex h-100 text-center align-items-center">
@@ -66,7 +67,7 @@ header .overlay {
         <p class="lead mb-0">당신의 반려 동물을 자랑해보세요!</p>
         <br />
         <br />
-        <p class="lead mb-0">이달의 인기 영상, 고양이's 냥펀치! by 쌤리</p>
+        <p class="lead mb-0">두 냥이의 대격돌! 승과는 과연~?</p>
       </div>
     </div>
   </div>
@@ -77,7 +78,7 @@ header .overlay {
     <div class="row">
       <div class="col-xs-8 mx-auto">
         <p>Welcome to PETFLICK!</p>
-        <p>Flick your finger on the screen to check these adorable creatures!</p>
+        <p>Flick your finger and show us your pet!</p>
       </div>
     </div>
   </div>

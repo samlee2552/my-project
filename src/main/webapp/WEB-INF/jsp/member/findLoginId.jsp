@@ -111,7 +111,7 @@ i {
 				onsubmit="FindLoginIdForm__submit(this); return false;">
 				<input type="hidden" name="redirectUri" value="/usr/member/login">
 				<img class="mb-4 mt-2 shadow-sm rounded-circle"
-					src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkTvFl%2FbtqIVHwUIcT%2FI2ZkRU3ekXkUgSdwtbikZ0%2Fimg.png"
+					src="/resource/img/rengar_hana.jpg"
 					alt="" width="200">
 				<h1 class="h3 mb-4 font-weight-normal">아이디 찾기</h1>
 				<label for="name" class="sr-only">이름</label>
