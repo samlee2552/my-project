@@ -6894,3 +6894,45 @@ javax.el.PropertyNotFoundException: Property [writer] not found on type [com.sbs
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:748)
+2020-12-07 14:57:20 [ERROR] o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8085 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8085 or configure this application to listen on another port.
+
+2020-12-07 15:14:05 [ERROR] o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8085 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8085 or configure this application to listen on another port.
+
+2020-12-07 16:04:36 [ERROR] o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8085 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8085 or configure this application to listen on another port.
+
